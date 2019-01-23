@@ -1,0 +1,13 @@
+{
+  "config": {
+    "connector.class": "com.nordstrom.kafka.connect.sqs.SqsSourceConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "name": "sqs-source-chirps",
+    "sqs.max.messages": "5",
+    "sqs.queue.url": "https://sqs.us-west-2.amazonaws.com/CHANGEME/chirps-q",
+    "sqs.wait.time.seconds": "5",
+    "topics": "chirps-t",
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter"
+  },
+  "name": "sqs-source-chirps"
+}
