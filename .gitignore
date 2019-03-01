@@ -30,3 +30,7 @@ hs_err_pid*
 
 # maven-shade-plugin
 dependency-reduced-pom.xml
+
+# IntelliJ
+.idea
+*.iml

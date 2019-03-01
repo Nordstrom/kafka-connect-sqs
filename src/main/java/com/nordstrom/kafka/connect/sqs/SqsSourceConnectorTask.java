@@ -30,11 +30,7 @@ import org.slf4j.LoggerFactory ;
 
 import com.amazonaws.services.sqs.model.Message ;
 import com.nordstrom.kafka.connect.About ;
-import com.nordstrom.kafka.connect.sqs.SqsSourceConnectorConfig.ConfigurationKeys ;
 
-/**
- *
- */
 public class SqsSourceConnectorTask extends SourceTask {
   private final Logger log = LoggerFactory.getLogger( this.getClass() ) ;
 
@@ -62,7 +58,7 @@ public class SqsSourceConnectorTask extends SourceTask {
     Guard.verifyNotNull( props, "Task properties" ) ;
 
     config = new SqsSourceConnectorConfig( props ) ;
-    client = new SqsClient() ;
+    client = new SqsClient(config.originalsWithPrefix(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue())) ;
 
     log.info( "task.start.OK, sqs.queue.url={}, topics={}", config.getQueueUrl(), config.getTopics() ) ;
   }
@@ -89,13 +85,13 @@ public class SqsSourceConnectorTask extends SourceTask {
     // Create a SourceRecord for each message in the queue.
     return messages.stream().map( message -> {
 
-      Map<String, String> sourcePartition = Collections.singletonMap( ConfigurationKeys.SQS_QUEUE_URL.getValue(),
+      Map<String, String> sourcePartition = Collections.singletonMap( SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue(),
           config.getQueueUrl() ) ;
       Map<String, String> sourceOffset = new HashMap<>() ;
       // Save the message id and receipt-handle. receipt-handle is needed to delete
       // the message once the record is committed.
-      sourceOffset.put( ConfigurationKeys.SQS_MESSAGE_ID.getValue(), message.getMessageId() ) ;
-      sourceOffset.put( ConfigurationKeys.SQS_MESSAGE_RECEIPT_HANDLE.getValue(), message.getReceiptHandle() ) ;
+      sourceOffset.put( SqsConnectorConfigKeys.SQS_MESSAGE_ID.getValue(), message.getMessageId() ) ;
+      sourceOffset.put( SqsConnectorConfigKeys.SQS_MESSAGE_RECEIPT_HANDLE.getValue(), message.getReceiptHandle() ) ;
       log.trace( ".poll:source-partition={}", sourcePartition ) ;
       log.trace( ".poll:source-offset={}", sourceOffset ) ;
 
@@ -113,7 +109,7 @@ public class SqsSourceConnectorTask extends SourceTask {
   @Override
   public void commitRecord( SourceRecord record ) throws InterruptedException {
     Guard.verifyNotNull( record, "record" ) ;
-    final String receipt = record.sourceOffset().get( ConfigurationKeys.SQS_MESSAGE_RECEIPT_HANDLE.getValue() )
+    final String receipt = record.sourceOffset().get( SqsConnectorConfigKeys.SQS_MESSAGE_RECEIPT_HANDLE.getValue() )
         .toString() ;
     log.debug( ".commit-record:url={}, receipt-handle={}", config.getQueueUrl(), receipt ) ;
     client.delete( config.getQueueUrl(), receipt ) ;
