@@ -22,7 +22,7 @@
   <groupId>com.nordstrom.kafka.connect.sqs</groupId>
   <artifactId>kafka-connect-sqs</artifactId>
   <name>Kafka Connect SQS Sink/Source Connector</name>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +33,6 @@
     <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
     <junit.version>4.12</junit.version>
     <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
-    <mockito-all.version>2.23.4</mockito-all.version>
     <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     <maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
     <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
@@ -42,7 +41,7 @@
     <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 
-    <aws.sdk.version>1.11.452</aws.sdk.version>
+    <aws-java-sdk.version>1.11.501</aws-java-sdk.version>
 
     <kafka.connect-api.version>2.1.0</kafka.connect-api.version>
   </properties>
@@ -60,12 +59,21 @@
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
-      <!-- <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>${mockito-all.version}</version>
-        <scope>test</scope>
-      </dependency> -->
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk-core</artifactId>
+        <version>${aws-java-sdk.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk-sqs</artifactId>
+        <version>${aws-java-sdk.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk-sts</artifactId>
+        <version>${aws-java-sdk.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -76,23 +84,20 @@
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
-      <artifactId>aws-java-sdk-sqs</artifactId>
-      <version>${aws.sdk.version}</version>
+      <artifactId>aws-java-sdk-core</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-    <!-- <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.6</version>
-    </dependency> -->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-sqs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-sts</artifactId>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-    <!-- <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-    </dependency> -->
   </dependencies>
 
   <build>

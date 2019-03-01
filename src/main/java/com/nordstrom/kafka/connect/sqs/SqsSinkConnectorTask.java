@@ -27,9 +27,6 @@ import org.slf4j.LoggerFactory ;
 
 import com.nordstrom.kafka.connect.sqs.SqsSinkConnector ;
 
-/**
- *
- */
 public class SqsSinkConnectorTask extends SinkTask {
   private final Logger log = LoggerFactory.getLogger( this.getClass() ) ;
 
@@ -57,7 +54,7 @@ public class SqsSinkConnectorTask extends SinkTask {
     Guard.verifyNotNull( props, "Task properties" ) ;
 
     config = new SqsSinkConnectorConfig( props ) ;
-    client = new SqsClient() ;
+    client = new SqsClient(config.originalsWithPrefix(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue())) ;
 
     log.info( "task.start:OK, sqs.queue.url={}, topics={}", config.getQueueUrl(), config.getTopics() ) ;
   }
