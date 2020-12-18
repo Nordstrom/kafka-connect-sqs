@@ -41,7 +41,7 @@
     <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 
-    <aws-java-sdk.version>1.11.501</aws-java-sdk.version>
+    <aws-java-sdk.version>1.11.922</aws-java-sdk.version>
 
     <kafka.connect-api.version>2.1.0</kafka.connect-api.version>
   </properties>
