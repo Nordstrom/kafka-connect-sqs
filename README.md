@@ -1,8 +1,13 @@
 # kafka-connect-sqs
 The SQS connector plugin provides the ability to use AWS SQS queues as both a source (from an SQS queue into a Kafka topic) or sink (out of a Kafka topic into an SQS queue).
 
-## Supported Kafka and AWS versions
-The `kafka-connect-sqs` connector has been tested with `connect-api:2.1.0` and `aws-java-sdk-sqs:1.11.501`
+## Compatibility Matrix
+|kafka-connect-lambda|Kafka Connect API|AWS SDK|
+|:---|:---|:---|
+|1.1.0|2.2.0|1.11.501|
+|1.2.0|2.3.0|1.11.924|
+
+Due to a compatibility issue with [Apache httpcomponents](http://hc.apache.org/), connector versions 1.1.0 and earlier may not work with Kafka Connect versions greater than 2.2
 
 # Building
 You can build the connector with Maven using the standard lifecycle goals:
@@ -165,11 +170,21 @@ For a `source` connector, the minimum actions required are:
 
 # Running the Demo
 
-The demo uses the Confluent Platform which can be downloaded here: https://www.confluent.io/download/
+## Build the connector plugin
 
-You can use either the Enterprise or Community version.
+Build the connector jar file:
 
-The rest of the tutorial assumes the Confluent Platform is installed at $CP and $CP/bin is on your PATH.
+```shell
+mvn clean package
+```
+
+## Run the connector using Docker Compose
+
+Ensure you have `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables exported in your shell. Docker Compose will pass these values into the `connect` container.
+
+Use the provided [Docker Compose](https://docs.docker.com/compose) file and run `docker-compose up`.
+
+With the [Kafka Connect REST interface](https://docs.confluent.io/current/connect/references/restapi.html), verify the SQS sink and source connectors are installed and ready: `curl http://localhost:8083/connector-plugins`.
 
 ## AWS
 
@@ -201,24 +216,6 @@ topic and write to a _different_ SQS queue.
 Create `chirps-q` and `chirped-q` SQS queues using the AWS Console.  Take note of the `URL:` values for each
 as you will need them to configure the connectors later.
 
-## Build the connector plugin
-
-Build the connector jar file and copy to the the classpath of Kafka Connect:
-
-```shell
-mvn clean package
-mkdir $CP/share/java/kafka-connect-sqs
-cp target/kafka-connect-sqs-0.0.1.jar $CP/share/java/kafka-connect-sqs/
-```
-
-## Start Confluent Platform using the Confluent CLI
-
-See https://docs.confluent.io/current/quickstart/ce-quickstart.html#ce-quickstart for more details.
-
-```shell
-$CP/bin/confluent start
-```
-
 ## Create the connectors
 
 The `source` connector configuration is defined in `demos/sqs-source-chirps.json]`, The `sink` connector configuration
@@ -228,8 +225,8 @@ values noted when you created the queues.
 Create the connectors using the Confluent CLI:
 
 ```shell
-confluent load kafka-connect-sqs -d ./demos/sqs-source-chirps.json
-confluent load kafka-connect-sqs -d ./demos/sqs-sink-chirped.json
+curl -XPOST -H 'Content-Type: application/json' http://localhost:8083/connectors -d @demos/sqs-source-chirps.json
+curl -XPOST -H 'Content-Type: application/json' http://localhost:8083/connectors -d @demos/sqs-sink-chirped.json
 ```
 
 ## Send/receive messages
@@ -242,10 +239,3 @@ The `sink` connector will read the message from the topic and write it to the `c
 
 Use the AWS Console (or the AWS CLI) to read your message from the `chirped-q`
 
-## Cleaning up
-
-Clean up by destroying the Confluent Platform to remove all messages and data stored on disk:
-
-```shell
-confluent destroy
-```

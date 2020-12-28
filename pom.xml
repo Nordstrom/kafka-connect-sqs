@@ -22,7 +22,7 @@
   <groupId>com.nordstrom.kafka.connect.sqs</groupId>
   <artifactId>kafka-connect-sqs</artifactId>
   <name>Kafka Connect SQS Sink/Source Connector</name>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,9 +41,9 @@
     <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 
-    <aws-java-sdk.version>1.11.501</aws-java-sdk.version>
+    <aws-java-sdk.version>1.11.924</aws-java-sdk.version>
 
-    <kafka.connect-api.version>2.1.0</kafka.connect-api.version>
+    <kafka.connect-api.version>2.3.0</kafka.connect-api.version>
   </properties>
 
   <dependencyManagement>
@@ -61,18 +61,10 @@
       </dependency>
       <dependency>
         <groupId>com.amazonaws</groupId>
-        <artifactId>aws-java-sdk-core</artifactId>
+        <artifactId>aws-java-sdk-bom</artifactId>
         <version>${aws-java-sdk.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.amazonaws</groupId>
-        <artifactId>aws-java-sdk-sqs</artifactId>
-        <version>${aws-java-sdk.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.amazonaws</groupId>
-        <artifactId>aws-java-sdk-sts</artifactId>
-        <version>${aws-java-sdk.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -177,7 +169,6 @@
                     <!-- provided by kafka-connect -->
                     <exclude>commons-codec:*</exclude>
                     <exclude>commons-logging:*</exclude>
-                    <exclude>org.apache.httpcomponents:*</exclude>
                     <exclude>org.apache.kafka:*</exclude>
                     <exclude>org.slf4j:*</exclude>
                   </excludes>
