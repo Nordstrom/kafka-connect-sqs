@@ -167,9 +167,6 @@
                     <exclude>mockito-all:*</exclude>
 
                     <!-- provided by kafka-connect -->
-                    <exclude>commons-codec:*</exclude>
-                    <exclude>commons-logging:*</exclude>
-                    <exclude>org.apache.kafka:*</exclude>
                     <exclude>org.slf4j:*</exclude>
                   </excludes>
                 </artifactSet>
