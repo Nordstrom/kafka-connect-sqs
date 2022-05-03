@@ -39,23 +39,24 @@ public class SqsClient {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   private final String AWS_FIFO_SUFFIX = ".fifo";
-  private final String AWS_PROFILE = "AWS_PROFILE";
-  private final String AWS_REGION = "AWS_REGION";
   public static final Class<? extends AWSCredentialsProvider> CREDENTIALS_PROVIDER_CLASS_DEFAULT =
       com.amazonaws.auth.DefaultAWSCredentialsProviderChain.class;
 
   private final AmazonSQS client;
 
-  public SqsClient(Map<String, ?> configs) {
-    log.warn(".ctor:configs={}", configs);
+  public SqsClient(SqsConnectorConfig config) {
+    Map<String, ?> credentialProviderConfigs = config.originalsWithPrefix(
+            SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue());
+    log.warn(".ctor:configs={}", credentialProviderConfigs);
     AWSCredentialsProvider provider = null;
     try {
-      provider = getCredentialsProvider(configs);
+      provider = getCredentialsProvider(credentialProviderConfigs);
     } catch ( Exception e ) {
       log.error("Problem initializing provider", e);
     }
     final AmazonSQSClientBuilder builder = AmazonSQSClientBuilder.standard();
     builder.setCredentials(provider);
+    builder.setRegion(config.getRegion());
 
 //    // If there's an AWS credentials profile and/or region configured in the
 //    // environment we will use it.

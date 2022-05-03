@@ -23,11 +23,9 @@ import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.common.config.ConfigDef.Importance;
 import org.apache.kafka.common.config.ConfigDef.Type;
 
-public class SqsSourceConnectorConfig extends AbstractConfig {
+public class SqsSourceConnectorConfig extends SqsConnectorConfig {
 
   private final Integer maxMessages;
-  private final String queueUrl;
-  private final String topics;
   private final Integer waitTimeSeconds;
 
   private static final ConfigDef CONFIG_DEF = new ConfigDef()
@@ -36,7 +34,10 @@ public class SqsSourceConnectorConfig extends AbstractConfig {
       .define(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue(), Type.STRING, Importance.HIGH, "The URL of the SQS queue to be read from.")
       .define(SqsConnectorConfigKeys.SQS_WAIT_TIME_SECONDS.getValue(), Type.INT, 1, Importance.LOW,
           "Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.")
-      .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "The Kafka topic to be written to.");
+      .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "The Kafka topic to be written to.")
+      .define(SqsConnectorConfigKeys.AWS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
+              "SQS queue AWS region.");
+
 
   public static ConfigDef config() {
     return CONFIG_DEF;
@@ -45,21 +46,11 @@ public class SqsSourceConnectorConfig extends AbstractConfig {
   public SqsSourceConnectorConfig(Map<?, ?> originals) {
     super(config(), originals);
     maxMessages = getInt(SqsConnectorConfigKeys.SQS_MAX_MESSAGES.getValue());
-    queueUrl = getString(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue());
-    topics = getString(SqsConnectorConfigKeys.TOPICS.getValue());
     waitTimeSeconds = getInt(SqsConnectorConfigKeys.SQS_WAIT_TIME_SECONDS.getValue());
   }
 
   public Integer getMaxMessages() {
     return maxMessages;
-  }
-
-  public String getQueueUrl() {
-    return queueUrl;
-  }
-
-  public String getTopics() {
-    return topics;
   }
 
   public Integer getWaitTimeSeconds() {
