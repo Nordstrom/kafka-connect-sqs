@@ -18,7 +18,6 @@ package com.nordstrom.kafka.connect.sqs;
 
 import java.util.Map;
 
-import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.common.config.ConfigDef.Importance;
 import org.apache.kafka.common.config.ConfigDef.Type;
@@ -35,7 +34,7 @@ public class SqsSourceConnectorConfig extends SqsConnectorConfig {
       .define(SqsConnectorConfigKeys.SQS_WAIT_TIME_SECONDS.getValue(), Type.INT, 1, Importance.LOW,
           "Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.")
       .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "The Kafka topic to be written to.")
-      .define(SqsConnectorConfigKeys.AWS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
+      .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
               "SQS queue AWS region.");
 
 

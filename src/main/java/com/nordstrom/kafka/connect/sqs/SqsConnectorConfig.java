@@ -15,7 +15,7 @@ abstract class SqsConnectorConfig extends AbstractConfig {
         super(configDef, originals);
         queueUrl = getString(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue());
         topics = getString(SqsConnectorConfigKeys.TOPICS.getValue());
-        region = getString(SqsConnectorConfigKeys.AWS_REGION.getValue());
+        region = getString(SqsConnectorConfigKeys.SQS_REGION.getValue());
     }
 
     public String getQueueUrl() {

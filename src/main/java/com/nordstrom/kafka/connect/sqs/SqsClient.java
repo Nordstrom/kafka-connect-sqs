@@ -45,8 +45,9 @@ public class SqsClient {
   private final AmazonSQS client;
 
   public SqsClient(SqsConnectorConfig config) {
-    Map<String, ?> credentialProviderConfigs = config.originalsWithPrefix(
+    Map<String, Object> credentialProviderConfigs = config.originalsWithPrefix(
             SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue());
+    credentialProviderConfigs.put(SqsConnectorConfigKeys.SQS_REGION.getValue(), config.getRegion());
     log.warn(".ctor:configs={}", credentialProviderConfigs);
     AWSCredentialsProvider provider = null;
     try {

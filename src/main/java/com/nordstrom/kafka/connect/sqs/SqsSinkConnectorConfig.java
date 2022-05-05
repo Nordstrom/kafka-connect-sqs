@@ -19,7 +19,6 @@ package com.nordstrom.kafka.connect.sqs;
 import java.util.Map;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
-import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.common.config.ConfigDef.Importance;
 import org.apache.kafka.common.config.ConfigDef.Type;
@@ -43,7 +42,7 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
           0,
           ConfigDef.Width.LONG,
           "AWS Credentials Provider Class")
-      .define(SqsConnectorConfigKeys.AWS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
+      .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
           "SQS queue AWS region.");
 
   public static ConfigDef config() {
