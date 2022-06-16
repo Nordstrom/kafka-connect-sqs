@@ -58,7 +58,7 @@ public class SqsSourceConnectorTask extends SourceTask {
     Guard.verifyNotNull( props, "Task properties" ) ;
 
     config = new SqsSourceConnectorConfig( props ) ;
-    client = new SqsClient(config.originalsWithPrefix(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue())) ;
+    client = new SqsClient(config) ;
 
     log.info( "task.start.OK, sqs.queue.url={}, topics={}", config.getQueueUrl(), config.getTopics() ) ;
   }

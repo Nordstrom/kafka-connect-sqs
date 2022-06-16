@@ -4,6 +4,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.STSAssumeRoleSessionCredentialsProvider;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
+import com.nordstrom.kafka.connect.sqs.SqsConnectorConfigKeys;
 import org.apache.kafka.common.Configurable;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -21,19 +22,21 @@ public class AWSAssumeRoleCredentialsProvider implements AWSCredentialsProvider,
   private String externalId;
   private String roleArn;
   private String sessionName;
-
+  private String region;
   @Override
   public void configure(Map<String, ?> map) {
     externalId = getOptionalField(map, EXTERNAL_ID_CONFIG);
     roleArn = getRequiredField(map, ROLE_ARN_CONFIG);
     sessionName = getRequiredField(map, SESSION_NAME_CONFIG);
+    region = getRequiredField(map, SqsConnectorConfigKeys.SQS_REGION.getValue());
   }
 
   @Override
   public AWSCredentials getCredentials() {
-    AWSSecurityTokenServiceClientBuilder clientBuilder = AWSSecurityTokenServiceClientBuilder.standard();
+    AWSSecurityTokenServiceClientBuilder clientBuilder = AWSSecurityTokenServiceClientBuilder.standard()
+            .withRegion(region);
     AWSCredentialsProvider provider = new STSAssumeRoleSessionCredentialsProvider.Builder(roleArn, sessionName)
-        .withStsClient(clientBuilder.defaultClient())
+        .withStsClient(clientBuilder.build())
         .withExternalId(externalId)
         .build();
 

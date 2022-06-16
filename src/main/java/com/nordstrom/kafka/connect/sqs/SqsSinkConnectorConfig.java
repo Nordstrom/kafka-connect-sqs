@@ -19,7 +19,6 @@ package com.nordstrom.kafka.connect.sqs;
 import java.util.Map;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
-import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.common.config.ConfigDef.Importance;
 import org.apache.kafka.common.config.ConfigDef.Type;
@@ -27,12 +26,9 @@ import org.apache.kafka.common.config.ConfigException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SqsSinkConnectorConfig extends AbstractConfig {
+public class SqsSinkConnectorConfig extends SqsConnectorConfig {
 //  private final Logger log = LoggerFactory.getLogger(this.getClass());
   private static final Logger log = LoggerFactory.getLogger(SqsSinkConnectorConfig.class);
-
-  private final String queueUrl;
-  private final String topics;
 
   private static final ConfigDef CONFIG_DEF = new ConfigDef()
       .define(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue(), Type.STRING, Importance.HIGH, "URL of the SQS queue to be written to.")
@@ -45,9 +41,9 @@ public class SqsSinkConnectorConfig extends AbstractConfig {
           "SQS",
           0,
           ConfigDef.Width.LONG,
-          "AWS Credentials Provider Class"
-      )
-      ;
+          "AWS Credentials Provider Class")
+      .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
+          "SQS queue AWS region.");
 
   public static ConfigDef config() {
     return CONFIG_DEF;
@@ -55,19 +51,7 @@ public class SqsSinkConnectorConfig extends AbstractConfig {
 
   public SqsSinkConnectorConfig(Map<?, ?> originals) {
     super(config(), originals);
-    queueUrl = getString(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue());
-    topics = getString(SqsConnectorConfigKeys.TOPICS.getValue());
   }
-
-  public String getQueueUrl() {
-    return queueUrl;
-  }
-
-  public String getTopics() {
-    return topics;
-  }
-
-
 
   private static class CredentialsProviderValidator implements ConfigDef.Validator {
     @Override
