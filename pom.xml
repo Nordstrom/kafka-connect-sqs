@@ -146,6 +146,7 @@
                 <goal>shade</goal>
               </goals>
               <configuration>
+                <outputDirectory>target/plugin</outputDirectory>
                 <filters>
                   <filter>
                     <artifact>*:*</artifact>
