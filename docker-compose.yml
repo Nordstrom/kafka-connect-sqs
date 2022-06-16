@@ -30,22 +30,6 @@ services:
     depends_on: [zookeeper]
     logging: { driver: none }
 
-  schema-registry:
-    image: confluentinc/cp-schema-registry:6.0.1
-    hostname: schema-registry
-    ports:
-      - 8080:8080
-    environment:
-      - SCHEMA_REGISTRY_HOST_NAME=schema-registry
-      - SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8080
-
-      - SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://broker:19092
-      - SCHEMA_REGISTRY_KAFKASTORE_TOPIC=_schemas
-      - SCHEMA_REGISTRY_KAFKASTORE_TOPIC_REPLICATION_FACTOR=1
-      - SCHEMA_REGISTRY_KAFKASTORE_TIMEOUT_MS=15000
-    depends_on: [broker]
-    logging: { driver: none }
-
   # NB: run connect locally in stand-alone mode to debug
   connect:
     image: confluentinc/cp-kafka-connect:6.0.1
