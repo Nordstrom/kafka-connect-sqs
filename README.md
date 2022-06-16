@@ -19,13 +19,14 @@ mvn package
 
 ## Source Connector
 
-A source connector reads from an AWS SQS queue and publishes to a Kafka topic.
+SQS source connector reads from an AWS SQS queue and publishes to a Kafka topic.
 
-A source connector configuration has two required fields:
- * `sqs.queue.url`: The URL of the SQS queue to be read from.
- * `topics`: The Kafka topic to be written to.
+Required properties:
+ * `topics`: Kafka topic to be written to.
+ * `sqs.queue.url`: URL of the SQS queue to be read from.
 
-These are optional fields:
+Optional properties:
+* `sqs.region`: AWS region of the SQS queue to be read from.
 * `sqs.max.messages`: Maximum number of messages to read from SQS queue for each poll interval. Range is 0 - 10 with default of 1.
 * `sqs.wait.time.seconds`: Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.
 
@@ -38,7 +39,7 @@ These are optional fields:
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
     "name": "sqs-source-chirps",
     "sqs.max.messages": "5",
-    "sqs.queue.url": "https://sqs.<SOME_REGION>.amazonaws.com/<SOME_ACCOUNT>/chirps-q",
+    "sqs.queue.url": "https://sqs.<AWS_REGION>.amazonaws.com/<AWS_ACCOUNT>/chirps-q",
     "sqs.wait.time.seconds": "5",
     "topics": "chirps-t",
     "value.converter": "org.apache.kafka.connect.storage.StringConverter"
@@ -49,18 +50,14 @@ These are optional fields:
 
 ## Sink Connector
 
-A sink connector reads from a Kafka topic and publishes to an AWS SQS queue.
+SQS sink connector reads from a Kafka topic and publishes to an AWS SQS queue.
 
-A sink connector configuration has two required fields:
- * `sqs.queue.url`: The URL of the SQS queue to be written to.
- * `topics`: The Kafka topic to be read from.
+Required properties:
+ * `topics`: Kafka topic to be read from.
+ * `sqs.queue.url`: URL of the SQS queue to be written to.
 
-### AWS Assume Role Support options
- The connector can assume a cross-account role to enable such features as Server Side Encryption of a queue:
- * `sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider`: REQUIRED Class providing cross-account role assumption.
- * `sqs.credentials.provider.role.arn`: REQUIRED AWS Role ARN providing the access.
- * `sqs.credentials.provider.session.name`: REQUIRED Session name
- * `sqs.credentials.provider.external.id`: OPTIONAL (but recommended) External identifier used by the `kafka-connect-sqs` when assuming the role.
+Optional properties:
+* `sqs.region`: AWS region of the SQS queue to be written to.
 
 ### Sample Configuration
 ```json
@@ -69,14 +66,14 @@ A sink connector configuration has two required fields:
     "connector.class": "com.nordstrom.kafka.connect.sqs.SqsSinkConnector",
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
     "name": "sqs-sink-chirped",
-    "sqs.queue.url": "https://sqs.<SOME_REGION>.amazonaws.com/<SOME_ACCOUNT>/chirps-q",
+    "sqs.queue.url": "https://sqs.<AWS_REGION>.amazonaws.com/<AWS_ACCOUNT>/chirps-q",
+    "sqs.region": "<AWS_REGION>",
     "topics": "chirps-t",
     "value.converter": "org.apache.kafka.connect.storage.StringConverter"
   },
   "name": "sqs-sink-chirped"
 }
 ```
-
 
 ## AWS IAM Policies
 
@@ -100,7 +97,14 @@ For a `sink` connector, the minimum actions required are:
 ```
 
 ### AWS Assume Role Support
-* Define the AWS IAM Role that `kafka-connect-sqs` will assume when writing to the queue (e.g., `kafka-connect-sqs-role`) with a Trust Relationship where `xxxxxxxxxxxx` is the AWS Account in which Kafka Connect executes:
+
+An SQS connector can assume a cross-account role to enable such features as Server Side Encryption of a queue:
+* `sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider`: REQUIRED Class providing cross-account role assumption.
+* `sqs.credentials.provider.role.arn`: REQUIRED AWS Role ARN providing the access.
+* `sqs.credentials.provider.session.name`: REQUIRED Session name
+* `sqs.credentials.provider.external.id`: OPTIONAL (but recommended) External identifier used by the `kafka-connect-sqs` when assuming the role.
+
+Define the AWS IAM Role that `kafka-connect-sqs` will assume when writing to the queue (e.g., `kafka-connect-sqs-role`) with a Trust Relationship to a principal in a separate account:
 
 ```json
 {
@@ -109,7 +113,7 @@ For a `sink` connector, the minimum actions required are:
     {
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::xxxxxxxxxxxx:root"
+        "AWS": "arn:aws:iam::<AWS_ACCOUNT>:root"
       },
       "Action": "sts:AssumeRole",
       "Condition": {
@@ -119,35 +123,36 @@ For a `sink` connector, the minimum actions required are:
       }
     }
   ]
-}```
+}
+```
 
-* Define an SQS Queue Policy Document for the queue to allow `SendMessage`. An example policy is:
+Define an SQS Queue Policy Document for the queue to allow `SendMessage`. An example policy is:
 
 ```json
 {
   "Version": "2012-10-17",
-  "Id": "arn:aws:sqs:us-west-2:nnnnnnnnnnnn:my-queue/SQSDefaultPolicy",
+  "Id": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue/SQSDefaultPolicy",
   "Statement": [
     {
       "Sid": "kafka-connect-sqs-sendmessage",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::nnnnnnnnnnnn:role/kafka-connect-sqs-role"
+        "AWS": "arn:aws:iam::<AWS_ACCOUNT>:role/kafka-connect-sqs-role"
       },
       "Action": "sqs:SendMessage",
-      "Resource": "arn:aws:sqs:us-west-2:nnnnnnnnnnnn:my-queue"
+      "Resource": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue"
     }
   ]
 }
 ```
 
-The sink connector configuration would then include the additional fields:
+SQS sink connector configuration would then include the additional properties:
 
-```json
-  sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider
-  sqs.credentials.provider.role.arn=arn:aws:iam::nnnnnnnnnnnn:role/kafka-connect-sqs-role
-  sqs.credentials.provider.session.name=my-queue-session
-  sqs.credentials.provider.external.id=my-queue-external-id
+```
+sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider
+sqs.credentials.provider.role.arn=arn:aws:iam::<AWS_ACCOUNT>:role/kafka-connect-sqs-role
+sqs.credentials.provider.session.name=my-queue-session
+sqs.credentials.provider.external.id=my-queue-external-id
 ```
 
 For a `source` connector, the minimum actions required are:
@@ -189,7 +194,7 @@ With the [Kafka Connect REST interface](https://docs.confluent.io/current/connec
 
 ## AWS
 
-The demo assumes you have an AWS account and have valid credentials in ~/.aws/credentials as well as
+The demo assumes you have an AWS account and valid credentials in ~/.aws/credentials as well as
 setting the `AWS_PROFILE` and `AWS_REGION` to appropriate values.
 
 These are required so that Kafka Connect will have access to the SQS queues.
