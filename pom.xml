@@ -41,8 +41,9 @@
     <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 
-    <aws-java-sdk.version>1.11.1034</aws-java-sdk.version>
-    <kafka.connect-api.version>2.8.1</kafka.connect-api.version>
+    <aws-java-sdk.version>1.12.241</aws-java-sdk.version>
+    <kafka.connect-api.version>3.1.1</kafka.connect-api.version>
+    <slf4j.version>1.7.36</slf4j.version>
   </properties>
 
   <dependencyManagement>
@@ -88,6 +89,11 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
   </dependencies>
 
@@ -146,7 +152,7 @@
                 <goal>shade</goal>
               </goals>
               <configuration>
-                <outputDirectory>target/plugin</outputDirectory>
+                <outputFile>target/plugin/${project.artifactId}-${project.version}.jar</outputFile>
                 <filters>
                   <filter>
                     <artifact>*:*</artifact>
