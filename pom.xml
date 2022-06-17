@@ -146,7 +146,7 @@
                 <goal>shade</goal>
               </goals>
               <configuration>
-                <outputDirectory>target/plugin</outputDirectory>
+                <outputFile>target/plugin/${project.artifactId}-${project.version}.jar</outputFile>
                 <filters>
                   <filter>
                     <artifact>*:*</artifact>
