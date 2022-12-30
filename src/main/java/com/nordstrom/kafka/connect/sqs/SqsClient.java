@@ -25,6 +25,7 @@ import org.apache.kafka.connect.errors.ConnectException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.DeleteMessageRequest;
@@ -34,6 +35,9 @@ import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.amazonaws.services.sqs.model.SendMessageResult;
+
+import com.nordstrom.kafka.connect.utils.StringUtils;
+
 
 public class SqsClient {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -55,9 +59,15 @@ public class SqsClient {
     } catch ( Exception e ) {
       log.error("Problem initializing provider", e);
     }
+
     final AmazonSQSClientBuilder builder = AmazonSQSClientBuilder.standard();
+    if(StringUtils.isBlank(config.getEndpoint())) {
+      builder.setRegion(config.getRegion());
+    } else {
+      builder.setEndpointConfiguration(new EndpointConfiguration(config.getEndpoint(), config.getRegion()));
+    }
+
     builder.setCredentials(provider);
-    builder.setRegion(config.getRegion());
 
 //    // If there's an AWS credentials profile and/or region configured in the
 //    // environment we will use it.

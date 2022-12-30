@@ -35,7 +35,9 @@ public class SqsSourceConnectorConfig extends SqsConnectorConfig {
           "Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.")
       .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "The Kafka topic to be written to.")
       .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
-              "SQS queue AWS region.");
+              "SQS queue AWS region.")
+      .define(SqsConnectorConfigKeys.SQS_ENDPOINT.getValue(), Type.STRING, Importance.LOW,
+                  "SQS queue endpoint, If specified, the connector will override the region specific endpoint with this value.");
 
 
   public static ConfigDef config() {
