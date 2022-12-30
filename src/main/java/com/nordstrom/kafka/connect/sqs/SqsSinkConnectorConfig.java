@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SqsSinkConnectorConfig extends SqsConnectorConfig {
-//  private final Logger log = LoggerFactory.getLogger(this.getClass());
   private static final Logger log = LoggerFactory.getLogger(SqsSinkConnectorConfig.class);
 
   private static final ConfigDef CONFIG_DEF = new ConfigDef()
@@ -43,7 +42,9 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
           ConfigDef.Width.LONG,
           "AWS Credentials Provider Class")
       .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
-          "SQS queue AWS region.");
+          "SQS queue AWS region.")
+      .define(SqsConnectorConfigKeys.SQS_ENDPOINT_URL.getValue(), Type.STRING, Importance.LOW,
+          "If specified, the connector will override the AWS region specific endpoint URL with this value. Note that this is not the queue URL.");
 
   public static ConfigDef config() {
     return CONFIG_DEF;

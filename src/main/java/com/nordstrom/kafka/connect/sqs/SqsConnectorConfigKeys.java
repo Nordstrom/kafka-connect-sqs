@@ -25,6 +25,7 @@ public enum SqsConnectorConfigKeys {
   SQS_WAIT_TIME_SECONDS("sqs.wait.time.seconds"),
   TOPICS("topics"),
   SQS_REGION("sqs.region"),
+  SQS_ENDPOINT_URL("sqs.endpoint.url"),
 
   // These are not part of the connector configuration proper, but just a convenient
   // place to define the constants.

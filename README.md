@@ -28,6 +28,7 @@ Required properties:
 
 Optional properties:
 * `sqs.region`: AWS region of the SQS queue to be read from.
+* `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
 * `sqs.max.messages`: Maximum number of messages to read from SQS queue for each poll interval. Range is 0 - 10 with default of 1.
 * `sqs.wait.time.seconds`: Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.
 
@@ -59,6 +60,7 @@ Required properties:
 
 Optional properties:
 * `sqs.region`: AWS region of the SQS queue to be written to.
+* `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
 
 ### Sample Configuration
 ```json
