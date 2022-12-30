@@ -61,10 +61,10 @@ public class SqsClient {
     }
 
     final AmazonSQSClientBuilder builder = AmazonSQSClientBuilder.standard();
-    if(StringUtils.isBlank(config.getEndpoint())) {
+    if(StringUtils.isBlank(config.getEndpointUrl())) {
       builder.setRegion(config.getRegion());
     } else {
-      builder.setEndpointConfiguration(new EndpointConfiguration(config.getEndpoint(), config.getRegion()));
+      builder.setEndpointConfiguration(new EndpointConfiguration(config.getEndpointUrl(), config.getRegion()));
     }
 
     builder.setCredentials(provider);
