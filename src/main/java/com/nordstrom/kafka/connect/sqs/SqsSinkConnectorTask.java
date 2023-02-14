@@ -18,8 +18,14 @@ package com.nordstrom.kafka.connect.sqs ;
 
 import java.text.MessageFormat ;
 import java.util.Collection ;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map ;
 
+import com.amazonaws.services.sqs.model.MessageAttributeValue;
+import org.apache.kafka.connect.data.Schema;
+import org.apache.kafka.connect.header.Header;
+import org.apache.kafka.connect.header.Headers;
 import org.apache.kafka.connect.sink.SinkRecord ;
 import org.apache.kafka.connect.sink.SinkTask ;
 import org.slf4j.Logger ;
@@ -82,9 +88,28 @@ public class SqsSinkConnectorTask extends SinkTask {
       final String gid = Facility.isNotNullNorEmpty( key ) ? key : record.topic() ;
       final String body = Facility.isNotNull( record.value() ) ? record.value().toString() : "" ;
 
+      Map<String, MessageAttributeValue> messageAttributes = null;
+
+      if (config.getMessageAttributesEnabled()) {
+        final Headers headers = record.headers();
+        messageAttributes = new HashMap<>();
+        List<String> attributesList = config.getMessageAttributesList();
+        boolean allNamesEnabled = (attributesList.size() == 1 && attributesList.get(0).equals("All"));
+        for(Header header: headers) {
+          if(allNamesEnabled || attributesList.contains(header.key())) {
+            if(header.schema().equals(Schema.STRING_SCHEMA)) {
+              messageAttributes.put(header.key(), new MessageAttributeValue()
+                .withDataType("String")
+                .withStringValue((String)header.value()));
+            }
+          }
+        }
+      }
+
+
       if ( Facility.isNotNullNorEmpty( body ) ) {
         try {
-          final String sid = client.send( config.getQueueUrl(), body, gid, mid ) ;
+          final String sid = client.send( config.getQueueUrl(), body, gid, mid, messageAttributes ) ;
 
           log.debug( ".put.OK:message-id={}, queue.url={}, sqs-group-id={}, sqs-message-id={}", gid, mid,
               config.getQueueUrl(), sid ) ;
