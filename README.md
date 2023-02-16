@@ -32,7 +32,7 @@ Optional properties:
 * `sqs.max.messages`: Maximum number of messages to read from SQS queue for each poll interval. Range is 0 - 10 with default of 1.
 * `sqs.wait.time.seconds`: Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.
 * `sqs.message.attributes.enabled`: If true, it gets the SQS MessageAttributes and inserts them as Kafka Headers (only string headers are currently supported). Default is false.
-* `sqs.message.attributes.list`: The comma separated list of MessageAttribute names to be included (or "All" to accept all the names). Default is the empty string.
+* `sqs.message.attributes.include.list`: The comma separated list of MessageAttribute names to be included, if empty it includes all the Message Attributes. Default is the empty string.
 
 ### Sample Configuration
 
@@ -64,7 +64,7 @@ Optional properties:
 * `sqs.region`: AWS region of the SQS queue to be written to.
 * `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
 * `sqs.message.attributes.enabled`: If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.
-* `sqs.message.attributes.list`: The comma separated list of Header names to be included (or "All" to accept all the names). Default is the empty string.
+* `sqs.message.attributes.include.list`: The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.
 
 ### Sample Configuration
 ```json
