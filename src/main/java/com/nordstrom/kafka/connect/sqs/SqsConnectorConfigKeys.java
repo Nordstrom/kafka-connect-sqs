@@ -27,7 +27,7 @@ public enum SqsConnectorConfigKeys {
   SQS_REGION("sqs.region"),
   SQS_ENDPOINT_URL("sqs.endpoint.url"),
   SQS_MESSAGE_ATTRIBUTES_ENABLED("sqs.message.attributes.enabled"),
-  SQS_MESSAGE_ATTRIBUTES_LIST("sqs.message.attributes.list"),
+  SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST("sqs.message.attributes.include.list"),
 
   // These are not part of the connector configuration proper, but just a convenient
   // place to define the constants.
