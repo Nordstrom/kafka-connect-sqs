@@ -16,13 +16,13 @@
 
 package com.nordstrom.kafka.connect.sqs ;
 
-import java.util.Collections ;
-import java.util.HashMap ;
-import java.util.List ;
-import java.util.Map ;
+import java.util.*;
 import java.util.stream.Collectors ;
 
+import com.amazonaws.services.sqs.model.MessageAttributeValue;
 import org.apache.kafka.connect.data.Schema ;
+import org.apache.kafka.connect.data.SchemaAndValue;
+import org.apache.kafka.connect.header.ConnectHeaders;
 import org.apache.kafka.connect.source.SourceRecord ;
 import org.apache.kafka.connect.source.SourceTask ;
 import org.slf4j.Logger ;
@@ -98,8 +98,22 @@ public class SqsSourceConnectorTask extends SourceTask {
       final String body = message.getBody() ;
       final String key = message.getMessageId() ;
       final String topic = config.getTopics() ;
-      return new SourceRecord( sourcePartition, sourceOffset, topic, Schema.STRING_SCHEMA, key, Schema.STRING_SCHEMA,
-          body ) ;
+
+      ConnectHeaders headers = new ConnectHeaders();
+      if (config.getMessageAttributesEnabled()) {
+        Map<String, MessageAttributeValue> attributes = message.getMessageAttributes();
+        // sqs api should return only the fields specified in the list
+        for(String attributeKey: attributes.keySet()) {
+          MessageAttributeValue attrValue = attributes.get(attributeKey);
+          if (attrValue.getDataType().equals("String")) {
+            SchemaAndValue schemaAndValue = new SchemaAndValue(Schema.STRING_SCHEMA, attrValue.getStringValue());
+            headers.add(attributeKey, schemaAndValue);
+          }
+        }
+      }
+
+      return new SourceRecord( sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.STRING_SCHEMA,
+          body, null, headers) ;
     } ).collect( Collectors.toList() ) ;
   }
 

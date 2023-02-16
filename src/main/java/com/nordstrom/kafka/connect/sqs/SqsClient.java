@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.services.sqs.model.*;
 import org.apache.kafka.common.Configurable;
 import org.apache.kafka.connect.errors.ConnectException;
 import org.slf4j.Logger;
@@ -28,13 +29,6 @@ import org.slf4j.LoggerFactory;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.DeleteMessageRequest;
-import com.amazonaws.services.sqs.model.DeleteMessageResult;
-import com.amazonaws.services.sqs.model.Message;
-import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
-import com.amazonaws.services.sqs.model.ReceiveMessageResult;
-import com.amazonaws.services.sqs.model.SendMessageRequest;
-import com.amazonaws.services.sqs.model.SendMessageResult;
 
 import com.nordstrom.kafka.connect.utils.StringUtils;
 
@@ -45,6 +39,9 @@ public class SqsClient {
   private final String AWS_FIFO_SUFFIX = ".fifo";
   public static final Class<? extends AWSCredentialsProvider> CREDENTIALS_PROVIDER_CLASS_DEFAULT =
       com.amazonaws.auth.DefaultAWSCredentialsProviderChain.class;
+
+  private final Boolean messageAttributesEnabled;
+  private final List<String> messageAttributesList;
 
   private final AmazonSQS client;
 
@@ -82,6 +79,8 @@ public class SqsClient {
 //    log.info("AmazonSQS using profile={}, region={}", profile, region);
 
     client = builder.build();
+    messageAttributesEnabled = config.getMessageAttributesEnabled();
+    messageAttributesList = config.getMessageAttributesList();
   }
 
   /**
@@ -121,8 +120,17 @@ public class SqsClient {
     //
     // Receive messages from queue
     //
-    final ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url)
+    ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(url)
         .withMaxNumberOfMessages(maxMessages).withWaitTimeSeconds(waitTimeSeconds).withAttributeNames("");
+
+    if (messageAttributesEnabled) {
+      if (messageAttributesList.size() == 0) {
+        receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames("All");
+      } else {
+        receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames(messageAttributesList);
+      }
+    }
+
     final ReceiveMessageResult result = client.receiveMessage(receiveMessageRequest);
     final List<Message> messages = result.getMessages();
 
@@ -139,9 +147,10 @@ public class SqsClient {
    * @param body      The message to send.
    * @param groupId   Optional group identifier (fifo queues only).
    * @param messageId Optional message identifier (fifo queues only).
+   * @param messageAttributes The message attributes to send.
    * @return
    */
-  public String send(final String url, final String body, final String groupId, final String messageId) {
+  public String send(final String url, final String body, final String groupId, final String messageId, final Map<String, MessageAttributeValue> messageAttributes) {
     log.debug(".send: queue={}, gid={}, mid={}", url, groupId, messageId);
 
     Guard.verifyValidUrl(url);
@@ -151,7 +160,11 @@ public class SqsClient {
     }
     final boolean fifo = isFifo(url);
 
-    final SendMessageRequest request = new SendMessageRequest(url, body);
+    SendMessageRequest request = new SendMessageRequest(url, body);
+    if (messageAttributes != null) {
+      request.setMessageAttributes(messageAttributes);
+    }
+
     if (fifo) {
       Guard.verifyNotNullOrEmpty(groupId, "groupId");
       Guard.verifyNotNullOrEmpty(messageId, "messageId");
