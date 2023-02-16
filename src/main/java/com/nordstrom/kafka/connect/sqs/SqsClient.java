@@ -124,7 +124,11 @@ public class SqsClient {
         .withMaxNumberOfMessages(maxMessages).withWaitTimeSeconds(waitTimeSeconds).withAttributeNames("");
 
     if (messageAttributesEnabled) {
-      receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames(messageAttributesList);
+      if (messageAttributesList.size() == 0) {
+        receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames("All");
+      } else {
+        receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames(messageAttributesList);
+      }
     }
 
     final ReceiveMessageResult result = client.receiveMessage(receiveMessageRequest);

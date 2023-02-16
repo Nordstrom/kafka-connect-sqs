@@ -40,9 +40,8 @@ public class SqsSourceConnectorConfig extends SqsConnectorConfig {
           "If specified, the connector will override the AWS region specific endpoint URL with this value. Note that this is not the queue URL.")
       .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue(), Type.BOOLEAN, false, Importance.LOW,
           "If true, it gets the SQS MessageAttributes and inserts them as Kafka Headers (only string headers are currently supported). Default is false.")
-      .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_LIST.getValue(), Type.STRING, "", Importance.LOW,
-          "The comma separated list of MessageAttribute names to be included (or \"All\" to accept all the names). Default is the empty string.");
-
+      .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue(), Type.LIST, "", Importance.LOW,
+          "The comma separated list of MessageAttribute names to be included, if empty it includes all the Message Attributes. Default is the empty string.");
 
   public static ConfigDef config() {
     return CONFIG_DEF;

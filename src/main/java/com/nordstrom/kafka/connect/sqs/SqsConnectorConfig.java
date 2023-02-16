@@ -4,7 +4,6 @@ import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.common.config.ConfigDef;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +26,8 @@ abstract class SqsConnectorConfig extends AbstractConfig {
         endpointUrl = getString(SqsConnectorConfigKeys.SQS_ENDPOINT_URL.getValue());
         messageAttributesEnabled = getBoolean(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue());
 
-        String csMessageAttributesList = getString(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_LIST.getValue());
-        messageAttributesList = messageAttributesEnabled ? Arrays.asList(csMessageAttributesList.split(",")) : new ArrayList<>();
+        List<String> csMessageAttributesList = getList(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue());
+        messageAttributesList = messageAttributesEnabled ? csMessageAttributesList : new ArrayList<>();
     }
 
     public String getQueueUrl() {
