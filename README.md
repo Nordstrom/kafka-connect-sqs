@@ -8,6 +8,7 @@ The SQS connector plugin provides the ability to use AWS SQS queues as both a so
 |1.2.0|2.3.0|1.11.924|
 |1.3.0|2.8.1|1.11.1034|
 |1.4.0|3.1.1|1.12.241|
+|1.5.0|3.3.2|1.12.409|
 
 Due to a compatibility issue with [Apache httpcomponents](http://hc.apache.org/), connector versions 1.1.0 and earlier may not work with Kafka Connect versions greater than 2.2
 
