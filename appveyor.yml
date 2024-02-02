@@ -1,0 +1,105 @@
+version: 1.4.{build}
+
+image: Ubuntu
+
+skip_commits:
+  message: /\[nobuild\]/
+
+skip_tags: true
+
+environment:
+  OctopusApiKey:
+    secure: 8IsUXAfxp7E3X7Ogsap3xFHSj0ahrTpLE5mGtDjWwzQ=
+  JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+    
+  git_host: github.com
+  git_username: overdrive-rw-build-user
+  git_access_token:
+    secure: H+opO+stEkx7ijMSbaMfvESu3HdmC0G5nhnaFAoyLss68zKeOgKFLGiqQ2A6AJVy
+
+init:
+  - if ! [[ "$APPVEYOR_REPO_BRANCH" =~ (master|hotfix-.*) ]]; then export APPVEYOR_CACHE_SKIP_SAVE=true; fi
+
+build_script:
+  - |
+    VERSION_ARG='-DnewVersion='$APPVEYOR_BUILD_VERSION
+    LOWERCASE_BRANCH=$(echo $APPVEYOR_REPO_BRANCH | awk '{print tolower($0)}')
+    if [[ $LOWERCASE_BRANCH == spike* ]]; then
+      VERSION_ARG="${VERSION_ARG}-beta"
+    fi
+
+    mvn clean
+    mvn versions:set $VERSION_ARG -e -q
+    if [[ $LOWERCASE_BRANCH =~ (master|spike-.*|hotfix-.*) ]]; then
+      mvn package -P deployed -e -q
+    else
+      mvn test -P deployed -e -q
+    fi
+
+    tree ./target
+cache:
+  - $HOME/.m2 -> pom.xml #invalidate cache when pom changes
+
+after_build:
+  - ps: |
+      If(Test-Path .\target\scalatest-reports\junit) {
+          $wc = New-Object 'System.Net.WebClient'
+          Get-ChildItem .\target\scalatest-reports\junit | Where { $_.Name -Like '*overdrive*' } | % {
+              $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", ($_.FullName))
+          }
+      }
+      New-Item package -Type Directory
+      Copy-Item target\*-package\* .\package
+      
+      $version = $env:APPVEYOR_BUILD_VERSION
+      $lowercase_branch = $env:APPVEYOR_REPO_BRANCH.toLower()
+      If($lowercase_branch -match ('spike-.*')) {
+        $version = $version + "-beta"
+      }
+
+      If($lowercase_branch -match '(master|spike-.*|hotfix-.*)') {
+        Get-ChildItem "./" -Recurse -Filter *.nuspec |
+        Foreach-Object {
+          Write-Host $_.FullName
+          nuget pack $_.FullName -Version $version
+        }
+      }
+
+artifacts:
+  - path: '*.nupkg'
+    name: NuGet-Package
+
+deploy:
+  - provider: NuGet
+    server: https://octopus-ext.hq.overdrive.com/nuget/packages/
+    api_key:
+      secure: IiFdyQbnSK44crdFUchQICDogfZqUchvWM85HVfvW7c=
+    skip_symbols: true
+    artifact: NuGet-Package
+    on:
+      branch: /(master|release-.*|spike-.*)/
+
+for:
+  - branches:
+      only:
+        - master
+        - /hotfix-.*/
+        - /spike-.*/
+    on_success:
+      - ps: |
+          Write-Host "Setting git identity, which will be associated with annotated tags"
+          git config --global user.email "no-reply@overdrive.com"
+          git config --global user.name "AppVeyor"
+          Write-Host "Setting git credentials"
+          git config --global credential.helper store
+          Set-Content -Path "$HOME\.git-credentials" -NoNewLine `
+            -Value "https://$($env:git_username):$($env:git_access_token)@$($env:git_host)`n"
+
+          $tag = "v$env:APPVEYOR_BUILD_VERSION"
+          If($env:APPVEYOR_REPO_BRANCH.toLower() -match ('spike-.*')) {
+            $version = $version + "-beta"
+          }
+
+          Write-Host "Creating an annotated tag $tag"
+          git tag -a $tag -m "built by AppVeyor project $env:APPVEYOR_PROJECT_NAME ($env:APPVEYOR_PROJECT_SLUG)"
+          git push origin $tag --porcelain
