@@ -8,6 +8,6 @@
         <description>Kafka Connect with Sqs</description>
     </metadata>
     <files>
-        <file src="target\*-jar-with-dependencies.jar"/>
+        <file src="target\kafka-connect-sqs-1.5.0.jar"/>
     </files>
 </package>
