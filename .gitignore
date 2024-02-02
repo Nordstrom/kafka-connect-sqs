@@ -34,3 +34,5 @@ dependency-reduced-pom.xml
 # IntelliJ
 .idea
 *.iml
+
+**/.DS_Store
