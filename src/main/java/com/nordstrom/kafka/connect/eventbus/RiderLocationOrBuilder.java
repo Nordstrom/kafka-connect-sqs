@@ -9,116 +9,59 @@ public interface RiderLocationOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string Type = 1;</code>
+   * <code>string type = 1;</code>
    * @return The type.
    */
   java.lang.String getType();
   /**
-   * <code>string Type = 1;</code>
+   * <code>string type = 1;</code>
    * @return The bytes for type.
    */
   com.google.protobuf.ByteString
       getTypeBytes();
 
   /**
-   * <code>string MessageId = 2;</code>
-   * @return The messageId.
+   * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+   * @return Whether the data field is set.
    */
-  java.lang.String getMessageId();
+  boolean hasData();
   /**
-   * <code>string MessageId = 2;</code>
-   * @return The bytes for messageId.
+   * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+   * @return The data.
+   */
+  com.nordstrom.kafka.connect.eventbus.RiderLocation.Data getData();
+  /**
+   * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+   */
+  com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder getDataOrBuilder();
+
+  /**
+   * <code>string country_code = 3;</code>
+   * @return The countryCode.
+   */
+  java.lang.String getCountryCode();
+  /**
+   * <code>string country_code = 3;</code>
+   * @return The bytes for countryCode.
    */
   com.google.protobuf.ByteString
-      getMessageIdBytes();
+      getCountryCodeBytes();
 
   /**
-   * <code>string TopicArn = 3;</code>
-   * @return The topicArn.
-   */
-  java.lang.String getTopicArn();
-  /**
-   * <code>string TopicArn = 3;</code>
-   * @return The bytes for topicArn.
-   */
-  com.google.protobuf.ByteString
-      getTopicArnBytes();
-
-  /**
-   * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-   * @return Whether the message field is set.
-   */
-  boolean hasMessage();
-  /**
-   * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-   * @return The message.
-   */
-  com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper getMessage();
-  /**
-   * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-   */
-  com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder getMessageOrBuilder();
-
-  /**
-   * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-   * @return Whether the timestamp field is set.
-   */
-  boolean hasTimestamp();
-  /**
-   * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+   * <code>string timestamp = 4;</code>
    * @return The timestamp.
    */
-  com.google.protobuf.Timestamp getTimestamp();
+  java.lang.String getTimestamp();
   /**
-   * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-   */
-  com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
-
-  /**
-   * <code>string SignatureVersion = 6;</code>
-   * @return The signatureVersion.
-   */
-  java.lang.String getSignatureVersion();
-  /**
-   * <code>string SignatureVersion = 6;</code>
-   * @return The bytes for signatureVersion.
+   * <code>string timestamp = 4;</code>
+   * @return The bytes for timestamp.
    */
   com.google.protobuf.ByteString
-      getSignatureVersionBytes();
+      getTimestampBytes();
 
   /**
-   * <code>string Signature = 7;</code>
-   * @return The signature.
+   * <code>uint32 version = 5;</code>
+   * @return The version.
    */
-  java.lang.String getSignature();
-  /**
-   * <code>string Signature = 7;</code>
-   * @return The bytes for signature.
-   */
-  com.google.protobuf.ByteString
-      getSignatureBytes();
-
-  /**
-   * <code>string SigningCertURL = 8;</code>
-   * @return The signingCertURL.
-   */
-  java.lang.String getSigningCertURL();
-  /**
-   * <code>string SigningCertURL = 8;</code>
-   * @return The bytes for signingCertURL.
-   */
-  com.google.protobuf.ByteString
-      getSigningCertURLBytes();
-
-  /**
-   * <code>string UnsubscribeURL = 9;</code>
-   * @return The unsubscribeURL.
-   */
-  java.lang.String getUnsubscribeURL();
-  /**
-   * <code>string UnsubscribeURL = 9;</code>
-   * @return The bytes for unsubscribeURL.
-   */
-  com.google.protobuf.ByteString
-      getUnsubscribeURLBytes();
+  int getVersion();
 }

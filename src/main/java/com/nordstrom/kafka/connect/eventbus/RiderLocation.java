@@ -18,12 +18,8 @@ private static final long serialVersionUID = 0L;
   }
   private RiderLocation() {
     type_ = "";
-    messageId_ = "";
-    topicArn_ = "";
-    signatureVersion_ = "";
-    signature_ = "";
-    signingCertURL_ = "";
-    unsubscribeURL_ = "";
+    countryCode_ = "";
+    timestamp_ = "";
   }
 
   @java.lang.Override
@@ -5336,1140 +5332,12 @@ private static final long serialVersionUID = 0L;
 
   }
 
-  public interface MessageWrapperOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.deliveryhero.eventbus.RiderLocation.MessageWrapper)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string type = 1;</code>
-     * @return The type.
-     */
-    java.lang.String getType();
-    /**
-     * <code>string type = 1;</code>
-     * @return The bytes for type.
-     */
-    com.google.protobuf.ByteString
-        getTypeBytes();
-
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-     * @return Whether the data field is set.
-     */
-    boolean hasData();
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-     * @return The data.
-     */
-    com.nordstrom.kafka.connect.eventbus.RiderLocation.Data getData();
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-     */
-    com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder getDataOrBuilder();
-
-    /**
-     * <code>string country_code = 3;</code>
-     * @return The countryCode.
-     */
-    java.lang.String getCountryCode();
-    /**
-     * <code>string country_code = 3;</code>
-     * @return The bytes for countryCode.
-     */
-    com.google.protobuf.ByteString
-        getCountryCodeBytes();
-
-    /**
-     * <code>string timestamp = 4;</code>
-     * @return The timestamp.
-     */
-    java.lang.String getTimestamp();
-    /**
-     * <code>string timestamp = 4;</code>
-     * @return The bytes for timestamp.
-     */
-    com.google.protobuf.ByteString
-        getTimestampBytes();
-
-    /**
-     * <code>uint32 version = 5;</code>
-     * @return The version.
-     */
-    int getVersion();
-  }
-  /**
-   * Protobuf type {@code com.deliveryhero.eventbus.RiderLocation.MessageWrapper}
-   */
-  public static final class MessageWrapper extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.deliveryhero.eventbus.RiderLocation.MessageWrapper)
-      MessageWrapperOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use MessageWrapper.newBuilder() to construct.
-    private MessageWrapper(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private MessageWrapper() {
-      type_ = "";
-      countryCode_ = "";
-      timestamp_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new MessageWrapper();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.nordstrom.kafka.connect.eventbus.RiderLocationOuterClass.internal_static_com_deliveryhero_eventbus_RiderLocation_MessageWrapper_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.nordstrom.kafka.connect.eventbus.RiderLocationOuterClass.internal_static_com_deliveryhero_eventbus_RiderLocation_MessageWrapper_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.class, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int TYPE_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object type_ = "";
-    /**
-     * <code>string type = 1;</code>
-     * @return The type.
-     */
-    @java.lang.Override
-    public java.lang.String getType() {
-      java.lang.Object ref = type_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        type_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string type = 1;</code>
-     * @return The bytes for type.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getTypeBytes() {
-      java.lang.Object ref = type_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        type_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int DATA_FIELD_NUMBER = 2;
-    private com.nordstrom.kafka.connect.eventbus.RiderLocation.Data data_;
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-     * @return Whether the data field is set.
-     */
-    @java.lang.Override
-    public boolean hasData() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-     * @return The data.
-     */
-    @java.lang.Override
-    public com.nordstrom.kafka.connect.eventbus.RiderLocation.Data getData() {
-      return data_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-     */
-    @java.lang.Override
-    public com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder getDataOrBuilder() {
-      return data_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
-    }
-
-    public static final int COUNTRY_CODE_FIELD_NUMBER = 3;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object countryCode_ = "";
-    /**
-     * <code>string country_code = 3;</code>
-     * @return The countryCode.
-     */
-    @java.lang.Override
-    public java.lang.String getCountryCode() {
-      java.lang.Object ref = countryCode_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        countryCode_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string country_code = 3;</code>
-     * @return The bytes for countryCode.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getCountryCodeBytes() {
-      java.lang.Object ref = countryCode_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        countryCode_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TIMESTAMP_FIELD_NUMBER = 4;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object timestamp_ = "";
-    /**
-     * <code>string timestamp = 4;</code>
-     * @return The timestamp.
-     */
-    @java.lang.Override
-    public java.lang.String getTimestamp() {
-      java.lang.Object ref = timestamp_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        timestamp_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string timestamp = 4;</code>
-     * @return The bytes for timestamp.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getTimestampBytes() {
-      java.lang.Object ref = timestamp_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        timestamp_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int VERSION_FIELD_NUMBER = 5;
-    private int version_ = 0;
-    /**
-     * <code>uint32 version = 5;</code>
-     * @return The version.
-     */
-    @java.lang.Override
-    public int getVersion() {
-      return version_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
-      }
-      if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(2, getData());
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(countryCode_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, countryCode_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timestamp_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, timestamp_);
-      }
-      if (version_ != 0) {
-        output.writeUInt32(5, version_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
-      }
-      if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getData());
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(countryCode_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, countryCode_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timestamp_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, timestamp_);
-      }
-      if (version_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(5, version_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper)) {
-        return super.equals(obj);
-      }
-      com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper other = (com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper) obj;
-
-      if (!getType()
-          .equals(other.getType())) return false;
-      if (hasData() != other.hasData()) return false;
-      if (hasData()) {
-        if (!getData()
-            .equals(other.getData())) return false;
-      }
-      if (!getCountryCode()
-          .equals(other.getCountryCode())) return false;
-      if (!getTimestamp()
-          .equals(other.getTimestamp())) return false;
-      if (getVersion()
-          != other.getVersion()) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getType().hashCode();
-      if (hasData()) {
-        hash = (37 * hash) + DATA_FIELD_NUMBER;
-        hash = (53 * hash) + getData().hashCode();
-      }
-      hash = (37 * hash) + COUNTRY_CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCountryCode().hashCode();
-      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-      hash = (53 * hash) + getTimestamp().hashCode();
-      hash = (37 * hash) + VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getVersion();
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.deliveryhero.eventbus.RiderLocation.MessageWrapper}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.deliveryhero.eventbus.RiderLocation.MessageWrapper)
-        com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.nordstrom.kafka.connect.eventbus.RiderLocationOuterClass.internal_static_com_deliveryhero_eventbus_RiderLocation_MessageWrapper_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.nordstrom.kafka.connect.eventbus.RiderLocationOuterClass.internal_static_com_deliveryhero_eventbus_RiderLocation_MessageWrapper_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.class, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder.class);
-      }
-
-      // Construct using com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getDataFieldBuilder();
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        bitField0_ = 0;
-        type_ = "";
-        data_ = null;
-        if (dataBuilder_ != null) {
-          dataBuilder_.dispose();
-          dataBuilder_ = null;
-        }
-        countryCode_ = "";
-        timestamp_ = "";
-        version_ = 0;
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.nordstrom.kafka.connect.eventbus.RiderLocationOuterClass.internal_static_com_deliveryhero_eventbus_RiderLocation_MessageWrapper_descriptor;
-      }
-
-      @java.lang.Override
-      public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper getDefaultInstanceForType() {
-        return com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper build() {
-        com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper buildPartial() {
-        com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper result = new com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
-        onBuilt();
-        return result;
-      }
-
-      private void buildPartial0(com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper result) {
-        int from_bitField0_ = bitField0_;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.type_ = type_;
-        }
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.data_ = dataBuilder_ == null
-              ? data_
-              : dataBuilder_.build();
-          to_bitField0_ |= 0x00000001;
-        }
-        if (((from_bitField0_ & 0x00000004) != 0)) {
-          result.countryCode_ = countryCode_;
-        }
-        if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.timestamp_ = timestamp_;
-        }
-        if (((from_bitField0_ & 0x00000010) != 0)) {
-          result.version_ = version_;
-        }
-        result.bitField0_ |= to_bitField0_;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper) {
-          return mergeFrom((com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper other) {
-        if (other == com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance()) return this;
-        if (!other.getType().isEmpty()) {
-          type_ = other.type_;
-          bitField0_ |= 0x00000001;
-          onChanged();
-        }
-        if (other.hasData()) {
-          mergeData(other.getData());
-        }
-        if (!other.getCountryCode().isEmpty()) {
-          countryCode_ = other.countryCode_;
-          bitField0_ |= 0x00000004;
-          onChanged();
-        }
-        if (!other.getTimestamp().isEmpty()) {
-          timestamp_ = other.timestamp_;
-          bitField0_ |= 0x00000008;
-          onChanged();
-        }
-        if (other.getVersion() != 0) {
-          setVersion(other.getVersion());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                type_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 10
-              case 18: {
-                input.readMessage(
-                    getDataFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                bitField0_ |= 0x00000002;
-                break;
-              } // case 18
-              case 26: {
-                countryCode_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000004;
-                break;
-              } // case 26
-              case 34: {
-                timestamp_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000008;
-                break;
-              } // case 34
-              case 40: {
-                version_ = input.readUInt32();
-                bitField0_ |= 0x00000010;
-                break;
-              } // case 40
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object type_ = "";
-      /**
-       * <code>string type = 1;</code>
-       * @return The type.
-       */
-      public java.lang.String getType() {
-        java.lang.Object ref = type_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          type_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string type = 1;</code>
-       * @return The bytes for type.
-       */
-      public com.google.protobuf.ByteString
-          getTypeBytes() {
-        java.lang.Object ref = type_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          type_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string type = 1;</code>
-       * @param value The type to set.
-       * @return This builder for chaining.
-       */
-      public Builder setType(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        type_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string type = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearType() {
-        type_ = getDefaultInstance().getType();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string type = 1;</code>
-       * @param value The bytes for type to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTypeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        type_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-
-      private com.nordstrom.kafka.connect.eventbus.RiderLocation.Data data_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.nordstrom.kafka.connect.eventbus.RiderLocation.Data, com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder> dataBuilder_;
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       * @return Whether the data field is set.
-       */
-      public boolean hasData() {
-        return ((bitField0_ & 0x00000002) != 0);
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       * @return The data.
-       */
-      public com.nordstrom.kafka.connect.eventbus.RiderLocation.Data getData() {
-        if (dataBuilder_ == null) {
-          return data_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
-        } else {
-          return dataBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      public Builder setData(com.nordstrom.kafka.connect.eventbus.RiderLocation.Data value) {
-        if (dataBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          data_ = value;
-        } else {
-          dataBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      public Builder setData(
-          com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder builderForValue) {
-        if (dataBuilder_ == null) {
-          data_ = builderForValue.build();
-        } else {
-          dataBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      public Builder mergeData(com.nordstrom.kafka.connect.eventbus.RiderLocation.Data value) {
-        if (dataBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0) &&
-            data_ != null &&
-            data_ != com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance()) {
-            getDataBuilder().mergeFrom(value);
-          } else {
-            data_ = value;
-          }
-        } else {
-          dataBuilder_.mergeFrom(value);
-        }
-        if (data_ != null) {
-          bitField0_ |= 0x00000002;
-          onChanged();
-        }
-        return this;
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        data_ = null;
-        if (dataBuilder_ != null) {
-          dataBuilder_.dispose();
-          dataBuilder_ = null;
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      public com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder getDataBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getDataFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      public com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder getDataOrBuilder() {
-        if (dataBuilder_ != null) {
-          return dataBuilder_.getMessageOrBuilder();
-        } else {
-          return data_ == null ?
-              com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
-        }
-      }
-      /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.nordstrom.kafka.connect.eventbus.RiderLocation.Data, com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder> 
-          getDataFieldBuilder() {
-        if (dataBuilder_ == null) {
-          dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.nordstrom.kafka.connect.eventbus.RiderLocation.Data, com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder>(
-                  getData(),
-                  getParentForChildren(),
-                  isClean());
-          data_ = null;
-        }
-        return dataBuilder_;
-      }
-
-      private java.lang.Object countryCode_ = "";
-      /**
-       * <code>string country_code = 3;</code>
-       * @return The countryCode.
-       */
-      public java.lang.String getCountryCode() {
-        java.lang.Object ref = countryCode_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          countryCode_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string country_code = 3;</code>
-       * @return The bytes for countryCode.
-       */
-      public com.google.protobuf.ByteString
-          getCountryCodeBytes() {
-        java.lang.Object ref = countryCode_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          countryCode_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string country_code = 3;</code>
-       * @param value The countryCode to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCountryCode(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        countryCode_ = value;
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string country_code = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCountryCode() {
-        countryCode_ = getDefaultInstance().getCountryCode();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string country_code = 3;</code>
-       * @param value The bytes for countryCode to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCountryCodeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        countryCode_ = value;
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object timestamp_ = "";
-      /**
-       * <code>string timestamp = 4;</code>
-       * @return The timestamp.
-       */
-      public java.lang.String getTimestamp() {
-        java.lang.Object ref = timestamp_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          timestamp_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string timestamp = 4;</code>
-       * @return The bytes for timestamp.
-       */
-      public com.google.protobuf.ByteString
-          getTimestampBytes() {
-        java.lang.Object ref = timestamp_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          timestamp_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string timestamp = 4;</code>
-       * @param value The timestamp to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTimestamp(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        timestamp_ = value;
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string timestamp = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTimestamp() {
-        timestamp_ = getDefaultInstance().getTimestamp();
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string timestamp = 4;</code>
-       * @param value The bytes for timestamp to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTimestampBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        timestamp_ = value;
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return this;
-      }
-
-      private int version_ ;
-      /**
-       * <code>uint32 version = 5;</code>
-       * @return The version.
-       */
-      @java.lang.Override
-      public int getVersion() {
-        return version_;
-      }
-      /**
-       * <code>uint32 version = 5;</code>
-       * @param value The version to set.
-       * @return This builder for chaining.
-       */
-      public Builder setVersion(int value) {
-
-        version_ = value;
-        bitField0_ |= 0x00000010;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 version = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearVersion() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        version_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:com.deliveryhero.eventbus.RiderLocation.MessageWrapper)
-    }
-
-    // @@protoc_insertion_point(class_scope:com.deliveryhero.eventbus.RiderLocation.MessageWrapper)
-    private static final com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper();
-    }
-
-    public static com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<MessageWrapper>
-        PARSER = new com.google.protobuf.AbstractParser<MessageWrapper>() {
-      @java.lang.Override
-      public MessageWrapper parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<MessageWrapper> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MessageWrapper> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   private int bitField0_;
   public static final int TYPE_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object type_ = "";
   /**
-   * <code>string Type = 1;</code>
+   * <code>string type = 1;</code>
    * @return The type.
    */
   @java.lang.Override
@@ -6486,7 +5354,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string Type = 1;</code>
+   * <code>string type = 1;</code>
    * @return The bytes for type.
    */
   @java.lang.Override
@@ -6504,290 +5372,119 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int MESSAGEID_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object messageId_ = "";
+  public static final int DATA_FIELD_NUMBER = 2;
+  private com.nordstrom.kafka.connect.eventbus.RiderLocation.Data data_;
   /**
-   * <code>string MessageId = 2;</code>
-   * @return The messageId.
+   * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+   * @return Whether the data field is set.
    */
   @java.lang.Override
-  public java.lang.String getMessageId() {
-    java.lang.Object ref = messageId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      messageId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string MessageId = 2;</code>
-   * @return The bytes for messageId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getMessageIdBytes() {
-    java.lang.Object ref = messageId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      messageId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int TOPICARN_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object topicArn_ = "";
-  /**
-   * <code>string TopicArn = 3;</code>
-   * @return The topicArn.
-   */
-  @java.lang.Override
-  public java.lang.String getTopicArn() {
-    java.lang.Object ref = topicArn_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      topicArn_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string TopicArn = 3;</code>
-   * @return The bytes for topicArn.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getTopicArnBytes() {
-    java.lang.Object ref = topicArn_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      topicArn_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int MESSAGE_FIELD_NUMBER = 4;
-  private com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper message_;
-  /**
-   * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-   * @return Whether the message field is set.
-   */
-  @java.lang.Override
-  public boolean hasMessage() {
+  public boolean hasData() {
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-   * @return The message.
+   * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+   * @return The data.
    */
   @java.lang.Override
-  public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper getMessage() {
-    return message_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance() : message_;
+  public com.nordstrom.kafka.connect.eventbus.RiderLocation.Data getData() {
+    return data_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
   }
   /**
-   * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
+   * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
    */
   @java.lang.Override
-  public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder getMessageOrBuilder() {
-    return message_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance() : message_;
+  public com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder getDataOrBuilder() {
+    return data_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
   }
 
-  public static final int TIMESTAMP_FIELD_NUMBER = 5;
-  private com.google.protobuf.Timestamp timestamp_;
+  public static final int COUNTRY_CODE_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object countryCode_ = "";
   /**
-   * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-   * @return Whether the timestamp field is set.
+   * <code>string country_code = 3;</code>
+   * @return The countryCode.
    */
   @java.lang.Override
-  public boolean hasTimestamp() {
-    return ((bitField0_ & 0x00000002) != 0);
+  public java.lang.String getCountryCode() {
+    java.lang.Object ref = countryCode_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      countryCode_ = s;
+      return s;
+    }
   }
   /**
-   * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+   * <code>string country_code = 3;</code>
+   * @return The bytes for countryCode.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCountryCodeBytes() {
+    java.lang.Object ref = countryCode_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      countryCode_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int TIMESTAMP_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object timestamp_ = "";
+  /**
+   * <code>string timestamp = 4;</code>
    * @return The timestamp.
    */
   @java.lang.Override
-  public com.google.protobuf.Timestamp getTimestamp() {
-    return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-  }
-  /**
-   * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-   */
-  @java.lang.Override
-  public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
-    return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-  }
-
-  public static final int SIGNATUREVERSION_FIELD_NUMBER = 6;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object signatureVersion_ = "";
-  /**
-   * <code>string SignatureVersion = 6;</code>
-   * @return The signatureVersion.
-   */
-  @java.lang.Override
-  public java.lang.String getSignatureVersion() {
-    java.lang.Object ref = signatureVersion_;
+  public java.lang.String getTimestamp() {
+    java.lang.Object ref = timestamp_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      signatureVersion_ = s;
+      timestamp_ = s;
       return s;
     }
   }
   /**
-   * <code>string SignatureVersion = 6;</code>
-   * @return The bytes for signatureVersion.
+   * <code>string timestamp = 4;</code>
+   * @return The bytes for timestamp.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getSignatureVersionBytes() {
-    java.lang.Object ref = signatureVersion_;
+      getTimestampBytes() {
+    java.lang.Object ref = timestamp_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      signatureVersion_ = b;
+      timestamp_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int SIGNATURE_FIELD_NUMBER = 7;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object signature_ = "";
+  public static final int VERSION_FIELD_NUMBER = 5;
+  private int version_ = 0;
   /**
-   * <code>string Signature = 7;</code>
-   * @return The signature.
+   * <code>uint32 version = 5;</code>
+   * @return The version.
    */
   @java.lang.Override
-  public java.lang.String getSignature() {
-    java.lang.Object ref = signature_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      signature_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string Signature = 7;</code>
-   * @return The bytes for signature.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSignatureBytes() {
-    java.lang.Object ref = signature_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      signature_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SIGNINGCERTURL_FIELD_NUMBER = 8;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object signingCertURL_ = "";
-  /**
-   * <code>string SigningCertURL = 8;</code>
-   * @return The signingCertURL.
-   */
-  @java.lang.Override
-  public java.lang.String getSigningCertURL() {
-    java.lang.Object ref = signingCertURL_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      signingCertURL_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string SigningCertURL = 8;</code>
-   * @return The bytes for signingCertURL.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getSigningCertURLBytes() {
-    java.lang.Object ref = signingCertURL_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      signingCertURL_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int UNSUBSCRIBEURL_FIELD_NUMBER = 9;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object unsubscribeURL_ = "";
-  /**
-   * <code>string UnsubscribeURL = 9;</code>
-   * @return The unsubscribeURL.
-   */
-  @java.lang.Override
-  public java.lang.String getUnsubscribeURL() {
-    java.lang.Object ref = unsubscribeURL_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      unsubscribeURL_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string UnsubscribeURL = 9;</code>
-   * @return The bytes for unsubscribeURL.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getUnsubscribeURLBytes() {
-    java.lang.Object ref = unsubscribeURL_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      unsubscribeURL_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getVersion() {
+    return version_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -6807,29 +5504,17 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(messageId_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, messageId_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(topicArn_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, topicArn_);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(4, getMessage());
+      output.writeMessage(2, getData());
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
-      output.writeMessage(5, getTimestamp());
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(countryCode_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, countryCode_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signatureVersion_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, signatureVersion_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timestamp_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, timestamp_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signature_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, signature_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signingCertURL_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, signingCertURL_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(unsubscribeURL_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, unsubscribeURL_);
+    if (version_ != 0) {
+      output.writeUInt32(5, version_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -6843,31 +5528,19 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(messageId_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, messageId_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(topicArn_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, topicArn_);
-    }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(4, getMessage());
+        .computeMessageSize(2, getData());
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(countryCode_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, countryCode_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timestamp_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, timestamp_);
+    }
+    if (version_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getTimestamp());
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signatureVersion_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, signatureVersion_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signature_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, signature_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(signingCertURL_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, signingCertURL_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(unsubscribeURL_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, unsubscribeURL_);
+        .computeUInt32Size(5, version_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -6886,28 +5559,17 @@ private static final long serialVersionUID = 0L;
 
     if (!getType()
         .equals(other.getType())) return false;
-    if (!getMessageId()
-        .equals(other.getMessageId())) return false;
-    if (!getTopicArn()
-        .equals(other.getTopicArn())) return false;
-    if (hasMessage() != other.hasMessage()) return false;
-    if (hasMessage()) {
-      if (!getMessage()
-          .equals(other.getMessage())) return false;
+    if (hasData() != other.hasData()) return false;
+    if (hasData()) {
+      if (!getData()
+          .equals(other.getData())) return false;
     }
-    if (hasTimestamp() != other.hasTimestamp()) return false;
-    if (hasTimestamp()) {
-      if (!getTimestamp()
-          .equals(other.getTimestamp())) return false;
-    }
-    if (!getSignatureVersion()
-        .equals(other.getSignatureVersion())) return false;
-    if (!getSignature()
-        .equals(other.getSignature())) return false;
-    if (!getSigningCertURL()
-        .equals(other.getSigningCertURL())) return false;
-    if (!getUnsubscribeURL()
-        .equals(other.getUnsubscribeURL())) return false;
+    if (!getCountryCode()
+        .equals(other.getCountryCode())) return false;
+    if (!getTimestamp()
+        .equals(other.getTimestamp())) return false;
+    if (getVersion()
+        != other.getVersion()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -6921,26 +5583,16 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
     hash = (53 * hash) + getType().hashCode();
-    hash = (37 * hash) + MESSAGEID_FIELD_NUMBER;
-    hash = (53 * hash) + getMessageId().hashCode();
-    hash = (37 * hash) + TOPICARN_FIELD_NUMBER;
-    hash = (53 * hash) + getTopicArn().hashCode();
-    if (hasMessage()) {
-      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-      hash = (53 * hash) + getMessage().hashCode();
+    if (hasData()) {
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
     }
-    if (hasTimestamp()) {
-      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-      hash = (53 * hash) + getTimestamp().hashCode();
-    }
-    hash = (37 * hash) + SIGNATUREVERSION_FIELD_NUMBER;
-    hash = (53 * hash) + getSignatureVersion().hashCode();
-    hash = (37 * hash) + SIGNATURE_FIELD_NUMBER;
-    hash = (53 * hash) + getSignature().hashCode();
-    hash = (37 * hash) + SIGNINGCERTURL_FIELD_NUMBER;
-    hash = (53 * hash) + getSigningCertURL().hashCode();
-    hash = (37 * hash) + UNSUBSCRIBEURL_FIELD_NUMBER;
-    hash = (53 * hash) + getUnsubscribeURL().hashCode();
+    hash = (37 * hash) + COUNTRY_CODE_FIELD_NUMBER;
+    hash = (53 * hash) + getCountryCode().hashCode();
+    hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+    hash = (53 * hash) + getTimestamp().hashCode();
+    hash = (37 * hash) + VERSION_FIELD_NUMBER;
+    hash = (53 * hash) + getVersion();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -7071,8 +5723,7 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getMessageFieldBuilder();
-        getTimestampFieldBuilder();
+        getDataFieldBuilder();
       }
     }
     @java.lang.Override
@@ -7080,22 +5731,14 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       type_ = "";
-      messageId_ = "";
-      topicArn_ = "";
-      message_ = null;
-      if (messageBuilder_ != null) {
-        messageBuilder_.dispose();
-        messageBuilder_ = null;
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
       }
-      timestamp_ = null;
-      if (timestampBuilder_ != null) {
-        timestampBuilder_.dispose();
-        timestampBuilder_ = null;
-      }
-      signatureVersion_ = "";
-      signature_ = "";
-      signingCertURL_ = "";
-      unsubscribeURL_ = "";
+      countryCode_ = "";
+      timestamp_ = "";
+      version_ = 0;
       return this;
     }
 
@@ -7132,36 +5775,21 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.type_ = type_;
       }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.messageId_ = messageId_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.topicArn_ = topicArn_;
-      }
       int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.message_ = messageBuilder_ == null
-            ? message_
-            : messageBuilder_.build();
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.data_ = dataBuilder_ == null
+            ? data_
+            : dataBuilder_.build();
         to_bitField0_ |= 0x00000001;
       }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.countryCode_ = countryCode_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.timestamp_ = timestamp_;
+      }
       if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.timestamp_ = timestampBuilder_ == null
-            ? timestamp_
-            : timestampBuilder_.build();
-        to_bitField0_ |= 0x00000002;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.signatureVersion_ = signatureVersion_;
-      }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
-        result.signature_ = signature_;
-      }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
-        result.signingCertURL_ = signingCertURL_;
-      }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
-        result.unsubscribeURL_ = unsubscribeURL_;
+        result.version_ = version_;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -7215,41 +5843,21 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getMessageId().isEmpty()) {
-        messageId_ = other.messageId_;
-        bitField0_ |= 0x00000002;
-        onChanged();
+      if (other.hasData()) {
+        mergeData(other.getData());
       }
-      if (!other.getTopicArn().isEmpty()) {
-        topicArn_ = other.topicArn_;
+      if (!other.getCountryCode().isEmpty()) {
+        countryCode_ = other.countryCode_;
         bitField0_ |= 0x00000004;
         onChanged();
       }
-      if (other.hasMessage()) {
-        mergeMessage(other.getMessage());
-      }
-      if (other.hasTimestamp()) {
-        mergeTimestamp(other.getTimestamp());
-      }
-      if (!other.getSignatureVersion().isEmpty()) {
-        signatureVersion_ = other.signatureVersion_;
-        bitField0_ |= 0x00000020;
+      if (!other.getTimestamp().isEmpty()) {
+        timestamp_ = other.timestamp_;
+        bitField0_ |= 0x00000008;
         onChanged();
       }
-      if (!other.getSignature().isEmpty()) {
-        signature_ = other.signature_;
-        bitField0_ |= 0x00000040;
-        onChanged();
-      }
-      if (!other.getSigningCertURL().isEmpty()) {
-        signingCertURL_ = other.signingCertURL_;
-        bitField0_ |= 0x00000080;
-        onChanged();
-      }
-      if (!other.getUnsubscribeURL().isEmpty()) {
-        unsubscribeURL_ = other.unsubscribeURL_;
-        bitField0_ |= 0x00000100;
-        onChanged();
+      if (other.getVersion() != 0) {
+        setVersion(other.getVersion());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -7283,49 +5891,27 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 10
             case 18: {
-              messageId_ = input.readStringRequireUtf8();
+              input.readMessage(
+                  getDataFieldBuilder().getBuilder(),
+                  extensionRegistry);
               bitField0_ |= 0x00000002;
               break;
             } // case 18
             case 26: {
-              topicArn_ = input.readStringRequireUtf8();
+              countryCode_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
             case 34: {
-              input.readMessage(
-                  getMessageFieldBuilder().getBuilder(),
-                  extensionRegistry);
+              timestamp_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000008;
               break;
             } // case 34
-            case 42: {
-              input.readMessage(
-                  getTimestampFieldBuilder().getBuilder(),
-                  extensionRegistry);
+            case 40: {
+              version_ = input.readUInt32();
               bitField0_ |= 0x00000010;
               break;
-            } // case 42
-            case 50: {
-              signatureVersion_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000020;
-              break;
-            } // case 50
-            case 58: {
-              signature_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000040;
-              break;
-            } // case 58
-            case 66: {
-              signingCertURL_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000080;
-              break;
-            } // case 66
-            case 74: {
-              unsubscribeURL_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000100;
-              break;
-            } // case 74
+            } // case 40
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -7345,7 +5931,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object type_ = "";
     /**
-     * <code>string Type = 1;</code>
+     * <code>string type = 1;</code>
      * @return The type.
      */
     public java.lang.String getType() {
@@ -7361,7 +5947,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string Type = 1;</code>
+     * <code>string type = 1;</code>
      * @return The bytes for type.
      */
     public com.google.protobuf.ByteString
@@ -7378,7 +5964,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string Type = 1;</code>
+     * <code>string type = 1;</code>
      * @param value The type to set.
      * @return This builder for chaining.
      */
@@ -7391,7 +5977,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string Type = 1;</code>
+     * <code>string type = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearType() {
@@ -7401,7 +5987,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string Type = 1;</code>
+     * <code>string type = 1;</code>
      * @param value The bytes for type to set.
      * @return This builder for chaining.
      */
@@ -7415,676 +6001,299 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object messageId_ = "";
+    private com.nordstrom.kafka.connect.eventbus.RiderLocation.Data data_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.nordstrom.kafka.connect.eventbus.RiderLocation.Data, com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder> dataBuilder_;
     /**
-     * <code>string MessageId = 2;</code>
-     * @return The messageId.
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+     * @return Whether the data field is set.
      */
-    public java.lang.String getMessageId() {
-      java.lang.Object ref = messageId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        messageId_ = s;
-        return s;
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+     * @return The data.
+     */
+    public com.nordstrom.kafka.connect.eventbus.RiderLocation.Data getData() {
+      if (dataBuilder_ == null) {
+        return data_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
       } else {
-        return (java.lang.String) ref;
+        return dataBuilder_.getMessage();
       }
     }
     /**
-     * <code>string MessageId = 2;</code>
-     * @return The bytes for messageId.
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getMessageIdBytes() {
-      java.lang.Object ref = messageId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        messageId_ = b;
-        return b;
+    public Builder setData(com.nordstrom.kafka.connect.eventbus.RiderLocation.Data value) {
+      if (dataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        data_ = value;
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        dataBuilder_.setMessage(value);
       }
-    }
-    /**
-     * <code>string MessageId = 2;</code>
-     * @param value The messageId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMessageId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      messageId_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string MessageId = 2;</code>
-     * @return This builder for chaining.
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
      */
-    public Builder clearMessageId() {
-      messageId_ = getDefaultInstance().getMessageId();
+    public Builder setData(
+        com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder builderForValue) {
+      if (dataBuilder_ == null) {
+        data_ = builderForValue.build();
+      } else {
+        dataBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+     */
+    public Builder mergeData(com.nordstrom.kafka.connect.eventbus.RiderLocation.Data value) {
+      if (dataBuilder_ == null) {
+        if (((bitField0_ & 0x00000002) != 0) &&
+          data_ != null &&
+          data_ != com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance()) {
+          getDataBuilder().mergeFrom(value);
+        } else {
+          data_ = value;
+        }
+      } else {
+        dataBuilder_.mergeFrom(value);
+      }
+      if (data_ != null) {
+        bitField0_ |= 0x00000002;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+     */
+    public Builder clearData() {
       bitField0_ = (bitField0_ & ~0x00000002);
+      data_ = null;
+      if (dataBuilder_ != null) {
+        dataBuilder_.dispose();
+        dataBuilder_ = null;
+      }
       onChanged();
       return this;
     }
     /**
-     * <code>string MessageId = 2;</code>
-     * @param value The bytes for messageId to set.
-     * @return This builder for chaining.
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
      */
-    public Builder setMessageIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      messageId_ = value;
+    public com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder getDataBuilder() {
       bitField0_ |= 0x00000002;
       onChanged();
-      return this;
+      return getDataFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+     */
+    public com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder getDataOrBuilder() {
+      if (dataBuilder_ != null) {
+        return dataBuilder_.getMessageOrBuilder();
+      } else {
+        return data_ == null ?
+            com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.getDefaultInstance() : data_;
+      }
+    }
+    /**
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Data data = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.nordstrom.kafka.connect.eventbus.RiderLocation.Data, com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder> 
+        getDataFieldBuilder() {
+      if (dataBuilder_ == null) {
+        dataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.nordstrom.kafka.connect.eventbus.RiderLocation.Data, com.nordstrom.kafka.connect.eventbus.RiderLocation.Data.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.DataOrBuilder>(
+                getData(),
+                getParentForChildren(),
+                isClean());
+        data_ = null;
+      }
+      return dataBuilder_;
     }
 
-    private java.lang.Object topicArn_ = "";
+    private java.lang.Object countryCode_ = "";
     /**
-     * <code>string TopicArn = 3;</code>
-     * @return The topicArn.
+     * <code>string country_code = 3;</code>
+     * @return The countryCode.
      */
-    public java.lang.String getTopicArn() {
-      java.lang.Object ref = topicArn_;
+    public java.lang.String getCountryCode() {
+      java.lang.Object ref = countryCode_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        topicArn_ = s;
+        countryCode_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string TopicArn = 3;</code>
-     * @return The bytes for topicArn.
+     * <code>string country_code = 3;</code>
+     * @return The bytes for countryCode.
      */
     public com.google.protobuf.ByteString
-        getTopicArnBytes() {
-      java.lang.Object ref = topicArn_;
+        getCountryCodeBytes() {
+      java.lang.Object ref = countryCode_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        topicArn_ = b;
+        countryCode_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string TopicArn = 3;</code>
-     * @param value The topicArn to set.
+     * <code>string country_code = 3;</code>
+     * @param value The countryCode to set.
      * @return This builder for chaining.
      */
-    public Builder setTopicArn(
+    public Builder setCountryCode(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      topicArn_ = value;
+      countryCode_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string TopicArn = 3;</code>
+     * <code>string country_code = 3;</code>
      * @return This builder for chaining.
      */
-    public Builder clearTopicArn() {
-      topicArn_ = getDefaultInstance().getTopicArn();
+    public Builder clearCountryCode() {
+      countryCode_ = getDefaultInstance().getCountryCode();
       bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string TopicArn = 3;</code>
-     * @param value The bytes for topicArn to set.
+     * <code>string country_code = 3;</code>
+     * @param value The bytes for countryCode to set.
      * @return This builder for chaining.
      */
-    public Builder setTopicArnBytes(
+    public Builder setCountryCodeBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      topicArn_ = value;
+      countryCode_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
-    private com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper message_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder> messageBuilder_;
+    private java.lang.Object timestamp_ = "";
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     * @return Whether the message field is set.
-     */
-    public boolean hasMessage() {
-      return ((bitField0_ & 0x00000008) != 0);
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     * @return The message.
-     */
-    public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper getMessage() {
-      if (messageBuilder_ == null) {
-        return message_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance() : message_;
-      } else {
-        return messageBuilder_.getMessage();
-      }
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    public Builder setMessage(com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper value) {
-      if (messageBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        message_ = value;
-      } else {
-        messageBuilder_.setMessage(value);
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    public Builder setMessage(
-        com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder builderForValue) {
-      if (messageBuilder_ == null) {
-        message_ = builderForValue.build();
-      } else {
-        messageBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    public Builder mergeMessage(com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper value) {
-      if (messageBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0) &&
-          message_ != null &&
-          message_ != com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance()) {
-          getMessageBuilder().mergeFrom(value);
-        } else {
-          message_ = value;
-        }
-      } else {
-        messageBuilder_.mergeFrom(value);
-      }
-      if (message_ != null) {
-        bitField0_ |= 0x00000008;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    public Builder clearMessage() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      message_ = null;
-      if (messageBuilder_ != null) {
-        messageBuilder_.dispose();
-        messageBuilder_ = null;
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder getMessageBuilder() {
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return getMessageFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    public com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder getMessageOrBuilder() {
-      if (messageBuilder_ != null) {
-        return messageBuilder_.getMessageOrBuilder();
-      } else {
-        return message_ == null ?
-            com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.getDefaultInstance() : message_;
-      }
-    }
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.MessageWrapper Message = 4;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder> 
-        getMessageFieldBuilder() {
-      if (messageBuilder_ == null) {
-        messageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapper.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.MessageWrapperOrBuilder>(
-                getMessage(),
-                getParentForChildren(),
-                isClean());
-        message_ = null;
-      }
-      return messageBuilder_;
-    }
-
-    private com.google.protobuf.Timestamp timestamp_;
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
-    /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-     * @return Whether the timestamp field is set.
-     */
-    public boolean hasTimestamp() {
-      return ((bitField0_ & 0x00000010) != 0);
-    }
-    /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+     * <code>string timestamp = 4;</code>
      * @return The timestamp.
      */
-    public com.google.protobuf.Timestamp getTimestamp() {
-      if (timestampBuilder_ == null) {
-        return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+    public java.lang.String getTimestamp() {
+      java.lang.Object ref = timestamp_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        timestamp_ = s;
+        return s;
       } else {
-        return timestampBuilder_.getMessage();
+        return (java.lang.String) ref;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+     * <code>string timestamp = 4;</code>
+     * @return The bytes for timestamp.
      */
-    public Builder setTimestamp(com.google.protobuf.Timestamp value) {
-      if (timestampBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        timestamp_ = value;
+    public com.google.protobuf.ByteString
+        getTimestampBytes() {
+      java.lang.Object ref = timestamp_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        timestamp_ = b;
+        return b;
       } else {
-        timestampBuilder_.setMessage(value);
+        return (com.google.protobuf.ByteString) ref;
       }
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+     * <code>string timestamp = 4;</code>
+     * @param value The timestamp to set.
+     * @return This builder for chaining.
      */
     public Builder setTimestamp(
-        com.google.protobuf.Timestamp.Builder builderForValue) {
-      if (timestampBuilder_ == null) {
-        timestamp_ = builderForValue.build();
-      } else {
-        timestampBuilder_.setMessage(builderForValue.build());
-      }
-      bitField0_ |= 0x00000010;
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      timestamp_ = value;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-     */
-    public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
-      if (timestampBuilder_ == null) {
-        if (((bitField0_ & 0x00000010) != 0) &&
-          timestamp_ != null &&
-          timestamp_ != com.google.protobuf.Timestamp.getDefaultInstance()) {
-          getTimestampBuilder().mergeFrom(value);
-        } else {
-          timestamp_ = value;
-        }
-      } else {
-        timestampBuilder_.mergeFrom(value);
-      }
-      if (timestamp_ != null) {
-        bitField0_ |= 0x00000010;
-        onChanged();
-      }
-      return this;
-    }
-    /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+     * <code>string timestamp = 4;</code>
+     * @return This builder for chaining.
      */
     public Builder clearTimestamp() {
-      bitField0_ = (bitField0_ & ~0x00000010);
-      timestamp_ = null;
-      if (timestampBuilder_ != null) {
-        timestampBuilder_.dispose();
-        timestampBuilder_ = null;
-      }
+      timestamp_ = getDefaultInstance().getTimestamp();
+      bitField0_ = (bitField0_ & ~0x00000008);
       onChanged();
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
+     * <code>string timestamp = 4;</code>
+     * @param value The bytes for timestamp to set.
+     * @return This builder for chaining.
      */
-    public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+    public Builder setTimestampBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      timestamp_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+
+    private int version_ ;
+    /**
+     * <code>uint32 version = 5;</code>
+     * @return The version.
+     */
+    @java.lang.Override
+    public int getVersion() {
+      return version_;
+    }
+    /**
+     * <code>uint32 version = 5;</code>
+     * @param value The version to set.
+     * @return This builder for chaining.
+     */
+    public Builder setVersion(int value) {
+
+      version_ = value;
       bitField0_ |= 0x00000010;
       onChanged();
-      return getTimestampFieldBuilder().getBuilder();
-    }
-    /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-     */
-    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
-      if (timestampBuilder_ != null) {
-        return timestampBuilder_.getMessageOrBuilder();
-      } else {
-        return timestamp_ == null ?
-            com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-      }
-    }
-    /**
-     * <code>.google.protobuf.Timestamp Timestamp = 5;</code>
-     */
-    private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-        getTimestampFieldBuilder() {
-      if (timestampBuilder_ == null) {
-        timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                getTimestamp(),
-                getParentForChildren(),
-                isClean());
-        timestamp_ = null;
-      }
-      return timestampBuilder_;
-    }
-
-    private java.lang.Object signatureVersion_ = "";
-    /**
-     * <code>string SignatureVersion = 6;</code>
-     * @return The signatureVersion.
-     */
-    public java.lang.String getSignatureVersion() {
-      java.lang.Object ref = signatureVersion_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        signatureVersion_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string SignatureVersion = 6;</code>
-     * @return The bytes for signatureVersion.
-     */
-    public com.google.protobuf.ByteString
-        getSignatureVersionBytes() {
-      java.lang.Object ref = signatureVersion_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        signatureVersion_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string SignatureVersion = 6;</code>
-     * @param value The signatureVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSignatureVersion(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      signatureVersion_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
       return this;
     }
     /**
-     * <code>string SignatureVersion = 6;</code>
+     * <code>uint32 version = 5;</code>
      * @return This builder for chaining.
      */
-    public Builder clearSignatureVersion() {
-      signatureVersion_ = getDefaultInstance().getSignatureVersion();
-      bitField0_ = (bitField0_ & ~0x00000020);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string SignatureVersion = 6;</code>
-     * @param value The bytes for signatureVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSignatureVersionBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      signatureVersion_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object signature_ = "";
-    /**
-     * <code>string Signature = 7;</code>
-     * @return The signature.
-     */
-    public java.lang.String getSignature() {
-      java.lang.Object ref = signature_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        signature_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string Signature = 7;</code>
-     * @return The bytes for signature.
-     */
-    public com.google.protobuf.ByteString
-        getSignatureBytes() {
-      java.lang.Object ref = signature_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        signature_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string Signature = 7;</code>
-     * @param value The signature to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSignature(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      signature_ = value;
-      bitField0_ |= 0x00000040;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string Signature = 7;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSignature() {
-      signature_ = getDefaultInstance().getSignature();
-      bitField0_ = (bitField0_ & ~0x00000040);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string Signature = 7;</code>
-     * @param value The bytes for signature to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSignatureBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      signature_ = value;
-      bitField0_ |= 0x00000040;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object signingCertURL_ = "";
-    /**
-     * <code>string SigningCertURL = 8;</code>
-     * @return The signingCertURL.
-     */
-    public java.lang.String getSigningCertURL() {
-      java.lang.Object ref = signingCertURL_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        signingCertURL_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string SigningCertURL = 8;</code>
-     * @return The bytes for signingCertURL.
-     */
-    public com.google.protobuf.ByteString
-        getSigningCertURLBytes() {
-      java.lang.Object ref = signingCertURL_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        signingCertURL_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string SigningCertURL = 8;</code>
-     * @param value The signingCertURL to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSigningCertURL(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      signingCertURL_ = value;
-      bitField0_ |= 0x00000080;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string SigningCertURL = 8;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearSigningCertURL() {
-      signingCertURL_ = getDefaultInstance().getSigningCertURL();
-      bitField0_ = (bitField0_ & ~0x00000080);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string SigningCertURL = 8;</code>
-     * @param value The bytes for signingCertURL to set.
-     * @return This builder for chaining.
-     */
-    public Builder setSigningCertURLBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      signingCertURL_ = value;
-      bitField0_ |= 0x00000080;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object unsubscribeURL_ = "";
-    /**
-     * <code>string UnsubscribeURL = 9;</code>
-     * @return The unsubscribeURL.
-     */
-    public java.lang.String getUnsubscribeURL() {
-      java.lang.Object ref = unsubscribeURL_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        unsubscribeURL_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string UnsubscribeURL = 9;</code>
-     * @return The bytes for unsubscribeURL.
-     */
-    public com.google.protobuf.ByteString
-        getUnsubscribeURLBytes() {
-      java.lang.Object ref = unsubscribeURL_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        unsubscribeURL_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string UnsubscribeURL = 9;</code>
-     * @param value The unsubscribeURL to set.
-     * @return This builder for chaining.
-     */
-    public Builder setUnsubscribeURL(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      unsubscribeURL_ = value;
-      bitField0_ |= 0x00000100;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string UnsubscribeURL = 9;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearUnsubscribeURL() {
-      unsubscribeURL_ = getDefaultInstance().getUnsubscribeURL();
-      bitField0_ = (bitField0_ & ~0x00000100);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string UnsubscribeURL = 9;</code>
-     * @param value The bytes for unsubscribeURL to set.
-     * @return This builder for chaining.
-     */
-    public Builder setUnsubscribeURLBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      unsubscribeURL_ = value;
-      bitField0_ |= 0x00000100;
+    public Builder clearVersion() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      version_ = 0;
       onChanged();
       return this;
     }

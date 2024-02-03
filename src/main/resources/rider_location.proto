@@ -5,7 +5,6 @@ package com.deliveryhero.eventbus;
 option java_multiple_files = true;
 option java_package = "com.nordstrom.kafka.connect.eventbus";
 
-import "google/protobuf/timestamp.proto";
 
 message RiderLocation {
 
@@ -49,22 +48,10 @@ message RiderLocation {
     Metadata metadata = 3;
   }
 
-  message MessageWrapper {
-    string type = 1;
-    Data data = 2;
-    string country_code = 3;
-    string timestamp = 4;
-    uint32 version = 5;
-  }
-
-  string Type = 1;
-  string MessageId = 2;
-  string TopicArn = 3;
-  MessageWrapper Message = 4;
-  google.protobuf.Timestamp Timestamp = 5;
-  string SignatureVersion = 6;
-  string Signature = 7;
-  string SigningCertURL = 8;
-  string UnsubscribeURL = 9;
+  string type = 1;
+  Data data = 2;
+  string country_code = 3;
+  string timestamp = 4;
+  uint32 version = 5;
 
 }
