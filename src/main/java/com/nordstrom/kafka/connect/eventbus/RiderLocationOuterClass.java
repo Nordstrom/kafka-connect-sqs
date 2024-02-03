@@ -70,46 +70,43 @@ public final class RiderLocationOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\'src/main/resources/rider_location.prot" +
-      "o\022\031com.deliveryhero.eventbus\032\031google/pro" +
-      "tobuf/any.proto\032\037google/protobuf/timesta" +
-      "mp.proto\"\320\t\n\rRiderLocation\022\014\n\004Type\030\001 \001(\t" +
-      "\022\021\n\tMessageId\030\002 \001(\t\022\020\n\010TopicArn\030\003 \001(\t\022H\n" +
-      "\007Message\030\004 \001(\01327.com.deliveryhero.eventb" +
-      "us.RiderLocation.MessageWrapper\022-\n\tTimes" +
-      "tamp\030\005 \001(\0132\032.google.protobuf.Timestamp\022\030" +
-      "\n\020SignatureVersion\030\006 \001(\t\022\021\n\tSignature\030\007 " +
-      "\001(\t\022\026\n\016SigningCertURL\030\010 \001(\t\022\026\n\016Unsubscri" +
-      "beURL\030\t \001(\t\032&\n\007Courier\022\n\n\002id\030\001 \001(\r\022\017\n\007us" +
-      "er_id\030\002 \001(\r\032/\n\010Location\022\020\n\010latitude\030\001 \001(" +
-      "\001\022\021\n\tlongitude\030\002 \001(\001\032(\n\007Battery\022\016\n\006statu" +
-      "s\030\001 \001(\t\022\r\n\005level\030\002 \001(\005\032\016\n\014Network_info\032^" +
-      "\n\017Connection_info\022K\n\014network_info\030\001 \001(\0132" +
-      "5.com.deliveryhero.eventbus.RiderLocatio" +
-      "n.Network_info\032\324\002\n\010Metadata\022\r\n\005speed\030\001 \001" +
-      "(\r\022\017\n\007heading\030\002 \001(\r\022\020\n\010accuracy\030\003 \001(\r\022\025\n" +
-      "\rmock_location\030\004 \001(\010\022(\n\nactivities\030\005 \003(\013" +
-      "2\024.google.protobuf.Any\022A\n\007battery\030\006 \001(\0132" +
-      "0.com.deliveryhero.eventbus.RiderLocatio" +
-      "n.Battery\022Q\n\017connection_info\030\007 \001(\01328.com" +
-      ".deliveryhero.eventbus.RiderLocation.Con" +
-      "nection_info\022\021\n\tdevice_id\030\010 \001(\t\022\020\n\010platf" +
-      "orm\030\t \001(\t\022\032\n\022roadrunner_version\030\n \001(\t\032\323\001" +
-      "\n\004Data\022A\n\007courier\030\001 \001(\01320.com.deliveryhe" +
-      "ro.eventbus.RiderLocation.Courier\022C\n\010loc" +
-      "ation\030\002 \001(\01321.com.deliveryhero.eventbus." +
-      "RiderLocation.Location\022C\n\010metadata\030\003 \001(\013" +
-      "21.com.deliveryhero.eventbus.RiderLocati" +
-      "on.Metadata\032\225\001\n\016MessageWrapper\022\014\n\004type\030\001" +
-      " \001(\t\022;\n\004data\030\002 \001(\0132-.com.deliveryhero.ev" +
-      "entbus.RiderLocation.Data\022\024\n\014country_cod" +
-      "e\030\003 \001(\t\022\021\n\ttimestamp\030\004 \001(\t\022\017\n\007version\030\005 " +
-      "\001(\rB(\n$com.nordstrom.kafka.connect.event" +
-      "busP\001b\006proto3"
+      "o\022\031com.deliveryhero.eventbus\032\037google/pro" +
+      "tobuf/timestamp.proto\"\246\t\n\rRiderLocation\022" +
+      "\014\n\004Type\030\001 \001(\t\022\021\n\tMessageId\030\002 \001(\t\022\020\n\010Topi" +
+      "cArn\030\003 \001(\t\022H\n\007Message\030\004 \001(\01327.com.delive" +
+      "ryhero.eventbus.RiderLocation.MessageWra" +
+      "pper\022-\n\tTimestamp\030\005 \001(\0132\032.google.protobu" +
+      "f.Timestamp\022\030\n\020SignatureVersion\030\006 \001(\t\022\021\n" +
+      "\tSignature\030\007 \001(\t\022\026\n\016SigningCertURL\030\010 \001(\t" +
+      "\022\026\n\016UnsubscribeURL\030\t \001(\t\032&\n\007Courier\022\n\n\002i" +
+      "d\030\001 \001(\r\022\017\n\007user_id\030\002 \001(\r\032/\n\010Location\022\020\n\010" +
+      "latitude\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(\001\032(\n\007Bat" +
+      "tery\022\016\n\006status\030\001 \001(\t\022\r\n\005level\030\002 \001(\005\032\016\n\014N" +
+      "etwork_info\032^\n\017Connection_info\022K\n\014networ" +
+      "k_info\030\001 \001(\01325.com.deliveryhero.eventbus" +
+      ".RiderLocation.Network_info\032\252\002\n\010Metadata" +
+      "\022\r\n\005speed\030\001 \001(\r\022\017\n\007heading\030\002 \001(\r\022\020\n\010accu" +
+      "racy\030\003 \001(\r\022\025\n\rmock_location\030\004 \001(\010\022A\n\007bat" +
+      "tery\030\005 \001(\01320.com.deliveryhero.eventbus.R" +
+      "iderLocation.Battery\022Q\n\017connection_info\030" +
+      "\006 \001(\01328.com.deliveryhero.eventbus.RiderL" +
+      "ocation.Connection_info\022\021\n\tdevice_id\030\007 \001" +
+      "(\t\022\020\n\010platform\030\010 \001(\t\022\032\n\022roadrunner_versi" +
+      "on\030\t \001(\t\032\323\001\n\004Data\022A\n\007courier\030\001 \001(\01320.com" +
+      ".deliveryhero.eventbus.RiderLocation.Cou" +
+      "rier\022C\n\010location\030\002 \001(\01321.com.deliveryher" +
+      "o.eventbus.RiderLocation.Location\022C\n\010met" +
+      "adata\030\003 \001(\01321.com.deliveryhero.eventbus." +
+      "RiderLocation.Metadata\032\225\001\n\016MessageWrappe" +
+      "r\022\014\n\004type\030\001 \001(\t\022;\n\004data\030\002 \001(\0132-.com.deli" +
+      "veryhero.eventbus.RiderLocation.Data\022\024\n\014" +
+      "country_code\030\003 \001(\t\022\021\n\ttimestamp\030\004 \001(\t\022\017\n" +
+      "\007version\030\005 \001(\rB(\n$com.nordstrom.kafka.co" +
+      "nnect.eventbusP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.google.protobuf.AnyProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_com_deliveryhero_eventbus_RiderLocation_descriptor =
@@ -153,7 +150,7 @@ public final class RiderLocationOuterClass {
     internal_static_com_deliveryhero_eventbus_RiderLocation_Metadata_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_deliveryhero_eventbus_RiderLocation_Metadata_descriptor,
-        new java.lang.String[] { "Speed", "Heading", "Accuracy", "MockLocation", "Activities", "Battery", "ConnectionInfo", "DeviceId", "Platform", "RoadrunnerVersion", });
+        new java.lang.String[] { "Speed", "Heading", "Accuracy", "MockLocation", "Battery", "ConnectionInfo", "DeviceId", "Platform", "RoadrunnerVersion", });
     internal_static_com_deliveryhero_eventbus_RiderLocation_Data_descriptor =
       internal_static_com_deliveryhero_eventbus_RiderLocation_descriptor.getNestedTypes().get(6);
     internal_static_com_deliveryhero_eventbus_RiderLocation_Data_fieldAccessorTable = new
@@ -166,7 +163,6 @@ public final class RiderLocationOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_deliveryhero_eventbus_RiderLocation_MessageWrapper_descriptor,
         new java.lang.String[] { "Type", "Data", "CountryCode", "Timestamp", "Version", });
-    com.google.protobuf.AnyProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

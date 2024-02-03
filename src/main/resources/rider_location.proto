@@ -5,7 +5,6 @@ package com.deliveryhero.eventbus;
 option java_multiple_files = true;
 option java_package = "com.nordstrom.kafka.connect.eventbus";
 
-import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 
 message RiderLocation {
@@ -37,12 +36,11 @@ message RiderLocation {
     uint32 heading = 2;
     uint32 accuracy = 3;
     bool mock_location = 4;
-    repeated google.protobuf.Any activities = 5;
-    Battery battery = 6;
-    Connection_info connection_info = 7;
-    string device_id = 8;
-    string platform = 9;
-    string roadrunner_version = 10;
+    Battery battery = 5;
+    Connection_info connection_info = 6;
+    string device_id = 7;
+    string platform = 8;
+    string roadrunner_version = 9;
   }
 
   message Data {

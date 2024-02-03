@@ -2808,90 +2808,66 @@ private static final long serialVersionUID = 0L;
     boolean getMockLocation();
 
     /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    java.util.List<com.google.protobuf.Any> 
-        getActivitiesList();
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    com.google.protobuf.Any getActivities(int index);
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    int getActivitiesCount();
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
-        getActivitiesOrBuilderList();
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    com.google.protobuf.AnyOrBuilder getActivitiesOrBuilder(
-        int index);
-
-    /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
      * @return Whether the battery field is set.
      */
     boolean hasBattery();
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
      * @return The battery.
      */
     com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery getBattery();
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
      */
     com.nordstrom.kafka.connect.eventbus.RiderLocation.BatteryOrBuilder getBatteryOrBuilder();
 
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
      * @return Whether the connectionInfo field is set.
      */
     boolean hasConnectionInfo();
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
      * @return The connectionInfo.
      */
     com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info getConnectionInfo();
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
      */
     com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_infoOrBuilder getConnectionInfoOrBuilder();
 
     /**
-     * <code>string device_id = 8;</code>
+     * <code>string device_id = 7;</code>
      * @return The deviceId.
      */
     java.lang.String getDeviceId();
     /**
-     * <code>string device_id = 8;</code>
+     * <code>string device_id = 7;</code>
      * @return The bytes for deviceId.
      */
     com.google.protobuf.ByteString
         getDeviceIdBytes();
 
     /**
-     * <code>string platform = 9;</code>
+     * <code>string platform = 8;</code>
      * @return The platform.
      */
     java.lang.String getPlatform();
     /**
-     * <code>string platform = 9;</code>
+     * <code>string platform = 8;</code>
      * @return The bytes for platform.
      */
     com.google.protobuf.ByteString
         getPlatformBytes();
 
     /**
-     * <code>string roadrunner_version = 10;</code>
+     * <code>string roadrunner_version = 9;</code>
      * @return The roadrunnerVersion.
      */
     java.lang.String getRoadrunnerVersion();
     /**
-     * <code>string roadrunner_version = 10;</code>
+     * <code>string roadrunner_version = 9;</code>
      * @return The bytes for roadrunnerVersion.
      */
     com.google.protobuf.ByteString
@@ -2910,7 +2886,6 @@ private static final long serialVersionUID = 0L;
       super(builder);
     }
     private Metadata() {
-      activities_ = java.util.Collections.emptyList();
       deviceId_ = "";
       platform_ = "";
       roadrunnerVersion_ = "";
@@ -2981,51 +2956,10 @@ private static final long serialVersionUID = 0L;
       return mockLocation_;
     }
 
-    public static final int ACTIVITIES_FIELD_NUMBER = 5;
-    @SuppressWarnings("serial")
-    private java.util.List<com.google.protobuf.Any> activities_;
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    @java.lang.Override
-    public java.util.List<com.google.protobuf.Any> getActivitiesList() {
-      return activities_;
-    }
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    @java.lang.Override
-    public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
-        getActivitiesOrBuilderList() {
-      return activities_;
-    }
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    @java.lang.Override
-    public int getActivitiesCount() {
-      return activities_.size();
-    }
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    @java.lang.Override
-    public com.google.protobuf.Any getActivities(int index) {
-      return activities_.get(index);
-    }
-    /**
-     * <code>repeated .google.protobuf.Any activities = 5;</code>
-     */
-    @java.lang.Override
-    public com.google.protobuf.AnyOrBuilder getActivitiesOrBuilder(
-        int index) {
-      return activities_.get(index);
-    }
-
-    public static final int BATTERY_FIELD_NUMBER = 6;
+    public static final int BATTERY_FIELD_NUMBER = 5;
     private com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery battery_;
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
      * @return Whether the battery field is set.
      */
     @java.lang.Override
@@ -3033,7 +2967,7 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
      * @return The battery.
      */
     @java.lang.Override
@@ -3041,17 +2975,17 @@ private static final long serialVersionUID = 0L;
       return battery_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.getDefaultInstance() : battery_;
     }
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
      */
     @java.lang.Override
     public com.nordstrom.kafka.connect.eventbus.RiderLocation.BatteryOrBuilder getBatteryOrBuilder() {
       return battery_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.getDefaultInstance() : battery_;
     }
 
-    public static final int CONNECTION_INFO_FIELD_NUMBER = 7;
+    public static final int CONNECTION_INFO_FIELD_NUMBER = 6;
     private com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info connectionInfo_;
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
      * @return Whether the connectionInfo field is set.
      */
     @java.lang.Override
@@ -3059,7 +2993,7 @@ private static final long serialVersionUID = 0L;
       return ((bitField0_ & 0x00000002) != 0);
     }
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
      * @return The connectionInfo.
      */
     @java.lang.Override
@@ -3067,18 +3001,18 @@ private static final long serialVersionUID = 0L;
       return connectionInfo_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.getDefaultInstance() : connectionInfo_;
     }
     /**
-     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+     * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
      */
     @java.lang.Override
     public com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_infoOrBuilder getConnectionInfoOrBuilder() {
       return connectionInfo_ == null ? com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.getDefaultInstance() : connectionInfo_;
     }
 
-    public static final int DEVICE_ID_FIELD_NUMBER = 8;
+    public static final int DEVICE_ID_FIELD_NUMBER = 7;
     @SuppressWarnings("serial")
     private volatile java.lang.Object deviceId_ = "";
     /**
-     * <code>string device_id = 8;</code>
+     * <code>string device_id = 7;</code>
      * @return The deviceId.
      */
     @java.lang.Override
@@ -3095,7 +3029,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string device_id = 8;</code>
+     * <code>string device_id = 7;</code>
      * @return The bytes for deviceId.
      */
     @java.lang.Override
@@ -3113,11 +3047,11 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    public static final int PLATFORM_FIELD_NUMBER = 9;
+    public static final int PLATFORM_FIELD_NUMBER = 8;
     @SuppressWarnings("serial")
     private volatile java.lang.Object platform_ = "";
     /**
-     * <code>string platform = 9;</code>
+     * <code>string platform = 8;</code>
      * @return The platform.
      */
     @java.lang.Override
@@ -3134,7 +3068,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string platform = 9;</code>
+     * <code>string platform = 8;</code>
      * @return The bytes for platform.
      */
     @java.lang.Override
@@ -3152,11 +3086,11 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    public static final int ROADRUNNER_VERSION_FIELD_NUMBER = 10;
+    public static final int ROADRUNNER_VERSION_FIELD_NUMBER = 9;
     @SuppressWarnings("serial")
     private volatile java.lang.Object roadrunnerVersion_ = "";
     /**
-     * <code>string roadrunner_version = 10;</code>
+     * <code>string roadrunner_version = 9;</code>
      * @return The roadrunnerVersion.
      */
     @java.lang.Override
@@ -3173,7 +3107,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string roadrunner_version = 10;</code>
+     * <code>string roadrunner_version = 9;</code>
      * @return The bytes for roadrunnerVersion.
      */
     @java.lang.Override
@@ -3217,23 +3151,20 @@ private static final long serialVersionUID = 0L;
       if (mockLocation_ != false) {
         output.writeBool(4, mockLocation_);
       }
-      for (int i = 0; i < activities_.size(); i++) {
-        output.writeMessage(5, activities_.get(i));
-      }
       if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(6, getBattery());
+        output.writeMessage(5, getBattery());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeMessage(7, getConnectionInfo());
+        output.writeMessage(6, getConnectionInfo());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deviceId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, deviceId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, deviceId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(platform_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, platform_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, platform_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roadrunnerVersion_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, roadrunnerVersion_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, roadrunnerVersion_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3260,26 +3191,22 @@ private static final long serialVersionUID = 0L;
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, mockLocation_);
       }
-      for (int i = 0; i < activities_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, activities_.get(i));
-      }
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getBattery());
+          .computeMessageSize(5, getBattery());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getConnectionInfo());
+          .computeMessageSize(6, getConnectionInfo());
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deviceId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, deviceId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, deviceId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(platform_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, platform_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, platform_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(roadrunnerVersion_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, roadrunnerVersion_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, roadrunnerVersion_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -3304,8 +3231,6 @@ private static final long serialVersionUID = 0L;
           != other.getAccuracy()) return false;
       if (getMockLocation()
           != other.getMockLocation()) return false;
-      if (!getActivitiesList()
-          .equals(other.getActivitiesList())) return false;
       if (hasBattery() != other.hasBattery()) return false;
       if (hasBattery()) {
         if (!getBattery()
@@ -3342,10 +3267,6 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + MOCK_LOCATION_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getMockLocation());
-      if (getActivitiesCount() > 0) {
-        hash = (37 * hash) + ACTIVITIES_FIELD_NUMBER;
-        hash = (53 * hash) + getActivitiesList().hashCode();
-      }
       if (hasBattery()) {
         hash = (37 * hash) + BATTERY_FIELD_NUMBER;
         hash = (53 * hash) + getBattery().hashCode();
@@ -3490,7 +3411,6 @@ private static final long serialVersionUID = 0L;
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getActivitiesFieldBuilder();
           getBatteryFieldBuilder();
           getConnectionInfoFieldBuilder();
         }
@@ -3503,13 +3423,6 @@ private static final long serialVersionUID = 0L;
         heading_ = 0;
         accuracy_ = 0;
         mockLocation_ = false;
-        if (activitiesBuilder_ == null) {
-          activities_ = java.util.Collections.emptyList();
-        } else {
-          activities_ = null;
-          activitiesBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000010);
         battery_ = null;
         if (batteryBuilder_ != null) {
           batteryBuilder_.dispose();
@@ -3549,22 +3462,9 @@ private static final long serialVersionUID = 0L;
       @java.lang.Override
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata buildPartial() {
         com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata result = new com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata(this);
-        buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
-      }
-
-      private void buildPartialRepeatedFields(com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata result) {
-        if (activitiesBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) != 0)) {
-            activities_ = java.util.Collections.unmodifiableList(activities_);
-            bitField0_ = (bitField0_ & ~0x00000010);
-          }
-          result.activities_ = activities_;
-        } else {
-          result.activities_ = activitiesBuilder_.build();
-        }
       }
 
       private void buildPartial0(com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata result) {
@@ -3582,25 +3482,25 @@ private static final long serialVersionUID = 0L;
           result.mockLocation_ = mockLocation_;
         }
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000020) != 0)) {
+        if (((from_bitField0_ & 0x00000010) != 0)) {
           result.battery_ = batteryBuilder_ == null
               ? battery_
               : batteryBuilder_.build();
           to_bitField0_ |= 0x00000001;
         }
-        if (((from_bitField0_ & 0x00000040) != 0)) {
+        if (((from_bitField0_ & 0x00000020) != 0)) {
           result.connectionInfo_ = connectionInfoBuilder_ == null
               ? connectionInfo_
               : connectionInfoBuilder_.build();
           to_bitField0_ |= 0x00000002;
         }
-        if (((from_bitField0_ & 0x00000080) != 0)) {
+        if (((from_bitField0_ & 0x00000040) != 0)) {
           result.deviceId_ = deviceId_;
         }
-        if (((from_bitField0_ & 0x00000100) != 0)) {
+        if (((from_bitField0_ & 0x00000080) != 0)) {
           result.platform_ = platform_;
         }
-        if (((from_bitField0_ & 0x00000200) != 0)) {
+        if (((from_bitField0_ & 0x00000100) != 0)) {
           result.roadrunnerVersion_ = roadrunnerVersion_;
         }
         result.bitField0_ |= to_bitField0_;
@@ -3662,32 +3562,6 @@ private static final long serialVersionUID = 0L;
         if (other.getMockLocation() != false) {
           setMockLocation(other.getMockLocation());
         }
-        if (activitiesBuilder_ == null) {
-          if (!other.activities_.isEmpty()) {
-            if (activities_.isEmpty()) {
-              activities_ = other.activities_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-            } else {
-              ensureActivitiesIsMutable();
-              activities_.addAll(other.activities_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.activities_.isEmpty()) {
-            if (activitiesBuilder_.isEmpty()) {
-              activitiesBuilder_.dispose();
-              activitiesBuilder_ = null;
-              activities_ = other.activities_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-              activitiesBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getActivitiesFieldBuilder() : null;
-            } else {
-              activitiesBuilder_.addAllMessages(other.activities_);
-            }
-          }
-        }
         if (other.hasBattery()) {
           mergeBattery(other.getBattery());
         }
@@ -3696,17 +3570,17 @@ private static final long serialVersionUID = 0L;
         }
         if (!other.getDeviceId().isEmpty()) {
           deviceId_ = other.deviceId_;
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000040;
           onChanged();
         }
         if (!other.getPlatform().isEmpty()) {
           platform_ = other.platform_;
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (!other.getRoadrunnerVersion().isEmpty()) {
           roadrunnerVersion_ = other.roadrunnerVersion_;
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -3756,47 +3630,34 @@ private static final long serialVersionUID = 0L;
                 break;
               } // case 32
               case 42: {
-                com.google.protobuf.Any m =
-                    input.readMessage(
-                        com.google.protobuf.Any.parser(),
-                        extensionRegistry);
-                if (activitiesBuilder_ == null) {
-                  ensureActivitiesIsMutable();
-                  activities_.add(m);
-                } else {
-                  activitiesBuilder_.addMessage(m);
-                }
+                input.readMessage(
+                    getBatteryFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000010;
                 break;
               } // case 42
               case 50: {
                 input.readMessage(
-                    getBatteryFieldBuilder().getBuilder(),
+                    getConnectionInfoFieldBuilder().getBuilder(),
                     extensionRegistry);
                 bitField0_ |= 0x00000020;
                 break;
               } // case 50
               case 58: {
-                input.readMessage(
-                    getConnectionInfoFieldBuilder().getBuilder(),
-                    extensionRegistry);
+                deviceId_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000040;
                 break;
               } // case 58
               case 66: {
-                deviceId_ = input.readStringRequireUtf8();
+                platform_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000080;
                 break;
               } // case 66
               case 74: {
-                platform_ = input.readStringRequireUtf8();
+                roadrunnerVersion_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000100;
                 break;
               } // case 74
-              case 82: {
-                roadrunnerVersion_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000200;
-                break;
-              } // case 82
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -3942,258 +3803,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
-      private java.util.List<com.google.protobuf.Any> activities_ =
-        java.util.Collections.emptyList();
-      private void ensureActivitiesIsMutable() {
-        if (!((bitField0_ & 0x00000010) != 0)) {
-          activities_ = new java.util.ArrayList<com.google.protobuf.Any>(activities_);
-          bitField0_ |= 0x00000010;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> activitiesBuilder_;
-
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public java.util.List<com.google.protobuf.Any> getActivitiesList() {
-        if (activitiesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(activities_);
-        } else {
-          return activitiesBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public int getActivitiesCount() {
-        if (activitiesBuilder_ == null) {
-          return activities_.size();
-        } else {
-          return activitiesBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public com.google.protobuf.Any getActivities(int index) {
-        if (activitiesBuilder_ == null) {
-          return activities_.get(index);
-        } else {
-          return activitiesBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder setActivities(
-          int index, com.google.protobuf.Any value) {
-        if (activitiesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureActivitiesIsMutable();
-          activities_.set(index, value);
-          onChanged();
-        } else {
-          activitiesBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder setActivities(
-          int index, com.google.protobuf.Any.Builder builderForValue) {
-        if (activitiesBuilder_ == null) {
-          ensureActivitiesIsMutable();
-          activities_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          activitiesBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder addActivities(com.google.protobuf.Any value) {
-        if (activitiesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureActivitiesIsMutable();
-          activities_.add(value);
-          onChanged();
-        } else {
-          activitiesBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder addActivities(
-          int index, com.google.protobuf.Any value) {
-        if (activitiesBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureActivitiesIsMutable();
-          activities_.add(index, value);
-          onChanged();
-        } else {
-          activitiesBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder addActivities(
-          com.google.protobuf.Any.Builder builderForValue) {
-        if (activitiesBuilder_ == null) {
-          ensureActivitiesIsMutable();
-          activities_.add(builderForValue.build());
-          onChanged();
-        } else {
-          activitiesBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder addActivities(
-          int index, com.google.protobuf.Any.Builder builderForValue) {
-        if (activitiesBuilder_ == null) {
-          ensureActivitiesIsMutable();
-          activities_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          activitiesBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder addAllActivities(
-          java.lang.Iterable<? extends com.google.protobuf.Any> values) {
-        if (activitiesBuilder_ == null) {
-          ensureActivitiesIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, activities_);
-          onChanged();
-        } else {
-          activitiesBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder clearActivities() {
-        if (activitiesBuilder_ == null) {
-          activities_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-          onChanged();
-        } else {
-          activitiesBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public Builder removeActivities(int index) {
-        if (activitiesBuilder_ == null) {
-          ensureActivitiesIsMutable();
-          activities_.remove(index);
-          onChanged();
-        } else {
-          activitiesBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public com.google.protobuf.Any.Builder getActivitiesBuilder(
-          int index) {
-        return getActivitiesFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public com.google.protobuf.AnyOrBuilder getActivitiesOrBuilder(
-          int index) {
-        if (activitiesBuilder_ == null) {
-          return activities_.get(index);  } else {
-          return activitiesBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
-           getActivitiesOrBuilderList() {
-        if (activitiesBuilder_ != null) {
-          return activitiesBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(activities_);
-        }
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public com.google.protobuf.Any.Builder addActivitiesBuilder() {
-        return getActivitiesFieldBuilder().addBuilder(
-            com.google.protobuf.Any.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public com.google.protobuf.Any.Builder addActivitiesBuilder(
-          int index) {
-        return getActivitiesFieldBuilder().addBuilder(
-            index, com.google.protobuf.Any.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .google.protobuf.Any activities = 5;</code>
-       */
-      public java.util.List<com.google.protobuf.Any.Builder> 
-           getActivitiesBuilderList() {
-        return getActivitiesFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
-          getActivitiesFieldBuilder() {
-        if (activitiesBuilder_ == null) {
-          activitiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
-                  activities_,
-                  ((bitField0_ & 0x00000010) != 0),
-                  getParentForChildren(),
-                  isClean());
-          activities_ = null;
-        }
-        return activitiesBuilder_;
-      }
-
       private com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery battery_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery, com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.BatteryOrBuilder> batteryBuilder_;
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        * @return Whether the battery field is set.
        */
       public boolean hasBattery() {
-        return ((bitField0_ & 0x00000020) != 0);
+        return ((bitField0_ & 0x00000010) != 0);
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        * @return The battery.
        */
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery getBattery() {
@@ -4204,7 +3825,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       public Builder setBattery(com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery value) {
         if (batteryBuilder_ == null) {
@@ -4215,12 +3836,12 @@ private static final long serialVersionUID = 0L;
         } else {
           batteryBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       public Builder setBattery(
           com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.Builder builderForValue) {
@@ -4229,16 +3850,16 @@ private static final long serialVersionUID = 0L;
         } else {
           batteryBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       public Builder mergeBattery(com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery value) {
         if (batteryBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) != 0) &&
+          if (((bitField0_ & 0x00000010) != 0) &&
             battery_ != null &&
             battery_ != com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.getDefaultInstance()) {
             getBatteryBuilder().mergeFrom(value);
@@ -4249,16 +3870,16 @@ private static final long serialVersionUID = 0L;
           batteryBuilder_.mergeFrom(value);
         }
         if (battery_ != null) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       public Builder clearBattery() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         battery_ = null;
         if (batteryBuilder_ != null) {
           batteryBuilder_.dispose();
@@ -4268,15 +3889,15 @@ private static final long serialVersionUID = 0L;
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.Builder getBatteryBuilder() {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getBatteryFieldBuilder().getBuilder();
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.BatteryOrBuilder getBatteryOrBuilder() {
         if (batteryBuilder_ != null) {
@@ -4287,7 +3908,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 6;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Battery battery = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery, com.nordstrom.kafka.connect.eventbus.RiderLocation.Battery.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.BatteryOrBuilder> 
@@ -4307,14 +3928,14 @@ private static final long serialVersionUID = 0L;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info, com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_infoOrBuilder> connectionInfoBuilder_;
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        * @return Whether the connectionInfo field is set.
        */
       public boolean hasConnectionInfo() {
-        return ((bitField0_ & 0x00000040) != 0);
+        return ((bitField0_ & 0x00000020) != 0);
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        * @return The connectionInfo.
        */
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info getConnectionInfo() {
@@ -4325,7 +3946,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       public Builder setConnectionInfo(com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info value) {
         if (connectionInfoBuilder_ == null) {
@@ -4336,12 +3957,12 @@ private static final long serialVersionUID = 0L;
         } else {
           connectionInfoBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       public Builder setConnectionInfo(
           com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.Builder builderForValue) {
@@ -4350,16 +3971,16 @@ private static final long serialVersionUID = 0L;
         } else {
           connectionInfoBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       public Builder mergeConnectionInfo(com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info value) {
         if (connectionInfoBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) != 0) &&
+          if (((bitField0_ & 0x00000020) != 0) &&
             connectionInfo_ != null &&
             connectionInfo_ != com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.getDefaultInstance()) {
             getConnectionInfoBuilder().mergeFrom(value);
@@ -4370,16 +3991,16 @@ private static final long serialVersionUID = 0L;
           connectionInfoBuilder_.mergeFrom(value);
         }
         if (connectionInfo_ != null) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       public Builder clearConnectionInfo() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         connectionInfo_ = null;
         if (connectionInfoBuilder_ != null) {
           connectionInfoBuilder_.dispose();
@@ -4389,15 +4010,15 @@ private static final long serialVersionUID = 0L;
         return this;
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.Builder getConnectionInfoBuilder() {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
         return getConnectionInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       public com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_infoOrBuilder getConnectionInfoOrBuilder() {
         if (connectionInfoBuilder_ != null) {
@@ -4408,7 +4029,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 7;</code>
+       * <code>.com.deliveryhero.eventbus.RiderLocation.Connection_info connection_info = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info, com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_info.Builder, com.nordstrom.kafka.connect.eventbus.RiderLocation.Connection_infoOrBuilder> 
@@ -4426,7 +4047,7 @@ private static final long serialVersionUID = 0L;
 
       private java.lang.Object deviceId_ = "";
       /**
-       * <code>string device_id = 8;</code>
+       * <code>string device_id = 7;</code>
        * @return The deviceId.
        */
       public java.lang.String getDeviceId() {
@@ -4442,7 +4063,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>string device_id = 8;</code>
+       * <code>string device_id = 7;</code>
        * @return The bytes for deviceId.
        */
       public com.google.protobuf.ByteString
@@ -4459,7 +4080,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>string device_id = 8;</code>
+       * <code>string device_id = 7;</code>
        * @param value The deviceId to set.
        * @return This builder for chaining.
        */
@@ -4467,22 +4088,22 @@ private static final long serialVersionUID = 0L;
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         deviceId_ = value;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
       /**
-       * <code>string device_id = 8;</code>
+       * <code>string device_id = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearDeviceId() {
         deviceId_ = getDefaultInstance().getDeviceId();
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
       /**
-       * <code>string device_id = 8;</code>
+       * <code>string device_id = 7;</code>
        * @param value The bytes for deviceId to set.
        * @return This builder for chaining.
        */
@@ -4491,14 +4112,14 @@ private static final long serialVersionUID = 0L;
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         deviceId_ = value;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
 
       private java.lang.Object platform_ = "";
       /**
-       * <code>string platform = 9;</code>
+       * <code>string platform = 8;</code>
        * @return The platform.
        */
       public java.lang.String getPlatform() {
@@ -4514,7 +4135,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>string platform = 9;</code>
+       * <code>string platform = 8;</code>
        * @return The bytes for platform.
        */
       public com.google.protobuf.ByteString
@@ -4531,7 +4152,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>string platform = 9;</code>
+       * <code>string platform = 8;</code>
        * @param value The platform to set.
        * @return This builder for chaining.
        */
@@ -4539,22 +4160,22 @@ private static final long serialVersionUID = 0L;
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         platform_ = value;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
       /**
-       * <code>string platform = 9;</code>
+       * <code>string platform = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearPlatform() {
         platform_ = getDefaultInstance().getPlatform();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
       /**
-       * <code>string platform = 9;</code>
+       * <code>string platform = 8;</code>
        * @param value The bytes for platform to set.
        * @return This builder for chaining.
        */
@@ -4563,14 +4184,14 @@ private static final long serialVersionUID = 0L;
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         platform_ = value;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
 
       private java.lang.Object roadrunnerVersion_ = "";
       /**
-       * <code>string roadrunner_version = 10;</code>
+       * <code>string roadrunner_version = 9;</code>
        * @return The roadrunnerVersion.
        */
       public java.lang.String getRoadrunnerVersion() {
@@ -4586,7 +4207,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>string roadrunner_version = 10;</code>
+       * <code>string roadrunner_version = 9;</code>
        * @return The bytes for roadrunnerVersion.
        */
       public com.google.protobuf.ByteString
@@ -4603,7 +4224,7 @@ private static final long serialVersionUID = 0L;
         }
       }
       /**
-       * <code>string roadrunner_version = 10;</code>
+       * <code>string roadrunner_version = 9;</code>
        * @param value The roadrunnerVersion to set.
        * @return This builder for chaining.
        */
@@ -4611,22 +4232,22 @@ private static final long serialVersionUID = 0L;
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         roadrunnerVersion_ = value;
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
       /**
-       * <code>string roadrunner_version = 10;</code>
+       * <code>string roadrunner_version = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearRoadrunnerVersion() {
         roadrunnerVersion_ = getDefaultInstance().getRoadrunnerVersion();
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
       /**
-       * <code>string roadrunner_version = 10;</code>
+       * <code>string roadrunner_version = 9;</code>
        * @param value The bytes for roadrunnerVersion to set.
        * @return This builder for chaining.
        */
@@ -4635,7 +4256,7 @@ private static final long serialVersionUID = 0L;
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         roadrunnerVersion_ = value;
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }

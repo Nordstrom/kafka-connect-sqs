@@ -116,28 +116,18 @@ public class SqsSourceConnectorTask extends SourceTask {
       }
 
       RiderLocation.Builder builder = RiderLocation.newBuilder();
+      log.info("Prabhu: Body: {}", body);
       try {
-        JsonFormat.parser().ignoringUnknownFields().merge(message.getBody(), builder);
+        JsonFormat.parser().ignoringUnknownFields().merge(body, builder);
       } catch (InvalidProtocolBufferException e) {
         log.error("Error parsing JSON to Protobuf: {}", e.getMessage());
         throw new RuntimeException("Error parsing JSON to Protobuf", e);
       }
 
-      SourceRecord sourceRecord;
-      try {
-        byte[] protobufBytes = builder.build().toByteArray();
-        Schema protobufSchema = Schema.BYTES_SCHEMA;
-        sourceRecord = new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, null,
-                protobufBytes, null, headers);
-      } catch (Exception e) {
-        log.error("Error building Protobuf message: {}", e.getMessage());
-        throw new RuntimeException("Error building Protobuf message: {}", e);
-      }
-
-      return sourceRecord;
-
-//      return new SourceRecord( sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.STRING_SCHEMA,
-//          body, null, headers) ;
+      log.info("Prabhu: Printing the parsed protobuf message");
+      log.info(builder.build().toString());
+      byte[] protobufBytes = builder.build().toByteArray();
+      return new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.BYTES_SCHEMA, protobufBytes, null, headers);
     } ).collect( Collectors.toList() ) ;
   }
 
