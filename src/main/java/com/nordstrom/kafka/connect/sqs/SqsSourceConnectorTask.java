@@ -20,6 +20,9 @@ import java.util.*;
 import java.util.stream.Collectors ;
 
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
+import com.nordstrom.kafka.connect.eventbus.RiderLocation;
+import com.google.protobuf.util.JsonFormat;
+import com.google.protobuf.InvalidProtocolBufferException;
 import org.apache.kafka.connect.data.Schema ;
 import org.apache.kafka.connect.data.SchemaAndValue;
 import org.apache.kafka.connect.header.ConnectHeaders;
@@ -112,8 +115,29 @@ public class SqsSourceConnectorTask extends SourceTask {
         }
       }
 
-      return new SourceRecord( sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.STRING_SCHEMA,
-          body, null, headers) ;
+      RiderLocation.Builder builder = RiderLocation.newBuilder();
+      try {
+        JsonFormat.parser().ignoringUnknownFields().merge(message.getBody(), builder);
+      } catch (InvalidProtocolBufferException e) {
+        log.error("Error parsing JSON to Protobuf: {}", e.getMessage());
+        throw new RuntimeException("Error parsing JSON to Protobuf", e);
+      }
+
+      SourceRecord sourceRecord;
+      try {
+        byte[] protobufBytes = builder.build().toByteArray();
+        Schema protobufSchema = Schema.BYTES_SCHEMA;
+        sourceRecord = new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, null,
+                protobufBytes, null, headers);
+      } catch (Exception e) {
+        log.error("Error building Protobuf message: {}", e.getMessage());
+        throw new RuntimeException("Error building Protobuf message: {}", e);
+      }
+
+      return sourceRecord;
+
+//      return new SourceRecord( sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.STRING_SCHEMA,
+//          body, null, headers) ;
     } ).collect( Collectors.toList() ) ;
   }
 

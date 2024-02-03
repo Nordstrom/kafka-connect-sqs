@@ -44,6 +44,7 @@
     <aws-java-sdk.version>1.12.409</aws-java-sdk.version>
     <kafka.connect-api.version>3.3.2</kafka.connect-api.version>
     <slf4j.version>1.7.36</slf4j.version>
+    <com.google.protobuf.version>3.25.2</com.google.protobuf.version>
   </properties>
 
   <dependencyManagement>
@@ -52,6 +53,16 @@
         <groupId>org.apache.kafka</groupId>
         <artifactId>connect-api</artifactId>
         <version>${kafka.connect-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java</artifactId>
+        <version>${com.google.protobuf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-java-util</artifactId>
+        <version>${com.google.protobuf.version}</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
@@ -73,6 +84,14 @@
     <dependency>
       <groupId>org.apache.kafka</groupId>
       <artifactId>connect-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java-util</artifactId>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>

@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package com.deliveryhero.eventbus;
+
+option java_multiple_files = true;
+option java_package = "com.nordstrom.kafka.connect.eventbus";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+message RiderLocation {
+
+  message Courier {
+    uint32 id = 1;
+    uint32 user_id = 2;
+  }
+
+  message Location {
+    double latitude = 1;
+    double longitude = 2;
+  }
+
+  message Battery {
+    string status = 1;
+    int32 level = 2;
+  }
+
+  message Network_info {
+  }
+
+  message Connection_info {
+    Network_info network_info = 1;
+  }
+
+  message Metadata {
+    uint32 speed = 1;
+    uint32 heading = 2;
+    uint32 accuracy = 3;
+    bool mock_location = 4;
+    repeated google.protobuf.Any activities = 5;
+    Battery battery = 6;
+    Connection_info connection_info = 7;
+    string device_id = 8;
+    string platform = 9;
+    string roadrunner_version = 10;
+  }
+
+  message Data {
+    Courier courier = 1;
+    Location location = 2;
+    Metadata metadata = 3;
+  }
+
+  message MessageWrapper {
+    string type = 1;
+    Data data = 2;
+    string country_code = 3;
+    string timestamp = 4;
+    uint32 version = 5;
+  }
+
+  string Type = 1;
+  string MessageId = 2;
+  string TopicArn = 3;
+  MessageWrapper Message = 4;
+  google.protobuf.Timestamp Timestamp = 5;
+  string SignatureVersion = 6;
+  string Signature = 7;
+  string SigningCertURL = 8;
+  string UnsubscribeURL = 9;
+
+}
