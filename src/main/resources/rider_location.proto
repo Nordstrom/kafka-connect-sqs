@@ -31,9 +31,9 @@ message RiderLocation {
   }
 
   message Metadata {
-    uint32 speed = 1;
-    uint32 heading = 2;
-    uint32 accuracy = 3;
+    double speed = 1;
+    double heading = 2;
+    double accuracy = 3;
     bool mock_location = 4;
     Battery battery = 5;
     Connection_info connection_info = 6;

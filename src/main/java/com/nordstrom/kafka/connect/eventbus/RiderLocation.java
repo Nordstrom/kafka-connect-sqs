@@ -2780,22 +2780,22 @@ private static final long serialVersionUID = 0L;
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 speed = 1;</code>
+     * <code>double speed = 1;</code>
      * @return The speed.
      */
-    int getSpeed();
+    double getSpeed();
 
     /**
-     * <code>uint32 heading = 2;</code>
+     * <code>double heading = 2;</code>
      * @return The heading.
      */
-    int getHeading();
+    double getHeading();
 
     /**
-     * <code>uint32 accuracy = 3;</code>
+     * <code>double accuracy = 3;</code>
      * @return The accuracy.
      */
-    int getAccuracy();
+    double getAccuracy();
 
     /**
      * <code>bool mock_location = 4;</code>
@@ -2909,35 +2909,35 @@ private static final long serialVersionUID = 0L;
 
     private int bitField0_;
     public static final int SPEED_FIELD_NUMBER = 1;
-    private int speed_ = 0;
+    private double speed_ = 0D;
     /**
-     * <code>uint32 speed = 1;</code>
+     * <code>double speed = 1;</code>
      * @return The speed.
      */
     @java.lang.Override
-    public int getSpeed() {
+    public double getSpeed() {
       return speed_;
     }
 
     public static final int HEADING_FIELD_NUMBER = 2;
-    private int heading_ = 0;
+    private double heading_ = 0D;
     /**
-     * <code>uint32 heading = 2;</code>
+     * <code>double heading = 2;</code>
      * @return The heading.
      */
     @java.lang.Override
-    public int getHeading() {
+    public double getHeading() {
       return heading_;
     }
 
     public static final int ACCURACY_FIELD_NUMBER = 3;
-    private int accuracy_ = 0;
+    private double accuracy_ = 0D;
     /**
-     * <code>uint32 accuracy = 3;</code>
+     * <code>double accuracy = 3;</code>
      * @return The accuracy.
      */
     @java.lang.Override
-    public int getAccuracy() {
+    public double getAccuracy() {
       return accuracy_;
     }
 
@@ -3135,14 +3135,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (speed_ != 0) {
-        output.writeUInt32(1, speed_);
+      if (java.lang.Double.doubleToRawLongBits(speed_) != 0) {
+        output.writeDouble(1, speed_);
       }
-      if (heading_ != 0) {
-        output.writeUInt32(2, heading_);
+      if (java.lang.Double.doubleToRawLongBits(heading_) != 0) {
+        output.writeDouble(2, heading_);
       }
-      if (accuracy_ != 0) {
-        output.writeUInt32(3, accuracy_);
+      if (java.lang.Double.doubleToRawLongBits(accuracy_) != 0) {
+        output.writeDouble(3, accuracy_);
       }
       if (mockLocation_ != false) {
         output.writeBool(4, mockLocation_);
@@ -3171,17 +3171,17 @@ private static final long serialVersionUID = 0L;
       if (size != -1) return size;
 
       size = 0;
-      if (speed_ != 0) {
+      if (java.lang.Double.doubleToRawLongBits(speed_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, speed_);
+          .computeDoubleSize(1, speed_);
       }
-      if (heading_ != 0) {
+      if (java.lang.Double.doubleToRawLongBits(heading_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, heading_);
+          .computeDoubleSize(2, heading_);
       }
-      if (accuracy_ != 0) {
+      if (java.lang.Double.doubleToRawLongBits(accuracy_) != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, accuracy_);
+          .computeDoubleSize(3, accuracy_);
       }
       if (mockLocation_ != false) {
         size += com.google.protobuf.CodedOutputStream
@@ -3219,12 +3219,15 @@ private static final long serialVersionUID = 0L;
       }
       com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata other = (com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata) obj;
 
-      if (getSpeed()
-          != other.getSpeed()) return false;
-      if (getHeading()
-          != other.getHeading()) return false;
-      if (getAccuracy()
-          != other.getAccuracy()) return false;
+      if (java.lang.Double.doubleToLongBits(getSpeed())
+          != java.lang.Double.doubleToLongBits(
+              other.getSpeed())) return false;
+      if (java.lang.Double.doubleToLongBits(getHeading())
+          != java.lang.Double.doubleToLongBits(
+              other.getHeading())) return false;
+      if (java.lang.Double.doubleToLongBits(getAccuracy())
+          != java.lang.Double.doubleToLongBits(
+              other.getAccuracy())) return false;
       if (getMockLocation()
           != other.getMockLocation()) return false;
       if (hasBattery() != other.hasBattery()) return false;
@@ -3255,11 +3258,14 @@ private static final long serialVersionUID = 0L;
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + SPEED_FIELD_NUMBER;
-      hash = (53 * hash) + getSpeed();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getSpeed()));
       hash = (37 * hash) + HEADING_FIELD_NUMBER;
-      hash = (53 * hash) + getHeading();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getHeading()));
       hash = (37 * hash) + ACCURACY_FIELD_NUMBER;
-      hash = (53 * hash) + getAccuracy();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getAccuracy()));
       hash = (37 * hash) + MOCK_LOCATION_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getMockLocation());
@@ -3415,9 +3421,9 @@ private static final long serialVersionUID = 0L;
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
-        speed_ = 0;
-        heading_ = 0;
-        accuracy_ = 0;
+        speed_ = 0D;
+        heading_ = 0D;
+        accuracy_ = 0D;
         mockLocation_ = false;
         battery_ = null;
         if (batteryBuilder_ != null) {
@@ -3546,13 +3552,13 @@ private static final long serialVersionUID = 0L;
 
       public Builder mergeFrom(com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata other) {
         if (other == com.nordstrom.kafka.connect.eventbus.RiderLocation.Metadata.getDefaultInstance()) return this;
-        if (other.getSpeed() != 0) {
+        if (other.getSpeed() != 0D) {
           setSpeed(other.getSpeed());
         }
-        if (other.getHeading() != 0) {
+        if (other.getHeading() != 0D) {
           setHeading(other.getHeading());
         }
-        if (other.getAccuracy() != 0) {
+        if (other.getAccuracy() != 0D) {
           setAccuracy(other.getAccuracy());
         }
         if (other.getMockLocation() != false) {
@@ -3605,21 +3611,21 @@ private static final long serialVersionUID = 0L;
               case 0:
                 done = true;
                 break;
-              case 8: {
-                speed_ = input.readUInt32();
+              case 9: {
+                speed_ = input.readDouble();
                 bitField0_ |= 0x00000001;
                 break;
-              } // case 8
-              case 16: {
-                heading_ = input.readUInt32();
+              } // case 9
+              case 17: {
+                heading_ = input.readDouble();
                 bitField0_ |= 0x00000002;
                 break;
-              } // case 16
-              case 24: {
-                accuracy_ = input.readUInt32();
+              } // case 17
+              case 25: {
+                accuracy_ = input.readDouble();
                 bitField0_ |= 0x00000004;
                 break;
-              } // case 24
+              } // case 25
               case 32: {
                 mockLocation_ = input.readBool();
                 bitField0_ |= 0x00000008;
@@ -3671,21 +3677,21 @@ private static final long serialVersionUID = 0L;
       }
       private int bitField0_;
 
-      private int speed_ ;
+      private double speed_ ;
       /**
-       * <code>uint32 speed = 1;</code>
+       * <code>double speed = 1;</code>
        * @return The speed.
        */
       @java.lang.Override
-      public int getSpeed() {
+      public double getSpeed() {
         return speed_;
       }
       /**
-       * <code>uint32 speed = 1;</code>
+       * <code>double speed = 1;</code>
        * @param value The speed to set.
        * @return This builder for chaining.
        */
-      public Builder setSpeed(int value) {
+      public Builder setSpeed(double value) {
 
         speed_ = value;
         bitField0_ |= 0x00000001;
@@ -3693,31 +3699,31 @@ private static final long serialVersionUID = 0L;
         return this;
       }
       /**
-       * <code>uint32 speed = 1;</code>
+       * <code>double speed = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearSpeed() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        speed_ = 0;
+        speed_ = 0D;
         onChanged();
         return this;
       }
 
-      private int heading_ ;
+      private double heading_ ;
       /**
-       * <code>uint32 heading = 2;</code>
+       * <code>double heading = 2;</code>
        * @return The heading.
        */
       @java.lang.Override
-      public int getHeading() {
+      public double getHeading() {
         return heading_;
       }
       /**
-       * <code>uint32 heading = 2;</code>
+       * <code>double heading = 2;</code>
        * @param value The heading to set.
        * @return This builder for chaining.
        */
-      public Builder setHeading(int value) {
+      public Builder setHeading(double value) {
 
         heading_ = value;
         bitField0_ |= 0x00000002;
@@ -3725,31 +3731,31 @@ private static final long serialVersionUID = 0L;
         return this;
       }
       /**
-       * <code>uint32 heading = 2;</code>
+       * <code>double heading = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearHeading() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        heading_ = 0;
+        heading_ = 0D;
         onChanged();
         return this;
       }
 
-      private int accuracy_ ;
+      private double accuracy_ ;
       /**
-       * <code>uint32 accuracy = 3;</code>
+       * <code>double accuracy = 3;</code>
        * @return The accuracy.
        */
       @java.lang.Override
-      public int getAccuracy() {
+      public double getAccuracy() {
         return accuracy_;
       }
       /**
-       * <code>uint32 accuracy = 3;</code>
+       * <code>double accuracy = 3;</code>
        * @param value The accuracy to set.
        * @return This builder for chaining.
        */
-      public Builder setAccuracy(int value) {
+      public Builder setAccuracy(double value) {
 
         accuracy_ = value;
         bitField0_ |= 0x00000004;
@@ -3757,12 +3763,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
       /**
-       * <code>uint32 accuracy = 3;</code>
+       * <code>double accuracy = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearAccuracy() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        accuracy_ = 0;
+        accuracy_ = 0D;
         onChanged();
         return this;
       }

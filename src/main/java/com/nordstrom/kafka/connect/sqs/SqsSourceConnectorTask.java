@@ -30,6 +30,11 @@ import org.apache.kafka.connect.source.SourceRecord ;
 import org.apache.kafka.connect.source.SourceTask ;
 import org.slf4j.Logger ;
 import org.slf4j.LoggerFactory ;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+// import com.nordstrom.kafka.connect.protobuf.ProtobufData;
+import io.confluent.connect.protobuf.ProtobufData;
+import io.confluent.kafka.schemaregistry.protobuf.ProtobufSchema;
 
 import com.amazonaws.services.sqs.model.Message ;
 import com.nordstrom.kafka.connect.About ;
@@ -115,19 +120,37 @@ public class SqsSourceConnectorTask extends SourceTask {
         }
       }
 
+      log.info("Prabhu: SQS Body: {}", body);
+      Gson gson = new Gson();
+      JsonObject jsonObject = gson.fromJson(body, JsonObject.class);
+      String snsMessage = jsonObject.get("Message").getAsString();
+      log.info("Prabhu: SNS Message: {}", snsMessage);
       RiderLocation.Builder builder = RiderLocation.newBuilder();
-      log.info("Prabhu: Body: {}", body);
       try {
-        JsonFormat.parser().ignoringUnknownFields().merge(body, builder);
+        JsonFormat.parser().ignoringUnknownFields().merge(snsMessage, builder);
       } catch (InvalidProtocolBufferException e) {
         log.error("Error parsing JSON to Protobuf: {}", e.getMessage());
         throw new RuntimeException("Error parsing JSON to Protobuf", e);
       }
-
       log.info("Prabhu: Printing the parsed protobuf message");
       log.info(builder.build().toString());
-      byte[] protobufBytes = builder.build().toByteArray();
-      return new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.BYTES_SCHEMA, protobufBytes, null, headers);
+
+      RiderLocation riderLocation = builder.build();
+
+//      // blueapron version https://github.com/blueapron/kafka-connect-protobuf-converter
+//      try {
+//        ProtobufData protobufData = new ProtobufData(Class.forName("com.nordstrom.kafka.connect.eventbus.RiderLocation").asSubclass(com.google.protobuf.GeneratedMessageV3.class), "", false);
+//        SchemaAndValue schema_value = protobufData.toConnectData(riderLocation.toByteArray());
+//        return new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, schema_value.schema(), schema_value.value());
+//      } catch (ClassNotFoundException e) {
+//        throw new RuntimeException("Proto class  not found in the classpath");
+//      }
+
+      // Confluent Version
+      ProtobufSchema protobufSchema = new ProtobufSchema(RiderLocation.getDescriptor());
+      ProtobufData protobufData = new ProtobufData();
+      SchemaAndValue schema_value = protobufData.toConnectData(protobufSchema, riderLocation);
+      return new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, schema_value.schema(), schema_value.value());
     } ).collect( Collectors.toList() ) ;
   }
 

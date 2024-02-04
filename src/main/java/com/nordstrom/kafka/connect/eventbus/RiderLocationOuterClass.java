@@ -76,8 +76,8 @@ public final class RiderLocationOuterClass {
       "k_info\032^\n\017Connection_info\022K\n\014network_inf" +
       "o\030\001 \001(\01325.com.deliveryhero.eventbus.Ride" +
       "rLocation.Network_info\032\252\002\n\010Metadata\022\r\n\005s" +
-      "peed\030\001 \001(\r\022\017\n\007heading\030\002 \001(\r\022\020\n\010accuracy\030" +
-      "\003 \001(\r\022\025\n\rmock_location\030\004 \001(\010\022A\n\007battery\030" +
+      "peed\030\001 \001(\001\022\017\n\007heading\030\002 \001(\001\022\020\n\010accuracy\030" +
+      "\003 \001(\001\022\025\n\rmock_location\030\004 \001(\010\022A\n\007battery\030" +
       "\005 \001(\01320.com.deliveryhero.eventbus.RiderL" +
       "ocation.Battery\022Q\n\017connection_info\030\006 \001(\013" +
       "28.com.deliveryhero.eventbus.RiderLocati" +
