@@ -9,7 +9,7 @@ skip_tags: true
 
 environment:
   OctopusApiKey:
-    secure: 8IsUXAfxp7E3X7Ogsap3xFHSj0ahrTpLE5mGtDjWwzQ=
+    secure: 0vM9oKVsM40UaGa2v7SbyKWwtwtqU4yKuHPI95X19d/Fp4Z+0q9vUQt1bFCkyAS5
   JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
     
   git_host: github.com
@@ -73,7 +73,7 @@ deploy:
   - provider: NuGet
     server: https://octopus-ext.hq.overdrive.com/nuget/packages/
     api_key:
-      secure: IiFdyQbnSK44crdFUchQICDogfZqUchvWM85HVfvW7c=
+      secure: MivbzaCyZlnYq21j0OAgj6UbQwsttl8onBOtUXfZ0QaxfnUh36T02rQ/w9C1zoJG
     skip_symbols: true
     artifact: NuGet-Package
     on:
