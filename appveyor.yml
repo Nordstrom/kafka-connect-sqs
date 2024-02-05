@@ -72,8 +72,7 @@ artifacts:
 deploy:
   - provider: NuGet
     server: https://octopus-ext.hq.overdrive.com/nuget/packages/
-    api_key:
-      secure: MivbzaCyZlnYq21j0OAgj6UbQwsttl8onBOtUXfZ0QaxfnUh36T02rQ/w9C1zoJG
+    api_key: $(OCTOPUS_CLI_API_KEY)
     skip_symbols: true
     artifact: NuGet-Package
     on:
