@@ -31,7 +31,7 @@ build_script:
     mvn clean
     mvn versions:set $VERSION_ARG -e -q
     if [[ $LOWERCASE_BRANCH =~ (master|spike-.*|hotfix-.*) ]]; then
-      mvn package -P deployed -e -q
+      mvn compile assembly:single -P deployed -e -q
     else
       mvn test -P deployed -e -q
     fi
