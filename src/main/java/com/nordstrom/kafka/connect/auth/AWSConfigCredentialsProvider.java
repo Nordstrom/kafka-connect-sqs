@@ -12,7 +12,6 @@ public class AWSConfigCredentialsProvider implements AWSCredentialsProvider, Con
     private static final String AWS_SECRET_ACCESS_KEY = "secretKey";
 
     private String awsAccessKeyId;
-
     private String awsSecretKey;
 
     @Override
