@@ -230,7 +230,7 @@ SQS sink connector configuration would then include the additional properties:
 sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider
 sqs.credentials.provider.accessKeyId=<Access key id of AWS IAM user>
 sqs.credentials.provider.secretKey=<Secret access key id of AWS IAM user>
-
+```
 
 # Running the Demo
 
