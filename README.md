@@ -227,7 +227,7 @@ Define an SQS Queue Policy Document for the queue to allow `SendMessage`. An exa
 SQS sink connector configuration would then include the additional properties:
 
 ```
-sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider
+sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSUserCredentialsProvider
 sqs.credentials.provider.accessKeyId=<Access key id of AWS IAM user>
 sqs.credentials.provider.secretKey=<Secret access key id of AWS IAM user>
 ```
