@@ -7,7 +7,7 @@ import org.apache.kafka.common.Configurable;
 
 import java.util.Map;
 
-public class AWSConfigCredentialsProvider implements AWSCredentialsProvider, Configurable {
+public class AWSUserCredentialsProvider implements AWSCredentialsProvider, Configurable {
     private static final String AWS_ACCESS_KEY_ID = "accessKeyId";
     private static final String AWS_SECRET_ACCESS_KEY = "secretKey";
 
