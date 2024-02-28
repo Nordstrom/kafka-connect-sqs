@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 abstract class SqsConnectorConfig extends AbstractConfig {
-
     private final String queueUrl;
     private final String topics;
     private final String region;
@@ -17,6 +16,10 @@ abstract class SqsConnectorConfig extends AbstractConfig {
     private final Boolean messageAttributesEnabled;
 
     private final List<String> messageAttributesList;
+
+    private final String messageBodyJSONKey;
+
+    private final String messageBodyType;
 
     public SqsConnectorConfig(ConfigDef configDef, Map<?, ?> originals) {
         super(configDef, originals);
@@ -28,6 +31,8 @@ abstract class SqsConnectorConfig extends AbstractConfig {
 
         List<String> csMessageAttributesList = getList(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue());
         messageAttributesList = messageAttributesEnabled ? csMessageAttributesList : new ArrayList<>();
+        messageBodyType = getString(SqsConnectorConfigKeys.SQS_MESSAGE_BODY_TYPE.getValue());
+        messageBodyJSONKey = getString(SqsConnectorConfigKeys.SQS_MESSAGE_BODY_JSON_KEY.getValue());
     }
 
     public String getQueueUrl() {
@@ -52,5 +57,13 @@ abstract class SqsConnectorConfig extends AbstractConfig {
 
     public List<String> getMessageAttributesList() {
         return messageAttributesList;
+    }
+
+    public String getMessageBodyJSONKey() {
+        return messageBodyJSONKey;
+    }
+
+    public String getMessageBodyType() {
+        return messageBodyType;
     }
 }

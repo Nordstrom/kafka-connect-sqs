@@ -20,6 +20,7 @@ import java.util.*;
 import java.util.stream.Collectors ;
 
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
+import com.nordstrom.kafka.connect.utils.MessageUtils;
 import org.apache.kafka.connect.data.Schema ;
 import org.apache.kafka.connect.data.SchemaAndValue;
 import org.apache.kafka.connect.header.ConnectHeaders;
@@ -33,7 +34,6 @@ import com.nordstrom.kafka.connect.About ;
 
 public class SqsSourceConnectorTask extends SourceTask {
   private final Logger log = LoggerFactory.getLogger( this.getClass() ) ;
-
   private SqsClient client ;
   private SqsSourceConnectorConfig config ;
 
@@ -61,6 +61,14 @@ public class SqsSourceConnectorTask extends SourceTask {
     client = new SqsClient(config) ;
 
     log.info( "task.start.OK, sqs.queue.url={}, topics={}", config.getQueueUrl(), config.getTopics() ) ;
+  }
+
+  private String getPartitionKey(Message message) {
+    String jsonType = SqsConnectorConfigKeys.SQS_MESSAGE_BODY_JSON_TYPE.getValue();
+    if (!jsonType.equals(config.getMessageBodyType())) {
+      return message.getMessageId();
+    }
+    return MessageUtils.getStringValueFromJSONPath(config.getMessageBodyJSONKey(), message);
   }
 
   /*
@@ -96,7 +104,7 @@ public class SqsSourceConnectorTask extends SourceTask {
       log.trace( ".poll:source-offset={}", sourceOffset ) ;
 
       final String body = message.getBody() ;
-      final String key = message.getMessageId() ;
+      final String key = getPartitionKey(message);
       final String topic = config.getTopics() ;
 
       ConnectHeaders headers = new ConnectHeaders();
