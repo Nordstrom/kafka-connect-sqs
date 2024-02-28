@@ -89,22 +89,6 @@ public class SqsSourceConnectorTask extends SourceTask {
     return messageId;
   }
 
-  private ConnectHeaders getConnectHeaders(Message message) {
-    ConnectHeaders headers = new ConnectHeaders();
-    if (config.getMessageAttributesEnabled()) {
-      Map<String, MessageAttributeValue> attributes = message.getMessageAttributes();
-      // sqs api should return only the fields specified in the list
-      for(String attributeKey: attributes.keySet()) {
-        MessageAttributeValue attrValue = attributes.get(attributeKey);
-        if (attrValue.getDataType().equals("String")) {
-          SchemaAndValue schemaAndValue = new SchemaAndValue(Schema.STRING_SCHEMA, attrValue.getStringValue());
-          headers.add(attributeKey, schemaAndValue);
-        }
-      }
-    }
-    return headers;
-  }
-
   /*
    * (non-Javadoc)
    * 
@@ -140,7 +124,19 @@ public class SqsSourceConnectorTask extends SourceTask {
       final String body = message.getBody();
       final String key = getPartitionKey(message);
       final String topic = config.getTopics() ;
-      final ConnectHeaders headers = getConnectHeaders(message);
+
+      final ConnectHeaders headers = new ConnectHeaders();
+      if (config.getMessageAttributesEnabled()) {
+        Map<String, MessageAttributeValue> attributes = message.getMessageAttributes();
+        // sqs api should return only the fields specified in the list
+        for(String attributeKey: attributes.keySet()) {
+          MessageAttributeValue attrValue = attributes.get(attributeKey);
+          if (attrValue.getDataType().equals("String")) {
+            SchemaAndValue schemaAndValue = new SchemaAndValue(Schema.STRING_SCHEMA, attrValue.getStringValue());
+            headers.add(attributeKey, schemaAndValue);
+          }
+        }
+      }
 
       return new SourceRecord(sourcePartition, sourceOffset, topic, null, Schema.STRING_SCHEMA, key, Schema.STRING_SCHEMA,
           body, null, headers) ;
