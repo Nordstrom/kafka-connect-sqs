@@ -66,6 +66,7 @@ Optional properties:
 * `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
 * `sqs.message.attributes.enabled`: If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.
 * `sqs.message.attributes.include.list`: The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.
+* `sqs.message.attributes.partition.key`: The name of a single AWS SQS MessageAttribute to use as the partition key. If this is not specified, default to the SQS message ID as the partition key.
 
 ### Sample Configuration
 ```json
