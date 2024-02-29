@@ -32,6 +32,8 @@ public enum SqsConnectorConfigKeys {
   // These are not part of the connector configuration proper, but just a convenient
   // place to define the constants.
   CREDENTIALS_PROVIDER_CLASS_CONFIG("sqs.credentials.provider.class"),
+  CREDENTIALS_PROVIDER_ACCESS_KEY_ID("sqs.credentials.provider.accessKeyId"),
+  CREDENTIALS_PROVIDER_SECRET_ACCESS_KEY("sqs.credentials.provider.secretKey"),
   CREDENTIALS_PROVIDER_CLASS_DEFAULT("com.amazonaws.auth.DefaultAWSCredentialsProviderChain"),
   CREDENTIALS_PROVIDER_CONFIG_PREFIX("sqs.credentials.provider."),  //NB: trailing '.'
   SQS_MESSAGE_ID("sqs.message.id"),

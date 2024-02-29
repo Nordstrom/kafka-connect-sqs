@@ -49,7 +49,6 @@ public class SqsClient {
     Map<String, Object> credentialProviderConfigs = config.originalsWithPrefix(
             SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue());
     credentialProviderConfigs.put(SqsConnectorConfigKeys.SQS_REGION.getValue(), config.getRegion());
-    log.warn(".ctor:configs={}", credentialProviderConfigs);
     AWSCredentialsProvider provider = null;
     try {
       provider = getCredentialsProvider(credentialProviderConfigs);
@@ -194,15 +193,13 @@ public class SqsClient {
 
   @SuppressWarnings("unchecked")
   public AWSCredentialsProvider getCredentialsProvider(Map<String, ?> configs) {
-    log.warn(".get-credentials-provider:configs={}", configs);
-
+    
     try {
       Object providerField = configs.get("class");
       String providerClass = SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CLASS_DEFAULT.getValue();
       if (null != providerField) {
         providerClass = providerField.toString();
       }
-      log.warn(".get-credentials-provider:field={}, class={}", providerField, providerClass);
       AWSCredentialsProvider provider = ((Class<? extends AWSCredentialsProvider>)
           getClass(providerClass)).newInstance();
 
@@ -215,7 +212,6 @@ public class SqsClient {
         ((Configurable) provider).configure(configs);
       }
 
-      log.warn(".get-credentials-provider:provider={}", provider);
       return provider;
     } catch (IllegalAccessException | InstantiationException e) {
       throw new ConnectException(

@@ -182,6 +182,56 @@ For a `source` connector, the minimum actions required are:
 }
 ```
 
+## AWS IAM User
+
+The IAM User that Kafka Connect is running under must have policies set for SQS resources in order
+to read from or write to the target queues.
+
+For a `sink` connector, the minimum actions required are:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Sid": "kafka-connect-sqs-sink-policy",
+    "Effect": "Allow",
+    "Action": [
+      "sqs:SendMessage"
+    ],
+    "Resource": "arn:aws:sqs:*:*:*"
+  }]
+}
+```
+
+Define an SQS Queue Policy Document for the queue to allow `SendMessage`. An example policy is:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Id": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue/SQSDefaultPolicy",
+  "Statement": [
+    {
+      "Sid": "kafka-connect-sqs-sendmessage",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<AWS_ACCOUNT>:user/kafka-connect-sqs-user"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue"
+    }
+  ]
+}
+```
+
+
+SQS sink connector configuration would then include the additional properties:
+
+```
+sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSUserCredentialsProvider
+sqs.credentials.provider.accessKeyId=<Access key id of AWS IAM user>
+sqs.credentials.provider.secretKey=<Secret access key id of AWS IAM user>
+```
+
 # Running the Demo
 
 ## Build the connector plugin
