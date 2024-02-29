@@ -18,6 +18,8 @@ abstract class SqsConnectorConfig extends AbstractConfig {
 
     private final List<String> messageAttributesList;
 
+    private final String messageAttributePartitionKey;
+
     public SqsConnectorConfig(ConfigDef configDef, Map<?, ?> originals) {
         super(configDef, originals);
         queueUrl = getString(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue());
@@ -28,6 +30,7 @@ abstract class SqsConnectorConfig extends AbstractConfig {
 
         List<String> csMessageAttributesList = getList(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue());
         messageAttributesList = messageAttributesEnabled ? csMessageAttributesList : new ArrayList<>();
+        messageAttributePartitionKey = getString(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTE_PARTITION_KEY.getValue());
     }
 
     public String getQueueUrl() {
@@ -52,5 +55,9 @@ abstract class SqsConnectorConfig extends AbstractConfig {
 
     public List<String> getMessageAttributesList() {
         return messageAttributesList;
+    }
+
+    public String getMessageAttributePartitionKey() {
+        return messageAttributePartitionKey;
     }
 }
