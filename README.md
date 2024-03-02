@@ -2,7 +2,7 @@
 
 The SQS connector plugin provides the ability to use AWS SQS queues as both a source (from an SQS queue into a Kafka topic) or sink (out of a Kafka topic into an SQS queue).
 
-## Compatibility Matrix
+## Compatibility matrix
 
 |Connector version|Kafka Connect API|AWS SDK|
 |:---|:---|:---|
@@ -12,7 +12,7 @@ The SQS connector plugin provides the ability to use AWS SQS queues as both a so
 
 Running the connector on versions of Kafka Connect prior to 3.0 is not recommended.
 
-# Building
+## Building the distributable
 
 You can build the connector with Maven using the standard lifecycle goals:
 ```
@@ -20,7 +20,7 @@ mvn clean
 mvn package
 ```
 
-## Source Connector
+## Source connector
 
 SQS source connector reads from an AWS SQS queue and publishes to a Kafka topic.
 
@@ -76,7 +76,7 @@ Ensure the authentication principal has privileges to read messages from the SQS
 }
 ```
 
-## Sink Connector
+## Sink connector
 
 SQS sink connector reads from a Kafka topic and publishes to an AWS SQS queue.
 
@@ -149,7 +149,7 @@ Ensure the authentication principal has privileges to send messages to the SQS q
 }
 ```
 
-## AWS Authentication
+## AWS authentication
 
 By default, the connector uses the AWS SDK `DefaultAWSCredentialsProviderChain` to determine the
 identity of the connector. This works well in simple scenarios when the connector gains privileges
@@ -205,9 +205,9 @@ The IAM role will have a corresponding trust policy. For example:
 }
 ```
 
-# Running the Demo
+## Running the demo
 
-## Build the connector plugin
+### Build the connector plugin
 
 Build the connector jar file:
 
@@ -215,7 +215,7 @@ Build the connector jar file:
 mvn clean package
 ```
 
-## Run the connector using Docker Compose
+### Run the connector using Docker Compose
 
 Ensure you have `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables exported in your shell. Docker Compose will pass these values into the `connect` container.
 
@@ -223,14 +223,14 @@ Use the provided [Docker Compose](https://docs.docker.com/compose) file and run 
 
 With the [Kafka Connect REST interface](https://docs.confluent.io/current/connect/references/restapi.html), verify the SQS sink and source connectors are installed and ready: `curl http://localhost:8083/connector-plugins`.
 
-## AWS
+### AWS
 
 The demo assumes you have an AWS account and valid credentials in ~/.aws/credentials as well as
 setting the `AWS_PROFILE` and `AWS_REGION` to appropriate values.
 
 These are required so that Kafka Connect will have access to the SQS queues.
 
-## The Flow
+### The flow
 
 We will use the AWS Console to put a message into an SQS queue.  A source connector will read messages
 from the queue and write the messages to a Kafka topic.  A sink connector will read messages from the
@@ -248,12 +248,12 @@ topic and write to a _different_ SQS queue.
                         connector      connector
 ```
 
-## Create AWS SQS queues
+### Create AWS SQS queues
 
 Create `chirps-q` and `chirped-q` SQS queues using the AWS Console.  Take note of the `URL:` values for each
 as you will need them to configure the connectors later.
 
-## Create the connectors
+### Create the connectors
 
 The `source` connector configuration is defined in `demos/sqs-source-chirps.json]`, The `sink` connector configuration
 is defined in `demos/sqs-sink-chirped.json`.  You will have to modify the `sqs.queue.url` parameter to reflect the
@@ -266,7 +266,7 @@ curl -XPOST -H 'Content-Type: application/json' http://localhost:8083/connectors
 curl -XPOST -H 'Content-Type: application/json' http://localhost:8083/connectors -d @demos/sqs-sink-chirped.json
 ```
 
-## Send/receive messages
+### Send and receive messages
 
 Using the AWS Console (or the AWS CLI), send a message to the `chirps-q`.
 
@@ -275,4 +275,3 @@ The source connector will read the message from the queue and write it to the `c
 The `sink` connector will read the message from the topic and write it to the `chirped-q` queue.
 
 Use the AWS Console (or the AWS CLI) to read your message from the `chirped-q`
-
