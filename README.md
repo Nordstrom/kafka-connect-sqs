@@ -1,29 +1,32 @@
 # kafka-connect-sqs
+
 The SQS connector plugin provides the ability to use AWS SQS queues as both a source (from an SQS queue into a Kafka topic) or sink (out of a Kafka topic into an SQS queue).
 
-## Compatibility Matrix
+## Compatibility matrix
+
 |Connector version|Kafka Connect API|AWS SDK|
 |:---|:---|:---|
 |1.4.0|3.1.1|1.12.241|
 |1.5.0|3.3.2|1.12.409|
 |1.6.0|3.4.1|1.12.669|
 
-We don't recommend running the connector on versions of Kafka Connect prior to 3.0.
+Running the connector on versions of Kafka Connect prior to 3.0 is not recommended.
 
-# Building
+## Building the distributable
+
 You can build the connector with Maven using the standard lifecycle goals:
 ```
 mvn clean
 mvn package
 ```
 
-## Source Connector
+## Source connector
 
 SQS source connector reads from an AWS SQS queue and publishes to a Kafka topic.
 
 Required properties:
- * `topics`: Kafka topic to be written to.
- * `sqs.queue.url`: URL of the SQS queue to be read from.
+* `topics`: Kafka topic to be written to.
+* `sqs.queue.url`: URL of the SQS queue to be read from.
 
 Optional properties:
 * `sqs.region`: AWS region of the SQS queue to be read from.
@@ -32,86 +35,155 @@ Optional properties:
 * `sqs.wait.time.seconds`: Duration (in seconds) to wait for a message to arrive in the queue. Default is 1.
 * `sqs.message.attributes.enabled`: If true, it gets the SQS MessageAttributes and inserts them as Kafka Headers (only string headers are currently supported). Default is false.
 * `sqs.message.attributes.include.list`: The comma separated list of MessageAttribute names to be included, if empty it includes all the Message Attributes. Default is the empty string.
+* `sqs.message.attributes.partition.key`: The name of a single AWS SQS MessageAttribute to use as the partition key. If this is not specified, default to the SQS message ID as the partition key.
 
-### Sample Configuration
+### Sample connector configuration
 
 ```json
 {
   "config": {
     "connector.class": "com.nordstrom.kafka.connect.sqs.SqsSourceConnector",
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "name": "sqs-source-chirps",
+    "name": "my-sqs-source",
     "sqs.max.messages": "5",
-    "sqs.queue.url": "https://sqs.<AWS_REGION>.amazonaws.com/<AWS_ACCOUNT>/chirps-q",
+    "sqs.queue.url": "https://sqs.<AWS_REGION>.amazonaws.com/<AWS_ACCOUNT>/my-queue",
     "sqs.wait.time.seconds": "5",
-    "topics": "chirps-t",
+    "topics": "my-topic",
     "value.converter": "org.apache.kafka.connect.storage.StringConverter"
   },
-  "name": "sqs-source-chirps"
+  "name": "my-sqs-source"
 }
 ```
 
-## Sink Connector
+### Sample IAM policy
 
-SQS sink connector reads from a Kafka topic and publishes to an AWS SQS queue.
-
-Required properties:
- * `topics`: Kafka topic to be read from.
- * `sqs.queue.url`: URL of the SQS queue to be written to.
-
-Optional properties:
-* `sqs.region`: AWS region of the SQS queue to be written to.
-* `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
-* `sqs.message.attributes.enabled`: If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.
-* `sqs.message.attributes.include.list`: The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.
-* `sqs.message.attributes.partition.key`: The name of a single AWS SQS MessageAttribute to use as the partition key. If this is not specified, default to the SQS message ID as the partition key.
-
-### Sample Configuration
-```json
-{
-  "config": {
-    "connector.class": "com.nordstrom.kafka.connect.sqs.SqsSinkConnector",
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "name": "sqs-sink-chirped",
-    "sqs.queue.url": "https://sqs.<AWS_REGION>.amazonaws.com/<AWS_ACCOUNT>/chirps-q",
-    "sqs.region": "<AWS_REGION>",
-    "topics": "chirps-t",
-    "value.converter": "org.apache.kafka.connect.storage.StringConverter"
-  },
-  "name": "sqs-sink-chirped"
-}
-```
-
-## AWS IAM Policies
-
-The IAM Role that Kafka Connect is running under must have policies set for SQS resources in order
-to read from or write to the target queues.
-
-For a `sink` connector, the minimum actions required are:
+Ensure the authentication principal has privileges to read messages from the SQS queue.
 
 ```json
 {
   "Version": "2012-10-17",
   "Statement": [{
-    "Sid": "kafka-connect-sqs-sink-policy",
+    "Sid": "kafka-connect-sqs-source",
     "Effect": "Allow",
     "Action": [
-      "sqs:SendMessage"
+      "sqs:DeleteMessage",
+      "sqs:GetQueueUrl",
+      "sqs:ListQueues",
+      "sqs:ReceiveMessage"
     ],
     "Resource": "arn:aws:sqs:*:*:*"
   }]
 }
 ```
 
-### AWS Assume Role Support
+## Sink connector
 
-An SQS connector can assume a cross-account role to enable such features as Server Side Encryption of a queue:
-* `sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider`: REQUIRED Class providing cross-account role assumption.
-* `sqs.credentials.provider.role.arn`: REQUIRED AWS Role ARN providing the access.
-* `sqs.credentials.provider.session.name`: REQUIRED Session name
-* `sqs.credentials.provider.external.id`: OPTIONAL (but recommended) External identifier used by the `kafka-connect-sqs` when assuming the role.
+SQS sink connector reads from a Kafka topic and publishes to an AWS SQS queue.
 
-Define the AWS IAM Role that `kafka-connect-sqs` will assume when writing to the queue (e.g., `kafka-connect-sqs-role`) with a Trust Relationship to a principal in a separate account:
+Required properties:
+* `topics`: Kafka topic to be read from.
+* `sqs.queue.url`: URL of the SQS queue to be written to.
+
+Optional properties:
+* `sqs.region`: AWS region of the SQS queue to be written to.
+* `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
+* `sqs.message.attributes.enabled`: If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.
+* `sqs.message.attributes.include.list`: The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.
+
+### Sample connector configuration
+
+```json
+{
+  "config": {
+    "connector.class": "com.nordstrom.kafka.connect.sqs.SqsSinkConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "name": "my-sqs-sink",
+    "sqs.queue.url": "https://sqs.<AWS_REGION>.amazonaws.com/<AWS_ACCOUNT>/my-queue",
+    "sqs.region": "<AWS_REGION>",
+    "topics": "my-topic",
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter"
+  },
+  "name": "my-sqs-sink"
+}
+```
+
+### Sample SQS queue policy
+
+Define a corresponding SQS queue policy that allows the connector to send messages to the SQS queue:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Id": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue/SQSDefaultPolicy",
+  "Statement": [
+    {
+      "Sid": "kafka-connect-sqs-sink",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "<Your principal ARN>"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue"
+    }
+  ]
+}
+```
+
+### Sample IAM policy
+
+Ensure the authentication principal has privileges to send messages to the SQS queue.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "kafka-connect-sqs-sink",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:SendMessage"
+      ],
+      "Resource": "arn:aws:sqs:*:*:*"
+    }
+  ]
+}
+```
+
+## AWS authentication
+
+By default, the connector uses the AWS SDK `DefaultAWSCredentialsProviderChain` to determine the
+identity of the connector. This works well in simple scenarios when the connector gains privileges
+granted to the Kafka Connect worker (i.e., environment variables, EC2 instance metadata, etc.)
+
+When the identity of the connector must be separate from the worker, supply an implementation of
+`sqs.credentials.provider.class` in the worker's classpath. There are two implementations directly
+included within this library:
+
+- `com.nordstrom.kafka.connect.auth.AWSUserCredentialsProvider`
+- `com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider`
+
+### AWSUserCredentialsProvider
+
+Use this credentials provider to cause the connector to authenticate as a specific IAM user.
+
+Required properties:
+* `sqs.credentials.provider.class`: Must be `com.nordstrom.kafka.connect.auth.AWSUserCredentialsProvider`
+* `sqs.credentials.provider.accessKeyId`: AWS access key of the IAM user
+* `sqs.credentials.provider.secretKey`: AWS secret key of the IAM user
+
+### AWSAssumeRoleCredentialsProvider
+
+Use this credentials provider to cause the connector to assume an IAM role.
+
+Required properties:
+* `sqs.credentials.provider.class`: Must be `com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider`
+* `sqs.credentials.provider.role.arn`: ARN of the IAM role to assume
+* `sqs.credentials.provider.session.name`: A session name specific to this connector
+
+Optional properties:
+* `sqs.credentials.provider.external.id`: An [external identifier](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) used when assuming the role
+
+The IAM role will have a corresponding trust policy. For example:
 
 ```json
 {
@@ -125,7 +197,7 @@ Define the AWS IAM Role that `kafka-connect-sqs` will assume when writing to the
       "Action": "sts:AssumeRole",
       "Condition": {
         "StringEquals": {
-          "sts:ExternalId": "my-queue-external-id"
+          "sts:ExternalId": "my-external-id"
         }
       }
     }
@@ -133,107 +205,9 @@ Define the AWS IAM Role that `kafka-connect-sqs` will assume when writing to the
 }
 ```
 
-Define an SQS Queue Policy Document for the queue to allow `SendMessage`. An example policy is:
+## Running the demo
 
-```json
-{
-  "Version": "2012-10-17",
-  "Id": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue/SQSDefaultPolicy",
-  "Statement": [
-    {
-      "Sid": "kafka-connect-sqs-sendmessage",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::<AWS_ACCOUNT>:role/kafka-connect-sqs-role"
-      },
-      "Action": "sqs:SendMessage",
-      "Resource": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue"
-    }
-  ]
-}
-```
-
-SQS sink connector configuration would then include the additional properties:
-
-```
-sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSAssumeRoleCredentialsProvider
-sqs.credentials.provider.role.arn=arn:aws:iam::<AWS_ACCOUNT>:role/kafka-connect-sqs-role
-sqs.credentials.provider.session.name=my-queue-session
-sqs.credentials.provider.external.id=my-queue-external-id
-```
-
-For a `source` connector, the minimum actions required are:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Sid": "kafka-connect-sqs-source-policy",
-    "Effect": "Allow",
-    "Action": [
-      "sqs:DeleteMessage",
-      "sqs:GetQueueUrl",
-      "sqs:ListQueues",
-      "sqs:ReceiveMessage"
-    ],
-    "Resource": "arn:aws:sqs:*:*:*"
-  }]
-}
-```
-
-## AWS IAM User
-
-The IAM User that Kafka Connect is running under must have policies set for SQS resources in order
-to read from or write to the target queues.
-
-For a `sink` connector, the minimum actions required are:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Sid": "kafka-connect-sqs-sink-policy",
-    "Effect": "Allow",
-    "Action": [
-      "sqs:SendMessage"
-    ],
-    "Resource": "arn:aws:sqs:*:*:*"
-  }]
-}
-```
-
-Define an SQS Queue Policy Document for the queue to allow `SendMessage`. An example policy is:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Id": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue/SQSDefaultPolicy",
-  "Statement": [
-    {
-      "Sid": "kafka-connect-sqs-sendmessage",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::<AWS_ACCOUNT>:user/kafka-connect-sqs-user"
-      },
-      "Action": "sqs:SendMessage",
-      "Resource": "arn:aws:sqs:us-west-2:<AWS_ACCOUNT>:my-queue"
-    }
-  ]
-}
-```
-
-
-SQS sink connector configuration would then include the additional properties:
-
-```
-sqs.credentials.provider.class=com.nordstrom.kafka.connect.auth.AWSUserCredentialsProvider
-sqs.credentials.provider.accessKeyId=<Access key id of AWS IAM user>
-sqs.credentials.provider.secretKey=<Secret access key id of AWS IAM user>
-```
-
-# Running the Demo
-
-## Build the connector plugin
+### Build the connector plugin
 
 Build the connector jar file:
 
@@ -241,7 +215,7 @@ Build the connector jar file:
 mvn clean package
 ```
 
-## Run the connector using Docker Compose
+### Run the connector using Docker Compose
 
 Ensure you have `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables exported in your shell. Docker Compose will pass these values into the `connect` container.
 
@@ -249,14 +223,14 @@ Use the provided [Docker Compose](https://docs.docker.com/compose) file and run 
 
 With the [Kafka Connect REST interface](https://docs.confluent.io/current/connect/references/restapi.html), verify the SQS sink and source connectors are installed and ready: `curl http://localhost:8083/connector-plugins`.
 
-## AWS
+### AWS
 
 The demo assumes you have an AWS account and valid credentials in ~/.aws/credentials as well as
 setting the `AWS_PROFILE` and `AWS_REGION` to appropriate values.
 
 These are required so that Kafka Connect will have access to the SQS queues.
 
-## The Flow
+### The flow
 
 We will use the AWS Console to put a message into an SQS queue.  A source connector will read messages
 from the queue and write the messages to a Kafka topic.  A sink connector will read messages from the
@@ -274,12 +248,12 @@ topic and write to a _different_ SQS queue.
                         connector      connector
 ```
 
-## Create AWS SQS queues
+### Create AWS SQS queues
 
 Create `chirps-q` and `chirped-q` SQS queues using the AWS Console.  Take note of the `URL:` values for each
 as you will need them to configure the connectors later.
 
-## Create the connectors
+### Create the connectors
 
 The `source` connector configuration is defined in `demos/sqs-source-chirps.json]`, The `sink` connector configuration
 is defined in `demos/sqs-sink-chirped.json`.  You will have to modify the `sqs.queue.url` parameter to reflect the
@@ -292,7 +266,7 @@ curl -XPOST -H 'Content-Type: application/json' http://localhost:8083/connectors
 curl -XPOST -H 'Content-Type: application/json' http://localhost:8083/connectors -d @demos/sqs-sink-chirped.json
 ```
 
-## Send/receive messages
+### Send and receive messages
 
 Using the AWS Console (or the AWS CLI), send a message to the `chirps-q`.
 
@@ -301,4 +275,3 @@ The source connector will read the message from the queue and write it to the `c
 The `sink` connector will read the message from the topic and write it to the `chirped-q` queue.
 
 Use the AWS Console (or the AWS CLI) to read your message from the `chirped-q`
-
