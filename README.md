@@ -6,9 +6,9 @@ The SQS connector plugin provides the ability to use AWS SQS queues as both a so
 
 |Connector version|Kafka Connect API|AWS SDK|
 |:---|:---|:---|
-|1.4.0|3.1.1|1.12.241|
-|1.5.0|3.3.2|1.12.409|
-|1.6.0|3.4.1|1.12.669|
+|1.4|3.1.1|1.12.241|
+|1.5|3.3.2|1.12.409|
+|1.6|3.4.1|1.12.669|
 
 Running the connector on versions of Kafka Connect prior to 3.0 is not recommended.
 
