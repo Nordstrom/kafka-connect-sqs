@@ -2,64 +2,31 @@ version: "3"
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.1.1
+    image: confluentinc/cp-zookeeper:7.4.5
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     ports:
       - 2181:2181
-    logging: { driver: none }
+    logging:
+      driver: none
 
-  broker:
-    image: confluentinc/cp-kafka:7.1.1
+  kafka-broker:
+    image: confluentinc/cp-kafka:7.4.5
     ports:
       - 9092:9092
+      - 9093:9093
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_LISTENERS=PUBLIC://0.0.0.0:9092,INTERNAL://0.0.0.0:19092
-      - KAFKA_ADVERTISED_LISTENERS=PUBLIC://localhost:9092,INTERNAL://broker:19092
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PUBLIC:PLAINTEXT,INTERNAL:PLAINTEXT
-      - KAFKA_INTER_BROKER_LISTENER_NAME=INTERNAL
-      - KAFKA_NUM_PARTITIONS=2
-      - KAFKA_DEFAULT_REPLICATION_FACTOR=1
-      - KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS=10
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-      - KAFKA_DELETE_TOPIC_ENABLE=true
-      - KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE=false
-
-      - KAFKA_LOG4J_ROOT_LOGLEVEL=INFO
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PUBLIC://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PUBLIC://localhost:9092,INTERNAL://kafka-broker:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PUBLIC:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_NUM_PARTITIONS: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 10
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_DELETE_TOPIC_ENABLE: "true"
+      KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
+      KAFKA_LOG4J_LOGGERS: kafka=WARN,kafka.controller=INFO,kafka.server.KafkaServer=INFO,org.apache.zookeeper=WARN
     depends_on: [zookeeper]
-    logging: { driver: none }
-
-  # NB: run connect locally in stand-alone mode to debug
-  connect:
-    image: confluentinc/cp-kafka-connect:7.1.1
-    ports:
-      - 8083:8083
-    environment:
-      - CONNECT_BOOTSTRAP_SERVERS=broker:19092
-      - CONNECT_REST_ADVERTISED_HOST_NAME=connect
-      - CONNECT_REST_PORT=8083
-      - CONNECT_GROUP_ID=connect
-      - CONNECT_CONFIG_STORAGE_TOPIC=_connect_configs
-      - CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1
-      - CONNECT_OFFSET_STORAGE_TOPIC=_connect_offsets
-      - CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1
-      - CONNECT_STATUS_STORAGE_TOPIC=_connect_status
-      - CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1
-      - CONNECT_KEY_CONVERTER=org.apache.kafka.connect.json.JsonConverter
-      - CONNECT_VALUE_CONVERTER=org.apache.kafka.connect.json.JsonConverter
-      - CONNECT_INTERNAL_KEY_CONVERTER=org.apache.kafka.connect.json.JsonConverter
-      - CONNECT_INTERNAL_VALUE_CONVERTER=org.apache.kafka.connect.json.JsonConverter
-
-      - CONNECT_PLUGIN_PATH=/opt/connectors
-      - KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/etc/log4j.properties
-
-      - AWS_PROFILE
-      - AWS_REGION
-      - AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY
-    volumes:
-      - ~/.aws:/root/.aws
-      - ./target/plugin:/opt/connectors
-      - ./config/log4j.properties:/etc/log4j.properties
-    depends_on: [broker]

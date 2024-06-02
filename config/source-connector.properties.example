@@ -1,0 +1,9 @@
+name: sqs-source
+connector.class: com.nordstrom.kafka.connect.sqs.SqsSourceConnector
+key.converter: org.apache.kafka.connect.storage.StringConverter
+value.converter: org.apache.kafka.connect.storage.StringConverter
+
+topics: hello-sqs-source
+sqs.queue.url: https://sqs.us-west-2.amazonaws.com/<Your AWS account>/hello-sqs-source
+sqs.wait.time.seconds: 5
+sqs.message.attributes.enabled: true
