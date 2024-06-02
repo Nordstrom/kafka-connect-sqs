@@ -37,11 +37,6 @@ public class SqsClient {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   private final String AWS_FIFO_SUFFIX = ".fifo";
-  public static final Class<? extends AWSCredentialsProvider> CREDENTIALS_PROVIDER_CLASS_DEFAULT =
-      com.amazonaws.auth.DefaultAWSCredentialsProviderChain.class;
-
-  private final Boolean messageAttributesEnabled;
-  private final List<String> messageAttributesList;
 
   private final AmazonSQS client;
 
@@ -64,22 +59,7 @@ public class SqsClient {
     }
 
     builder.setCredentials(provider);
-
-//    // If there's an AWS credentials profile and/or region configured in the
-//    // environment we will use it.
-//    final String profile = System.getenv(AWS_PROFILE);
-//    final String region = System.getenv(AWS_REGION);
-//    if (Facility.isNotNullNorEmpty(profile)) {
-//      builder.setCredentials(provider);
-//    }
-//    if (Facility.isNotNullNorEmpty(region)) {
-//      builder.setRegion(region);
-//    }
-//    log.info("AmazonSQS using profile={}, region={}", profile, region);
-
     client = builder.build();
-    messageAttributesEnabled = config.getMessageAttributesEnabled();
-    messageAttributesList = config.getMessageAttributesList();
   }
 
   /**
@@ -104,9 +84,11 @@ public class SqsClient {
    * @param url             SQS queue url.
    * @param maxMessages     Maximum number of messages to receive for this call.
    * @param waitTimeSeconds Time to wait, in seconds, for messages to arrive.
+   * @param messageAttributesEnabled Whether to collect message attributes.
+   * @param messageAttributesList Which message attributes to collect; if empty, all attributes are collected.
    * @return Collection of messages received.
    */
-  public List<Message> receive(final String url, final int maxMessages, final int waitTimeSeconds) {
+  public List<Message> receive(final String url, final int maxMessages, final int waitTimeSeconds, final Boolean messageAttributesEnabled, final List<String> messageAttributesList) {
     log.debug(".receive:queue={}, max={}, wait={}", url, maxMessages, waitTimeSeconds);
 
     Guard.verifyValidUrl(url);
@@ -123,7 +105,7 @@ public class SqsClient {
         .withMaxNumberOfMessages(maxMessages).withWaitTimeSeconds(waitTimeSeconds).withAttributeNames("");
 
     if (messageAttributesEnabled) {
-      if (messageAttributesList.size() == 0) {
+      if (messageAttributesList.isEmpty()) {
         receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames("All");
       } else {
         receiveMessageRequest = receiveMessageRequest.withMessageAttributeNames(messageAttributesList);
@@ -147,7 +129,7 @@ public class SqsClient {
    * @param groupId   Optional group identifier (fifo queues only).
    * @param messageId Optional message identifier (fifo queues only).
    * @param messageAttributes The message attributes to send.
-   * @return
+   * @return Sequence number when FIFO; otherwise, the message identifier
    */
   public String send(final String url, final String body, final String groupId, final String messageId, final Map<String, MessageAttributeValue> messageAttributes) {
     log.debug(".send: queue={}, gid={}, mid={}", url, groupId, messageId);

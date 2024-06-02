@@ -103,8 +103,12 @@ public class SqsSourceConnectorTask extends SourceTask {
     }
 
     // Read messages from the queue.
-    List<Message> messages = client.receive( config.getQueueUrl(), config.getMaxMessages(),
-        config.getWaitTimeSeconds() ) ;
+    List<Message> messages = client.receive(
+        config.getQueueUrl(),
+        config.getMaxMessages(),
+        config.getWaitTimeSeconds(),
+        config.getMessageAttributesEnabled(),
+        config.getMessageAttributesList());
     log.debug( ".poll:url={}, max={}, wait={}, size={}", config.getQueueUrl(), config.getMaxMessages(),
         config.getWaitTimeSeconds(), messages.size() ) ;
 
