@@ -171,3 +171,28 @@ The IAM role will have a corresponding trust policy. For example:
   ]
 }
 ```
+
+## Running the connector
+
+This example demonstrates using the sink connector to send a message to an SQS queue from Kafka.
+
+- Setup an SQS queue
+- Setup Kafka. Use the cluster defined in `docker-compose.yaml` if you don't have one
+- Customize the files in the config directory; for example, `config/sink-connector.properties.example`
+
+Now, start the sink connector in standalone mode:
+
+```sh
+$KAFKA_HOME/bin/connect-standalone.sh \
+  config/connect-worker.properties config/sink-connector.properties
+```
+
+Use a tool to produce messages to the Kafka topic.
+
+```sh
+bin/kafka-console-producer --bootstrap-server localhost:9092 \
+    --topic hello-sqs-sink \
+    --property parse.headers=true \
+    --property 'headers.delimiter=\t'
+>test:abc\t{"hello":"world"}
+```
