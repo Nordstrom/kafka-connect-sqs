@@ -94,7 +94,7 @@ public class SqsSinkConnectorTask extends SinkTask {
         final Headers headers = record.headers();
         messageAttributes = new HashMap<>();
         List<String> attributesList = config.getMessageAttributesList();
-        boolean allNamesEnabled = (attributesList.size() == 0);
+        boolean allNamesEnabled = attributesList.isEmpty();
         for(Header header: headers) {
           if(allNamesEnabled || attributesList.contains(header.key())) {
             if(header.schema().equals(Schema.STRING_SCHEMA)) {
@@ -105,7 +105,6 @@ public class SqsSinkConnectorTask extends SinkTask {
           }
         }
       }
-
 
       if ( Facility.isNotNullNorEmpty( body ) ) {
         try {

@@ -16,6 +16,8 @@
 
 package com.nordstrom.kafka.connect.sqs;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
@@ -27,11 +29,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SqsSinkConnectorConfig extends SqsConnectorConfig {
-  private static final Logger log = LoggerFactory.getLogger(SqsSinkConnectorConfig.class);
+  private final Boolean messageAttributesEnabled;
+  private final List<String> messageAttributesList;
 
   private static final ConfigDef CONFIG_DEF = new ConfigDef()
       .define(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue(), Type.STRING, Importance.HIGH, "URL of the SQS queue to be written to.")
       .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "Kafka topic to be read from.")
+      .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
+          "SQS queue AWS region.")
+      .define(SqsConnectorConfigKeys.SQS_ENDPOINT_URL.getValue(), Type.STRING, "", Importance.LOW,
+          "If specified, the connector will override the AWS region specific endpoint URL with this value. Note that this is not the queue URL.")
       .define(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CLASS_CONFIG.getValue(), Type.CLASS,
           SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CLASS_DEFAULT.getValue(),
           new CredentialsProviderValidator(),
@@ -41,17 +48,14 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
           0,
           ConfigDef.Width.LONG,
           "AWS Credentials Provider Class")
-      .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
-          "SQS queue AWS region.")
-      .define(SqsConnectorConfigKeys.SQS_ENDPOINT_URL.getValue(), Type.STRING, Importance.LOW,
-          "If specified, the connector will override the AWS region specific endpoint URL with this value. Note that this is not the queue URL.")
       .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue(), Type.BOOLEAN, false, Importance.LOW,
           "If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.")
       .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue(), Type.LIST, "", Importance.LOW,
-      "The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.")
-      .define(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_ACCESS_KEY_ID.getValue(), Type.STRING, "", Importance.LOW, "AWS Secret Access Key to be used with Config credentials provider.")
-      .define(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_SECRET_ACCESS_KEY.getValue(), Type.PASSWORD, "", Importance.LOW, "AWS Secret Access Key to be used with Config credentials provider")
-      .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTE_PARTITION_KEY.getValue(), Type.STRING, "", Importance.LOW, "The name of a single AWS SQS MessageAttribute to use as the partition key");
+          "The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.")
+      .define(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_ACCESS_KEY_ID.getValue(), Type.STRING, "", Importance.LOW,
+          "AWS Secret Access Key to be used with Config credentials provider.")
+      .define(SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_SECRET_ACCESS_KEY.getValue(), Type.PASSWORD, "", Importance.LOW,
+          "AWS Secret Access Key to be used with Config credentials provider");
 
   public static ConfigDef config() {
     return CONFIG_DEF;
@@ -59,26 +63,21 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
 
   public SqsSinkConnectorConfig(Map<?, ?> originals) {
     super(config(), originals);
-  }
 
-  private static class CredentialsProviderValidator implements ConfigDef.Validator {
-    @Override
-    public void ensureValid(String name, Object provider) {
-      log.warn(".validator:name={}, provider={}", name, provider);
-      if (provider != null && provider instanceof Class
-          && AWSCredentialsProvider.class.isAssignableFrom((Class<?>) provider)) {
-        return;
-      }
-      throw new ConfigException(
-          name,
-          provider,
-          "Class must extend: " + AWSCredentialsProvider.class
-      );
-    }
-
-    @Override
-    public String toString() {
-      return "Any class implementing: " + AWSCredentialsProvider.class;
+    messageAttributesEnabled = getBoolean(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue());
+    if (messageAttributesEnabled) {
+      messageAttributesList = getList(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue());
+    } else {
+      messageAttributesList = Collections.emptyList();
     }
   }
+
+  public Boolean getMessageAttributesEnabled() {
+    return messageAttributesEnabled;
+  }
+
+  public List<String> getMessageAttributesList() {
+    return messageAttributesList;
+  }
+
 }

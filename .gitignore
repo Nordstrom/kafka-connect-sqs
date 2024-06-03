@@ -19,10 +19,6 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/target/
-
 # Eclipse
 .classpath
 .project
@@ -34,3 +30,8 @@ dependency-reduced-pom.xml
 # IntelliJ
 .idea
 *.iml
+
+# Files relevant to this project
+target/
+config/sink-connector.properties
+config/source-connector.properties

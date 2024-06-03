@@ -1,0 +1,8 @@
+name: sqs-sink
+connector.class: com.nordstrom.kafka.connect.sqs.SqsSinkConnector
+key.converter: org.apache.kafka.connect.storage.StringConverter
+value.converter: org.apache.kafka.connect.storage.StringConverter
+
+topics: hello-sqs-sink
+sqs.queue.url: https://sqs.us-west-2.amazonaws.com/<Your AWS account>/hello-sqs-sink
+sqs.message.attributes.enabled: true
