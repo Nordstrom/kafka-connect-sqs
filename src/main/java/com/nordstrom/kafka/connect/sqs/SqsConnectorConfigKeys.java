@@ -27,6 +27,7 @@ public enum SqsConnectorConfigKeys {
   SQS_REGION("sqs.region"),
   SQS_ENDPOINT_URL("sqs.endpoint.url"),
   SQS_MESSAGE_ATTRIBUTES_ENABLED("sqs.message.attributes.enabled"),
+  SQS_SEND_MODE("sqs.send.mode"),
   SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST("sqs.message.attributes.include.list"),
   SQS_MESSAGE_ATTRIBUTE_PARTITION_KEY("sqs.message.attributes.partition.key"),
 
