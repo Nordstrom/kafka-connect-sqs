@@ -50,7 +50,7 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
           0,
           ConfigDef.Width.LONG,
           "AWS Credentials Provider Class")
-      .define(SqsConnectorConfigKeys.SQS_SEND_MODE.getValue(), Type.STRING, SQSSendMode.SYNC, Importance.LOW,
+      .define(SqsConnectorConfigKeys.SQS_SEND_MODE.getValue(), Type.STRING, "sync", Importance.LOW,
                   "If sync, then AmazonSQS client is used. If async, then AmazonSQSAsync client is used to gain better throughput, but ordering might be affected")
       .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue(), Type.BOOLEAN, false, Importance.LOW,
           "If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.")
