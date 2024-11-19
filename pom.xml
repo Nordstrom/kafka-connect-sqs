@@ -22,7 +22,7 @@
   <groupId>com.nordstrom.kafka.connect.sqs</groupId>
   <artifactId>kafka-connect-sqs</artifactId>
   <name>Kafka Connect SQS Sink/Source Connector</name>
-  <version>1.6.2</version>
+  <version>1.6.3</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,7 +41,7 @@
     <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
     <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 
-    <aws-java-sdk.version>1.12.669</aws-java-sdk.version>
+    <aws-java-sdk.version>1.12.778</aws-java-sdk.version>
     <kafka.connect-api.version>3.4.1</kafka.connect-api.version>
     <slf4j.version>1.7.36</slf4j.version>
   </properties>
