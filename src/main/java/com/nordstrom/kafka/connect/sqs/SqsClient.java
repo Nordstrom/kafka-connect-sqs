@@ -18,8 +18,11 @@ package com.nordstrom.kafka.connect.sqs;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.services.sqs.AmazonSQSAsync;
+import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder;
 import com.amazonaws.services.sqs.model.*;
 import org.apache.kafka.common.Configurable;
 import org.apache.kafka.connect.errors.ConnectException;
@@ -40,6 +43,8 @@ public class SqsClient {
 
   private final AmazonSQS client;
 
+  private final AmazonSQSAsync asyncClient;
+
   public SqsClient(SqsConnectorConfig config) {
     Map<String, Object> credentialProviderConfigs = config.originalsWithPrefix(
             SqsConnectorConfigKeys.CREDENTIALS_PROVIDER_CONFIG_PREFIX.getValue());
@@ -52,14 +57,20 @@ public class SqsClient {
     }
 
     final AmazonSQSClientBuilder builder = AmazonSQSClientBuilder.standard();
+    final AmazonSQSAsyncClientBuilder asyncBuilder = AmazonSQSAsyncClientBuilder.standard();
     if(StringUtils.isBlank(config.getEndpointUrl())) {
       builder.setRegion(config.getRegion());
+      asyncBuilder.setRegion(config.getRegion());
     } else {
       builder.setEndpointConfiguration(new EndpointConfiguration(config.getEndpointUrl(), config.getRegion()));
+      asyncBuilder.setEndpointConfiguration(new EndpointConfiguration(config.getEndpointUrl(), config.getRegion()));
     }
 
     builder.setCredentials(provider);
+    asyncBuilder.setCredentials(provider);
+
     client = builder.build();
+    asyncClient = asyncBuilder.build();
   }
 
   /**
@@ -122,7 +133,24 @@ public class SqsClient {
   }
 
   /**
-   * Send a message to an SQS queue.
+   * Send a message to an SQS queue in async mode which boosts throughput but could change message ordering.
+   *
+   * @param url       SQS queue url.
+   * @param body      The message to send.
+   * @param groupId   Optional group identifier (fifo queues only).
+   * @param messageId Optional message identifier (fifo queues only).
+   * @param messageAttributes The message attributes to send.
+   * @return Sequence number when FIFO; otherwise, the message identifier
+   */
+  public Future<SendMessageResult> sendAsync(final String url, final String body,
+                                             final String groupId, final String messageId, final Map<String, MessageAttributeValue> messageAttributes) {
+    SendMessageRequest request = getSendMessageRequest(url, body, groupId, messageId, messageAttributes);
+
+    return asyncClient.sendMessageAsync(request);
+  }
+
+  /**
+   * Send a message to an SQS queue in sync mode.
    *
    * @param url       SQS queue url.
    * @param body      The message to send.
@@ -132,6 +160,16 @@ public class SqsClient {
    * @return Sequence number when FIFO; otherwise, the message identifier
    */
   public String send(final String url, final String body, final String groupId, final String messageId, final Map<String, MessageAttributeValue> messageAttributes) {
+    SendMessageRequest request = getSendMessageRequest(url, body, groupId, messageId, messageAttributes);
+
+    final SendMessageResult result = client.sendMessage(request);
+
+    log.debug(".send-message.OK: queue={}, result={}", url, result);
+
+    return isFifo(url) ? result.getSequenceNumber() : result.getMessageId();
+  }
+
+  private SendMessageRequest getSendMessageRequest(String url, String body, String groupId, String messageId, Map<String, MessageAttributeValue> messageAttributes) {
     log.debug(".send: queue={}, gid={}, mid={}", url, groupId, messageId);
 
     Guard.verifyValidUrl(url);
@@ -139,25 +177,19 @@ public class SqsClient {
     if (!isValidState()) {
       throw new IllegalStateException("AmazonSQS client is not initialized");
     }
-    final boolean fifo = isFifo(url);
 
     SendMessageRequest request = new SendMessageRequest(url, body);
     if (messageAttributes != null) {
       request.setMessageAttributes(messageAttributes);
     }
 
-    if (fifo) {
+    if (isFifo(url)) {
       Guard.verifyNotNullOrEmpty(groupId, "groupId");
       Guard.verifyNotNullOrEmpty(messageId, "messageId");
       request.setMessageGroupId(groupId);
       request.setMessageDeduplicationId(messageId);
     }
-
-    final SendMessageResult result = client.sendMessage(request);
-
-    log.debug(".send-message.OK: queue={}, result={}", url, result);
-
-    return fifo ? result.getSequenceNumber() : result.getMessageId();
+    return request;
   }
 
   private boolean isFifo(final String url) {

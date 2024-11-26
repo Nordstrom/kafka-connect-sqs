@@ -32,6 +32,8 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
   private final Boolean messageAttributesEnabled;
   private final List<String> messageAttributesList;
 
+  private final SQSSendMode sqsSendMode;
+
   private static final ConfigDef CONFIG_DEF = new ConfigDef()
       .define(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue(), Type.STRING, Importance.HIGH, "URL of the SQS queue to be written to.")
       .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "Kafka topic to be read from.")
@@ -48,6 +50,8 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
           0,
           ConfigDef.Width.LONG,
           "AWS Credentials Provider Class")
+      .define(SqsConnectorConfigKeys.SQS_SEND_MODE.getValue(), Type.STRING, "sync", Importance.LOW,
+                  "If sync, then AmazonSQS client is used. If async, then AmazonSQSAsync client is used to gain better throughput, but ordering might be affected")
       .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue(), Type.BOOLEAN, false, Importance.LOW,
           "If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.")
       .define(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_INCLUDE_LIST.getValue(), Type.LIST, "", Importance.LOW,
@@ -61,6 +65,8 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
     return CONFIG_DEF;
   }
 
+  public enum SQSSendMode {SYNC, ASYNC};
+
   public SqsSinkConnectorConfig(Map<?, ?> originals) {
     super(config(), originals);
 
@@ -70,7 +76,10 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
     } else {
       messageAttributesList = Collections.emptyList();
     }
+    sqsSendMode = SQSSendMode.valueOf(getString(SqsConnectorConfigKeys.SQS_SEND_MODE.getValue()).toUpperCase());
   }
+
+  public SQSSendMode getSQSSendMode() { return sqsSendMode; }
 
   public Boolean getMessageAttributesEnabled() {
     return messageAttributesEnabled;
