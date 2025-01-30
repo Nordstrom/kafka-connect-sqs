@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map ;
 
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
+import org.apache.kafka.common.errors.RetriableException;
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.header.Header;
 import org.apache.kafka.connect.header.Headers;
@@ -112,7 +113,7 @@ public class SqsSinkConnectorTask extends SinkTask {
 
           log.debug( ".put.OK:message-id={}, queue.url={}, sqs-group-id={}, sqs-message-id={}", gid, mid,
               config.getQueueUrl(), sid ) ;
-        } catch ( final RuntimeException e ) {
+        } catch ( final RetriableException e ) {
           log.error( "An Exception occurred while sending message {} to target url {}:", mid, config.getQueueUrl(),
               e ) ;
         }
