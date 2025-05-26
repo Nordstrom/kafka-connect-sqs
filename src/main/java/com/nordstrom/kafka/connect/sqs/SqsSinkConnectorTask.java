@@ -130,7 +130,12 @@ public class SqsSinkConnectorTask extends SinkTask {
    */
   @Override
   public void stop() {
-    log.info( "task.stop:OK" ) ;
+    log.info( "Stopping SQS Sink Connector Task" ) ;
+    if (this.client != null) {
+        this.client.close();
+        this.client = null;
+    }
+    log.info( "SQS Sink Connector Task stopped." ) ;
   }
 
   /**

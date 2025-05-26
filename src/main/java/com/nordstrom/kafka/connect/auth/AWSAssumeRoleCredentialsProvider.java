@@ -1,19 +1,24 @@
 package com.nordstrom.kafka.connect.auth;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.STSAssumeRoleSessionCredentialsProvider;
-import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
-import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
 import com.nordstrom.kafka.connect.sqs.SqsConnectorConfigKeys;
 import com.nordstrom.kafka.connect.utils.StringUtils;
 import org.apache.kafka.common.Configurable;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StsAssumeRoleCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sts.StsClient;
+import software.amazon.awssdk.services.sts.StsClientBuilder;
+import software.amazon.awssdk.services.sts.model.AssumeRoleRequest;
+
+import java.net.URI;
 import java.util.Map;
 
-public class AWSAssumeRoleCredentialsProvider implements AWSCredentialsProvider, Configurable {
+public class AWSAssumeRoleCredentialsProvider implements AwsCredentialsProvider, Configurable {
   //NB: uncomment slf4j imports and field declaration to enable logging.
 //  private static final Logger log = LoggerFactory.getLogger(AWSAssumeRoleCredentialsProvider.class);
 
@@ -26,6 +31,11 @@ public class AWSAssumeRoleCredentialsProvider implements AWSCredentialsProvider,
   private String sessionName;
   private String region;
   private String endpointUrl;
+
+  // TODO: The cached stsClient is not explicitly closed as AwsCredentialsProvider does not define a close() method.
+  // Consider if this provider should implement java.io.Closeable if used in a context that can manage its lifecycle.
+  private volatile software.amazon.awssdk.services.sts.StsClient stsClient;
+
   @Override
   public void configure(Map<String, ?> map) {
     externalId = getOptionalField(map, EXTERNAL_ID_CONFIG);
@@ -36,27 +46,42 @@ public class AWSAssumeRoleCredentialsProvider implements AWSCredentialsProvider,
   }
 
   @Override
-  public AWSCredentials getCredentials() {
-    AWSSecurityTokenServiceClientBuilder clientBuilder = null;
-    if(StringUtils.isBlank(endpointUrl))
-      clientBuilder = AWSSecurityTokenServiceClientBuilder.standard()
-            .withRegion(region);
-    else
-      clientBuilder = AWSSecurityTokenServiceClientBuilder.standard()
-              .withEndpointConfiguration(new EndpointConfiguration(endpointUrl, region));
+  public AwsCredentials resolveCredentials() {
+    if (this.stsClient == null) {
+      synchronized (this) {
+        if (this.stsClient == null) {
+          StsClientBuilder stsClientBuilder = software.amazon.awssdk.services.sts.StsClient.builder()
+              .credentialsProvider(software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.create()); // For the STS client itself
 
-    AWSCredentialsProvider provider = new STSAssumeRoleSessionCredentialsProvider.Builder(roleArn, sessionName)
-        .withStsClient(clientBuilder.build())
-        .withExternalId(externalId)
+          if (StringUtils.isBlank(endpointUrl)) {
+            stsClientBuilder.region(software.amazon.awssdk.regions.Region.of(region));
+          } else {
+            stsClientBuilder.region(software.amazon.awssdk.regions.Region.of(region)) // Region still needed with endpoint override for signing
+                          .endpointOverride(java.net.URI.create(endpointUrl));
+          }
+          this.stsClient = stsClientBuilder.build();
+        }
+      }
+    }
+
+    AssumeRoleRequest assumeRoleRequest = software.amazon.awssdk.services.sts.model.AssumeRoleRequest.builder()
+        .roleArn(roleArn)
+        .roleSessionName(sessionName)
+        .externalId(externalId) // externalId can be null, builder handles it
         .build();
 
-    return provider.getCredentials();
+    // Note: StsAssumeRoleCredentialsProvider itself is lightweight and can be created per call.
+    // The main benefit is caching the StsClient used by it.
+    software.amazon.awssdk.auth.credentials.StsAssumeRoleCredentialsProvider provider =
+        software.amazon.awssdk.auth.credentials.StsAssumeRoleCredentialsProvider.builder()
+            .stsClient(this.stsClient) // Use the cached client
+            .refreshRequest(assumeRoleRequest)
+            .build();
+
+    return provider.resolveCredentials();
   }
 
-  @Override
-  public void refresh() {
-    //Nothing to do really, since we are assuming a role.
-  }
+  // refresh() method is removed as it's not part of AwsCredentialsProvider in SDK v2
 
   private String getOptionalField(final Map<String, ?> map, final String fieldName) {
     final Object field = map.get(fieldName);
@@ -94,5 +119,4 @@ public class AWSAssumeRoleCredentialsProvider implements AWSCredentialsProvider,
       throw new IllegalArgumentException(String.format("The field '%1s' should not be null or empty", fieldName));
     }
   }
-
 }

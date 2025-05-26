@@ -167,7 +167,12 @@ public class SqsSourceConnectorTask extends SourceTask {
    */
   @Override
   public void stop() {
-    log.info( "task.stop:OK" ) ;
+    log.info( "Stopping SQS Source Connector Task" ) ;
+    if (this.client != null) {
+        this.client.close();
+        this.client = null;
+    }
+    log.info( "SQS Source Connector Task stopped." ) ;
   }
 
   /**

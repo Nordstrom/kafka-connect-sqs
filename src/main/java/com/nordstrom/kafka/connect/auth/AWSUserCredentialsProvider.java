@@ -1,13 +1,13 @@
 package com.nordstrom.kafka.connect.auth;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
 import org.apache.kafka.common.Configurable;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 
 import java.util.Map;
 
-public class AWSUserCredentialsProvider implements AWSCredentialsProvider, Configurable {
+public class AWSUserCredentialsProvider implements AwsCredentialsProvider, Configurable {
     private static final String AWS_ACCESS_KEY_ID = "accessKeyId";
     private static final String AWS_SECRET_ACCESS_KEY = "secretKey";
 
@@ -15,12 +15,11 @@ public class AWSUserCredentialsProvider implements AWSCredentialsProvider, Confi
     private String awsSecretKey;
 
     @Override
-    public AWSCredentials getCredentials() {
-        return new BasicAWSCredentials(awsAccessKeyId, awsSecretKey);
+    public AwsCredentials resolveCredentials() {
+        return AwsBasicCredentials.create(awsAccessKeyId, awsSecretKey);
     }
 
-    @Override
-    public void refresh() { }
+    // refresh() method is removed as it's not part of AwsCredentialsProvider in SDK v2
 
     @Override
     public void configure(Map<String, ?> map) {
