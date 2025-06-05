@@ -62,7 +62,11 @@ public class SqsSinkConnectorTask extends SinkTask {
     config = new SqsSinkConnectorConfig( props ) ;
     client = new SqsClient(config) ;
 
-    log.info( "task.start:OK, sqs.queue.url={}, topics={}", config.getQueueUrl(), config.getTopics() ) ;
+    if (config.isUsingRegex()) {
+      log.info( "task.start:OK, sqs.queue.url={}, topics.regex={}", config.getQueueUrl(), config.getTopicsRegex() ) ;
+    } else {
+      log.info( "task.start:OK, sqs.queue.url={}, topics={}", config.getQueueUrl(), config.getTopics() ) ;
+    }
   }
 
   /*
@@ -110,14 +114,14 @@ public class SqsSinkConnectorTask extends SinkTask {
         try {
           final String sid = client.send( config.getQueueUrl(), body, gid, mid, messageAttributes ) ;
 
-          log.debug( ".put.OK:message-id={}, queue.url={}, sqs-group-id={}, sqs-message-id={}", gid, mid,
-              config.getQueueUrl(), sid ) ;
+          log.debug( ".put.OK:message-id={}, topic={}, queue.url={}, sqs-group-id={}, sqs-message-id={}", 
+              mid, record.topic(), config.getQueueUrl(), gid, sid ) ;
         } catch ( final RuntimeException e ) {
-          log.error( "An Exception occurred while sending message {} to target url {}:", mid, config.getQueueUrl(),
-              e ) ;
+          log.error( "An Exception occurred while sending message {} from topic {} to target url {}:", 
+              mid, record.topic(), config.getQueueUrl(), e ) ;
         }
       } else {
-        log.warn( "Skipping empty message: key={}", key ) ;
+        log.warn( "Skipping empty message: key={}, topic={}", key, record.topic() ) ;
       }
 
     }

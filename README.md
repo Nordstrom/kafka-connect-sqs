@@ -63,8 +63,11 @@ the SQS queue.
 
 SQS sink connector reads from a Kafka topic and publishes to an AWS SQS queue.
 
-Required properties:
-* `topics`: Kafka topic to be read from.
+Required properties (one of the following):
+* `topics`: Specific Kafka topic to be read from.
+* `topics.regex`: Regex pattern for Kafka topics to be read from (e.g., `.*_created_event` to match all topics ending with `_created_event`).
+
+Additional required properties:
 * `sqs.queue.url`: URL of the SQS queue to be written to.
 
 Optional properties:
@@ -72,6 +75,31 @@ Optional properties:
 * `sqs.endpoint.url`: Override value for the AWS region specific endpoint.
 * `sqs.message.attributes.enabled`: If true, it gets the Kafka Headers and inserts them as SQS MessageAttributes (only string headers are currently supported). Default is false.
 * `sqs.message.attributes.include.list`: The comma separated list of Header names to be included, if empty it includes all the Headers. Default is the empty string.
+
+### Wildcard Topic Subscriptions
+
+The sink connector supports regex patterns for subscribing to multiple topics that match a pattern. This is useful for scenarios like:
+
+- **Event patterns**: Subscribe to all topics ending with `_created_event`, `_updated_event`, etc.
+- **Service patterns**: Subscribe to all topics starting with `user-service_`, `order-service_`, etc.
+- **Environment patterns**: Subscribe to topics matching `prod_.*` or `dev_.*`
+
+Examples:
+```properties
+# Match all topics ending with '_created_event'
+topics.regex: .*_created_event
+
+# Match all topics starting with 'user-service_'
+topics.regex: user-service_.*
+
+# Match topics for specific environments
+topics.regex: (prod|staging)_.*
+
+# Match any topic containing 'event' 
+topics.regex: .*event.*
+```
+
+**Note**: You must specify either `topics` OR `topics.regex`, but not both.
 
 ### Sample SQS queue policy
 

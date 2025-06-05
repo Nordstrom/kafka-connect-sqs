@@ -1,0 +1,19 @@
+name: sqs-sink-regex
+connector.class: com.nordstrom.kafka.connect.sqs.SqsSinkConnector
+key.converter: org.apache.kafka.connect.storage.StringConverter
+value.converter: org.apache.kafka.connect.storage.StringConverter
+
+# Use regex pattern to match topics ending with '_created_event'
+topics.regex: .*_created_event
+
+sqs.queue.url: https://sqs.us-west-2.amazonaws.com/<Your AWS account>/events-queue
+sqs.message.attributes.enabled: true
+
+# Optional: AWS region (can also be set via AWS_REGION environment variable)
+# sqs.region: us-west-2
+
+# Optional: Custom AWS endpoint
+# sqs.endpoint.url: http://localhost:4566
+
+# Optional: Filter message attributes to include
+# sqs.message.attributes.include.list: event-type,source-system 
