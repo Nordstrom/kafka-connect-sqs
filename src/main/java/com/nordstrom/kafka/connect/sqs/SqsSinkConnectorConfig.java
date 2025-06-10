@@ -19,6 +19,8 @@ package com.nordstrom.kafka.connect.sqs;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import org.apache.kafka.common.config.ConfigDef;
@@ -31,10 +33,12 @@ import org.slf4j.LoggerFactory;
 public class SqsSinkConnectorConfig extends SqsConnectorConfig {
   private final Boolean messageAttributesEnabled;
   private final List<String> messageAttributesList;
+  private final String topicsRegex;
 
   private static final ConfigDef CONFIG_DEF = new ConfigDef()
       .define(SqsConnectorConfigKeys.SQS_QUEUE_URL.getValue(), Type.STRING, Importance.HIGH, "URL of the SQS queue to be written to.")
-      .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, Importance.HIGH, "Kafka topic to be read from.")
+      .define(SqsConnectorConfigKeys.TOPICS.getValue(), Type.STRING, "", Importance.HIGH, "Kafka topic to be read from. Use either this or topics.regex, but not both.")
+      .define(SqsConnectorConfigKeys.TOPICS_REGEX.getValue(), Type.STRING, "", Importance.HIGH, "Regex pattern for Kafka topics to be read from (e.g., '.*_created_event'). Use either this or topics, but not both.")
       .define(SqsConnectorConfigKeys.SQS_REGION.getValue(), Type.STRING, System.getenv("AWS_REGION"), Importance.HIGH,
           "SQS queue AWS region.")
       .define(SqsConnectorConfigKeys.SQS_ENDPOINT_URL.getValue(), Type.STRING, "", Importance.LOW,
@@ -63,6 +67,27 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
 
   public SqsSinkConnectorConfig(Map<?, ?> originals) {
     super(config(), originals);
+    
+    // Validate that only one of topics or topics.regex is specified
+    String topics = getString(SqsConnectorConfigKeys.TOPICS.getValue());
+    topicsRegex = getString(SqsConnectorConfigKeys.TOPICS_REGEX.getValue());
+    
+    if ((topics == null || topics.trim().isEmpty()) && (topicsRegex == null || topicsRegex.trim().isEmpty())) {
+      throw new ConfigException("Either 'topics' or 'topics.regex' must be specified");
+    }
+    
+    if ((topics != null && !topics.trim().isEmpty()) && (topicsRegex != null && !topicsRegex.trim().isEmpty())) {
+      throw new ConfigException("Cannot specify both 'topics' and 'topics.regex'. Use only one.");
+    }
+    
+    // Validate regex pattern if specified
+    if (topicsRegex != null && !topicsRegex.trim().isEmpty()) {
+      try {
+        Pattern.compile(topicsRegex);
+      } catch (PatternSyntaxException e) {
+        throw new ConfigException("Invalid regex pattern for topics.regex: " + topicsRegex, e);
+      }
+    }
 
     messageAttributesEnabled = getBoolean(SqsConnectorConfigKeys.SQS_MESSAGE_ATTRIBUTES_ENABLED.getValue());
     if (messageAttributesEnabled) {
@@ -78,6 +103,14 @@ public class SqsSinkConnectorConfig extends SqsConnectorConfig {
 
   public List<String> getMessageAttributesList() {
     return messageAttributesList;
+  }
+  
+  public String getTopicsRegex() {
+    return topicsRegex;
+  }
+  
+  public boolean isUsingRegex() {
+    return topicsRegex != null && !topicsRegex.trim().isEmpty();
   }
 
 }
