@@ -5,11 +5,12 @@ queue into a Kafka topic) or sink (out of a Kafka topic into an SQS queue).
 
 ## Compatibility matrix
 
-|Connector version|Kafka Connect API|AWS SDK|
-|:---|:---|:---|
-|1.4|3.1.1|1.12.241|
-|1.5|3.3.2|1.12.409|
-|1.6|3.4.1|1.12.778|
+| Connector version | Kafka Connect API | AWS SDK  |
+|:------------------|:------------------|:---------|
+| 1.4               | 3.1.1             | 1.12.241 |
+| 1.5               | 3.3.2             | 1.12.409 |
+| 1.6               | 3.4.1             | 1.12.778 |
+| 1.7               | 4.0.0             | 1.12.778 |
 
 ## Building the distributable
 
