@@ -21,6 +21,7 @@ import java.util.stream.Collectors ;
 
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
 import com.nordstrom.kafka.connect.utils.StringUtils;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.connect.data.Schema ;
 import org.apache.kafka.connect.data.SchemaAndValue;
 import org.apache.kafka.connect.header.ConnectHeaders;
@@ -148,16 +149,17 @@ public class SqsSourceConnectorTask extends SourceTask {
   }
 
   /* (non-Javadoc)
-   * @see org.apache.kafka.connect.source.SourceTask#commitRecord(org.apache.kafka.connect.source.SourceRecord)
+   * @see org.apache.kafka.connect.source.SourceTask#commitRecord(org.apache.kafka.connect.source.SourceRecord, org.apache.kafka.clients.producer.RecordMetadata)
    */
   @Override
-  public void commitRecord( SourceRecord record ) throws InterruptedException {
+  public void commitRecord(SourceRecord record, RecordMetadata metadata)
+          throws InterruptedException {
     Guard.verifyNotNull( record, "record" ) ;
     final String receipt = record.sourceOffset().get( SqsConnectorConfigKeys.SQS_MESSAGE_RECEIPT_HANDLE.getValue() )
         .toString() ;
     log.debug( ".commit-record:url={}, receipt-handle={}", config.getQueueUrl(), receipt ) ;
     client.delete( config.getQueueUrl(), receipt ) ;
-    super.commitRecord( record ) ;
+    super.commitRecord(record, metadata) ;
   }
 
   /*
