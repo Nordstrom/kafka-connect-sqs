@@ -24,6 +24,7 @@ public enum SqsConnectorConfigKeys {
   SQS_QUEUE_URL("sqs.queue.url"),
   SQS_WAIT_TIME_SECONDS("sqs.wait.time.seconds"),
   TOPICS("topics"),
+  TOPICS_REGEX("topics.regex"),
   SQS_REGION("sqs.region"),
   SQS_ENDPOINT_URL("sqs.endpoint.url"),
   SQS_MESSAGE_ATTRIBUTES_ENABLED("sqs.message.attributes.enabled"),
