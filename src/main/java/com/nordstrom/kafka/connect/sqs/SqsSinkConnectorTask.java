@@ -17,12 +17,14 @@
 package com.nordstrom.kafka.connect.sqs ;
 
 import java.text.MessageFormat ;
-import java.util.Collection ;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map ;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
+import com.amazonaws.services.sqs.model.SendMessageResult;
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.header.Header;
 import org.apache.kafka.connect.header.Headers;
@@ -81,6 +83,7 @@ public class SqsSinkConnectorTask extends SinkTask {
     }
 
     log.debug( ".put:record_count={}", records.size() ) ;
+    List<Future<SendMessageResult>> futureResults = new LinkedList<>();
     for ( final SinkRecord record : records ) {
       final String mid = MessageFormat.format( "{0}-{1}-{2}", record.topic(), record.kafkaPartition().longValue(),
           record.kafkaOffset() ) ;
@@ -108,18 +111,38 @@ public class SqsSinkConnectorTask extends SinkTask {
 
       if ( Facility.isNotNullNorEmpty( body ) ) {
         try {
-          final String sid = client.send( config.getQueueUrl(), body, gid, mid, messageAttributes ) ;
-
-          log.debug( ".put.OK:message-id={}, queue.url={}, sqs-group-id={}, sqs-message-id={}", gid, mid,
-              config.getQueueUrl(), sid ) ;
+          switch (config.getSQSSendMode()) {
+            case SYNC:
+              final String sid = client.send( config.getQueueUrl(), body, gid, mid, messageAttributes ) ;
+              log.debug( ".put.OK:message-id={}, queue.url={}, sqs-group-id={}, sqs-message-id={}", gid, mid, config.getQueueUrl(), sid ) ;
+              break;
+            case ASYNC:
+              Future<SendMessageResult> result = client.sendAsync(config.getQueueUrl(), body, gid, mid, messageAttributes);
+              futureResults.add(result);
+            break;
+          }
         } catch ( final RuntimeException e ) {
           log.error( "An Exception occurred while sending message {} to target url {}:", mid, config.getQueueUrl(),
               e ) ;
+          throw new RuntimeException("Failed to send message to queue=" + config.getQueueUrl(), e);
         }
       } else {
         log.warn( "Skipping empty message: key={}", key ) ;
       }
 
+    }
+
+    for (Future<SendMessageResult> futureResult: futureResults) {
+      try {
+        SendMessageResult result = futureResult.get(30, TimeUnit.SECONDS);
+        if(result.getMessageId() == null || result.getMessageId().isEmpty())
+        {
+          throw new RuntimeException("Failed to send message to queue=" + config.getQueueUrl() + " - " + result.getSdkResponseMetadata());
+        }
+        log.debug(".send-message.OK: queue={}, result={}", config.getQueueUrl(), result);
+      } catch (InterruptedException|ExecutionException|TimeoutException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 
